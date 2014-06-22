@@ -105,13 +105,14 @@ pointers;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void s_free(s_string *restrict str) {
-  if(str != NULL  &&  str->string != NULL) {
-    free(str->string);
+  if(str == NULL  ||  str->string == NULL)
+    return ;
 
-    str->string = NULL;
-    str->length = 0;
-    str->size = 0;
-  }
+  free(str->string);
+
+  str->string = NULL;
+  str->length = 0;
+  str->size = 0;
 }
 
 
@@ -122,15 +123,16 @@ s_string;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void s_pfree(s_string *restrict str) {
-  if(str != NULL) {
-    if(str->string != NULL) {
-      free(str->string);
-      str->string = NULL;
-    }
+  if(str == NULL)
+    return ;
 
-    free(str);
-    str = NULL;
+  if(str->string != NULL) {
+    free(str->string);
+    str->string = NULL;
   }
+
+  free(str);
+  str = NULL;
 }
 
 
