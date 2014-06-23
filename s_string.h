@@ -99,12 +99,11 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 }
 
 /******************************************************************************\
-  Frees the memory allocated for s_string. Use this only on s_string, not on
-pointers;
+  Empties a s_string and frees memory used for the string inside it
   str is a s_string which will have its memory freed;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
-void s_free(s_string *restrict str) {
+void s_empty(s_string *restrict str) {
   if(str == NULL  ||  str->string == NULL)
     return ;
 
@@ -122,7 +121,7 @@ s_string;
   str is a s_string which will have its memory freed;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
-void s_pfree(s_string *restrict str) {
+void s_free(s_string *restrict str) {
   if(str == NULL)
     return ;
 
