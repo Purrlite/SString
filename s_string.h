@@ -6,9 +6,6 @@
 
 #define restrict __restrict__
 
-// @TODO: Add checks for NULL at the start of the functions
-// @TODO: Check functions if I could add restrict keywords to them
-
 /******************************************************************************\
   s_string stores length of the string in "length" that is equal to the exact
 amount of meaningfull characters in the string, stores the size of the string,
