@@ -154,7 +154,7 @@ void *s_memnull(void *restrict memory, size_t num) {
   return memory;
 }
 
-// second version
+//  version 2
 void *s_memnull2(void *memory, size_t num) {
   char *restrict _help = memory;
   int i;
@@ -165,7 +165,7 @@ void *s_memnull2(void *memory, size_t num) {
   return _help;
 }
 
-// Third version
+// version 3
 void *s_memnull3(void *restrict memory, size_t num) {
   register int i;
 
@@ -175,7 +175,7 @@ void *s_memnull3(void *restrict memory, size_t num) {
   return memory;
 }
 
-// Fourth version
+// version 4
 void *s_memnull4(void *memory, size_t num) {
   char *restrict _help = memory;
   register int i;
@@ -198,7 +198,7 @@ void *s_memcpy(void *destination, const void *source, size_t num) {
   return _help;
 }
 
-// Second version
+// version 2
 void *s_memcpy2(void *restrict destination, const void *restrict source,
                 size_t num) {
   int i;
@@ -209,7 +209,7 @@ void *s_memcpy2(void *restrict destination, const void *restrict source,
   return destination;
 }
 
-// Third version
+// version 3
 void *s_memcpy3(void *restrict destination, const void *restrict source,
                 size_t num) {
   int i;
@@ -240,7 +240,7 @@ void *s_memmove(void *destination, const void *source, size_t num) {
   return _help;
 }
 
-// Second version
+// version 2
 void *s_memmove2(void *destination, const void *source, size_t num) {
   void *restrict _copy = malloc(num);
   int i;
@@ -258,7 +258,7 @@ void *s_memmove2(void *destination, const void *source, size_t num) {
   return destination;
 }
 
-// Third version
+// version 3
 void *s_memmove3(void *destination, const void *source, size_t num) {
   void *restrict _copy = malloc(num);
   int i;
@@ -470,7 +470,7 @@ s_string *s_strcat(s_string *restrict destination, const s_string *restrict
   return destination;
 }
 
-// second version
+// version 2
 s_string *s_strcat2(s_string *restrict destination, const s_string *restrict
                     source) {
   int i;
@@ -633,7 +633,7 @@ void *s_memchr(void *ptr, int value, size_t num) {
   return NULL;
 }
 
-// Not sure which version would be faster, so I put both of them in here for now
+// version 2
 void *s_memchr2(void *ptr, int value, size_t num) {
   int i;
 
@@ -836,7 +836,7 @@ void *s_memset(void *ptr, int value, size_t num) {
   return ptr;
 }
 
-// Not sure which version would be faster, so I put both of them in here for now
+// version 2
 void *s_memset2(void *ptr, int value, size_t num) {
   int i;
 
