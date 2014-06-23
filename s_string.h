@@ -6,14 +6,6 @@
 
 #define restrict __restrict__
 
-/******************************************************************************\
-  s_string stores length of the string in "length" that is equal to the exact
-amount of meaningfull characters in the string, stores the size of the string,
-which is the amount of allocated memory for the string, it stores the string in
-"string";
-  s_string doesn't always end with '\0' at the end of the string, but can be
-added in there when needed;
-\******************************************************************************/
 typedef struct {
   size_t length;
   size_t size;
