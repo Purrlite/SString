@@ -10,7 +10,7 @@ typedef struct {
 
 
 // Fast way to initialize s_string with a C string
-#define s_string(str) (s_string){ sizeof(str)-1 , sizeof(str) , str }
+#define S_STRING(str) (s_string){ sizeof(str)-1 , sizeof(str) , str }
 
 
 s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
