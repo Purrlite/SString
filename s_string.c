@@ -21,7 +21,6 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 
     if(NULL == str)
       return NULL;
-
   }
 
   if(NULL == array) {
@@ -32,7 +31,6 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
       str->string = malloc(size * sizeof(char));
       if(NULL == str->string)
         return NULL;
-
     } else
       str->string = NULL;
 
