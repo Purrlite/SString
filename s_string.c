@@ -1,5 +1,7 @@
 #include "s_string.c"
 
+#include <string.h>
+
 #define restrict __restrict__
 
 typedef struct {
@@ -31,6 +33,8 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
       str->string = malloc(size);
       if(NULL == str->string)
         return NULL;
+
+      str->string[0] = '\0';
     } else
       str->string = NULL;
 
