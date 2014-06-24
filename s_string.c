@@ -19,10 +19,9 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
   if(NULL == str) {
     str = malloc(sizeof(s_string));
 
-    if(NULL == str) {
-      perror("Error allocating memory for s_string");
+    if(NULL == str)
       return NULL;
-    }
+
   }
 
   if(NULL == array) {
@@ -31,10 +30,9 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 
     if(0 != size) {
       str->string = malloc(size * sizeof(char));
-      if(NULL == str->string) {
-        perror("Error allocating memory for s_string");
+      if(NULL == str->string)
         return NULL;
-      }
+
     } else
       str->string = NULL;
 
@@ -44,20 +42,18 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 
       for(i = 0; array[i] != '\0'; i++) {
         str->string = realloc((void *)(str->string), i + 1);
-        if(NULL == str->string) {
-          perror("Error allocating memory for s_string");
+        if(NULL == str->string)
           return NULL;
-        }
+
         str->string[i] = array[i];
       }
 
       str->length = str->size = i;
     } else {
       str->string = malloc(size);
-      if(NULL == str->string) {
-        perror("Error allocating memory for s_string");
+      if(NULL == str->string)
         return NULL;
-      }
+
       str->size = size;
 
       for(i = 0; i < size; i++)
