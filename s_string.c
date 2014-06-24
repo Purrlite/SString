@@ -16,8 +16,6 @@ typedef struct {
 
 
 s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
-  size_t length;
-
   if(NULL == str) {
     str = malloc(sizeof(s_string));
 
@@ -39,27 +37,14 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
       str->string = NULL;
 
   } else {
-    if(0 == size) {
-      length = strlen(array);
-      str->size = length + 1;
-      str->length = length;
+    str->length = strlen(array);
+    str->size = (0 == size) ? str->length + 1 : size;
 
-      str->string = malloc(str->size);
-      if(NULL == str->string)
-        return NULL;
+    str->string = malloc(str->size);
+    if(NULL == str->string)
+      return NULL;
 
-      strcpy(str->string, array);
-    } else {
-      str->string = malloc(size);
-      if(NULL == str->string)
-        return NULL;
-
-      str->size = size;
-
-      for(i = 0; i < size; i++)
-        str->string[i] = array[i];
-
-      str->length = ('\0' == str->string[i]) ? size-1 : size;
+    strcpy(str->string, array);
     }
   }
 
