@@ -7,9 +7,9 @@
 #define restrict __restrict__
 
 typedef struct {
-  size_t length;
-  size_t size;
-  char *string;
+	size_t length;
+	size_t size;
+	char *string;
 } s_string;
 
 
@@ -18,13 +18,14 @@ typedef struct {
 
 
 /******************************************************************************\
-  Initializes s_string with characters from a Cstring (ending with '\0') and
-allocates new memory for .string even if there was some allocated before.
+  Fills str with a string from array
+  Initializes s_string with characters from a C-string and allocates new memory
+for .string even if there was some allocated before.
   str is a s_string to which the characters will be added, array is a string of
 characters to be added to str, num is the number of characters of the string to
 be copied unless it finds a '\0';
   If str is NULL, then it creates a new one. If array is NULL, then it allocates
-memory normally, but won't put any characters in ther. If array is NULL and num
+memory normally, but won't put any characters in there. If array is NULL and num
 is 0, then it sets length to 0, but doesn't allocate anything. If num is 0, then
 it will search until it finds '\0' and length will get set automatically to the
 length of the array.
@@ -125,7 +126,7 @@ s_string *s_strcpy(s_string *restrict destination, const s_string *restrict
                    source) ;
 
 s_string *s_strcpy2(s_string *restrict destination, const s_string *restrict
-                   source) ;
+                    source) ;
 
 s_string *s_strcpy3(s_string *restrict destination, const s_string *restrict
                     source) ;
