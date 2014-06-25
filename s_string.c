@@ -4,13 +4,6 @@
 
 #define restrict __restrict__
 
-typedef struct {
-	size_t length;
-	size_t size;
-	char *string;
-} s_string;
-
-
 // Fast way to initialize s_string with a C string
 #define S_STRING(str) (s_string){ sizeof(str)-1 , sizeof(str) , str }
 
