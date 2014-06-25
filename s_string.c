@@ -4,9 +4,6 @@
 
 #define restrict __restrict__
 
-// Fast way to initialize s_string with a C string
-#define S_STRING(str) (s_string){ sizeof(str)-1 , sizeof(str) , str }
-
 
 s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 	if(NULL == str) {
