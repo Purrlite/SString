@@ -34,7 +34,7 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 		if(NULL == str->string)
 			return NULL;
 
-		strncpy(str->string, array);
+		strncpy(str->string, array, str->size);
 	}
 
 	return str;
