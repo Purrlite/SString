@@ -35,7 +35,6 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 			return NULL;
 
 		strncpy(str->string, array);
-		}
 	}
 
 	return str;
