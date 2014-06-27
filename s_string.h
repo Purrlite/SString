@@ -18,7 +18,6 @@ typedef struct s_string {
 
 
 /******************************************************************************\
-  Fills str with a string from array
   Initializes s_string with characters from a C-string and allocates new memory
 for .string even if there was some allocated before.
   str is a s_string to which the characters will be added, array is a string of
