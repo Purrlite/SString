@@ -458,8 +458,8 @@ s_strncpy3(s_string * destination,
            size_t num)
 {
 	int i;
-	uint64_t * __restrict__ _dest = (uint64_t *)(destination->string);
-	uint64_t * __restrict__ _sour = (uint64_t *)(source->string);
+	uint64_t * restrict _dest = (uint64_t *)(destination->string);
+	uint64_t * restrict _sour = (uint64_t *)(source->string);
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
