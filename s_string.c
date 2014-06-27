@@ -7,12 +7,10 @@ s_init(s_string * restrict str,
        char * restrict array,
        size_t size)
 {
-	if(NULL == str) {
-		str = malloc(sizeof(s_string));
+	str = malloc(sizeof(s_string));
 
-		if(NULL == str)
-			return NULL;
-	}
+	if(NULL == str)
+		return NULL;
 
 	if(NULL == array) {
 		str->length = 0;
