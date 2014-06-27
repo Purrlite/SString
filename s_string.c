@@ -88,7 +88,7 @@ s_sstos(s_string * restrict str)
 char *
 s_sstonews(s_string * restrict str)
 {
-	char *s;
+	char * s;
 	int i;
 
 	if(NULL == str  ||  NULL == str->string)
@@ -109,7 +109,7 @@ s_sstonews(s_string * restrict str)
 char *
 s_sstonews2(s_string * restrict str)
 {
-	char *s;
+	char * s;
 	register int i;
 
 	if(NULL == str  ||  NULL == str->string)
@@ -144,7 +144,7 @@ void *
 s_memnull2(void * memory,
            size_t num)
 {
-	char *restrict _help = memory;
+	char * restrict _help = memory;
 	int i;
 
 	for(i = 0; i < num; i++)
@@ -171,7 +171,7 @@ void *
 s_memnull4(void * memory,
            size_t num)
 {
-	char *restrict _help = memory;
+	char * restrict _help = memory;
 	register int i;
 
 	for(i = 0; i < num; i++)
@@ -186,8 +186,8 @@ s_memcpy(void * destination,
          const void * source,
          size_t num)
 {
-	char *restrict _help = destination;
-	const char *restrict _help2 = source;
+	char * restrict _help = destination;
+	const char * restrict _help2 = source;
 	int i;
 
 	for(i = 0; i < num; i++)
@@ -230,8 +230,8 @@ s_memmove(void * destination,
           const void * source,
           size_t num)
 {
-	char *restrict _copy = malloc(num),
-	     *_help = destination;
+	char * restrict _copy = malloc(num);
+	char * _help = destination;
 	const char *_help2 = source;
 	int i;
 
@@ -254,7 +254,7 @@ s_memmove2(void * destination,
            const void * source,
            size_t num)
 {
-	void *restrict _copy = malloc(num);
+	void * restrict _copy = malloc(num);
 	int i;
 
 	for(i = 0; i < num; i++) {
@@ -276,7 +276,7 @@ s_memmove3(void * destination,
            const void * source,
            size_t num)
 {
-	void *restrict _copy = malloc(num);
+	void * restrict _copy = malloc(num);
 	int i;
 
 	for(i = 0; i < num; i++) {
@@ -373,8 +373,8 @@ s_strcpy4(s_string * restrict destination,
           const s_string * restrict source)
 {
 	int i;
-	uint64_t *_dest = (uint64_t *)(destination->string),
-	         *_sour = (uint64_t *)(source->string);
+	uint64_t * _dest = (uint64_t *)(destination->string);
+	uint64_t * _sour = (uint64_t *)(source->string);
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
@@ -458,8 +458,8 @@ s_strncpy3(s_string * destination,
            size_t num)
 {
 	int i;
-	uint64_t *__restrict__ _dest = (uint64_t *)(destination->string),
-	         *__restrict__ _sour = (uint64_t *)(source->string);
+	uint64_t * __restrict__ _dest = (uint64_t *)(destination->string);
+	uint64_t * __restrict__ _sour = (uint64_t *)(source->string);
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
@@ -487,8 +487,8 @@ s_string *
 s_strcat(s_string * restrict destination,
          const s_string * restrict source)
 {
-	int i,
-	    j;
+	int i;
+	int j;
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
@@ -535,8 +535,8 @@ s_strncat(s_string * restrict destination,
           const s_string * restrict source,
           size_t num)
 {
-	int i,
-	    j;
+	int i;
+	int j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
@@ -599,8 +599,8 @@ s_memcmp(const void * ptr1,
          const void * ptr2,
          size_t num)
 {
-	const char *restrict _p1 = ptr1,
-	           *restrict _p2 = ptr2;
+	const char * restrict _p1 = ptr1;
+	const char * restrict _p2 = ptr2;
 	int i;
 
 	for(i = 0; i < num; i++) {
@@ -654,8 +654,8 @@ s_strcmp2(const s_string * str1,
           const s_string * str2)
 {
 	int i;
-	const s_string *restrict _help = str1,
-	               *restrict _help2 = str2;
+	const s_string * restrict _help = str1;
+	const s_string * restrict _help2 = str2;
 
 	for(i = 0; i < _help->length && i < _help2->length; i++) {
 		if(_help->string[i] > _help2->string[i])
@@ -691,7 +691,7 @@ s_memchr(void * ptr,
          int value,
          size_t num)
 {
-	char *_p = ptr;
+	char * _p = ptr;
 	int i;
 
 	for(i = 0; i < num; i++) {
@@ -738,8 +738,8 @@ size_t
 s_strspn(const s_string * str1,
          const s_string * str2)
 {
-	int i,
-	    j;
+	int i;
+	int j;
 
 	for(i = 0; i < str1->length; i++) {
 		for(j = 0; j < str2->length; j++) {
@@ -756,8 +756,8 @@ size_t
 s_strcspn(const s_string * str1,
           const s_string * str2)
 {
-	int i,
-	    j;
+	int i;
+	int j;
 
 	for(i = 0; i < str1->length; i++) {
 		for(j = 0; j < str2->length; j++) {
@@ -774,8 +774,8 @@ char *
 s_strpbrk(const s_string * str1,
           const s_string * str2)
 {
-	int i,
-	    j;
+	int i;
+	int j;
 
 	for(i = 0; i < str1->length; i++) {
 		for(j = 0; j < str2->length; j++) {
@@ -792,7 +792,7 @@ char *
 s_strrchr(s_string * str,
           int character)
 {
-	char *pointer = NULL;
+	char * pointer = NULL;
 	int i;
 
 	for(i = 0; i < str->length; i++) {
@@ -829,14 +829,14 @@ char *
 s_strtok(s_string * str,
          const s_string * delimiters)
 {
-	static char *_lastPos = NULL;
-	static s_string *_str = NULL;
-	char *startOfToken = NULL;
+	static char * _lastPos = NULL;
+	static s_string * _str = NULL;
+	char * startOfToken = NULL;
 	char numOfDelimiters;
 	int lengthOfToken = 0;
-	int i,
-	    j;
-	char *newString;
+	int i;
+	int j;
+	char * newString;
 
 	if(str != NULL)
 		_str = str;
@@ -878,14 +878,14 @@ s_string *
 s_sstrtok(s_string * str,
           const s_string * delimiters)
 {
-	static char *_lastPos = NULL;
+	static char * _lastPos = NULL;
 	static s_string *_str = NULL;
-	char *startOfToken = NULL;
+	char * startOfToken = NULL;
 	char numOfDelimiters;
 	int lengthOfToken = 0;
-	int i,
-	    j;
-	s_string *newSstr = malloc(sizeof(s_string));
+	int i;
+	int j;
+	s_string * newSstr = malloc(sizeof(s_string));
 
 	if(str != NULL)
 		_str = str;
@@ -928,7 +928,7 @@ s_memset(void * ptr,
          int value,
          size_t num)
 {
-	char *_p = ptr;
+	char * _p = ptr;
 	int i;
 
 	for(i = 0; i < num; i++)
