@@ -6,7 +6,7 @@
 
 #define restrict __restrict__
 
-typedef struct {
+typedef struct s_string {
 	size_t length;
 	size_t size;
 	char *string;
