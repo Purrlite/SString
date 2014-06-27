@@ -35,6 +35,11 @@ s_init(s_string * restrict str,
        char * restrict array,
        size_t size) ;
 
+s_string *
+s_init2(s_string * restrict str,
+        char * restrict array,
+        size_t size)
+
 
 /******************************************************************************\
   Empties a s_string and frees memory used for the string inside it

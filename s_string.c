@@ -41,6 +41,111 @@ s_init(s_string * restrict str,
 }
 
 
+typedef s_string * (s_str_init_func)(s_string * restrict str,
+                                     char * restrict array,
+                                     size_t size);
+
+
+static s_str_init_func
+NULL_array_0_size
+{
+	str->length = 0;
+	str->size = 0;
+	str->string = NULL;
+
+	return str;
+}
+
+
+static s_str_init_func
+NULL_array_non0_size
+{
+	str->length = 0;
+	str->size = size;
+
+	str->string = malloc(str->size);
+	if(NULL == str->string)
+		return NULL;
+
+	str->string[0] = '\0';
+
+	return str;
+}
+
+
+static s_str_init_func
+nonNULL_array_0_size
+{
+	str->length = sizeof(array);
+	str->size = str->length + 1;
+
+    str->string = malloc(str->size);
+    if(NULL == str->string)
+    	return NULL;
+
+	strncpy(str->string, array, str->size);
+
+    return str;
+}
+
+
+static s_str_init_func
+nonNULL_array_non0_size
+{
+    str->length = sizeof(array);
+    str->size = (size > str->length) ? size : str->length + 1;
+
+    str->string = malloc(str->size);
+    if(NULL == str->string)
+    	return NULL;
+
+	strncpy(str->string, array, str->size);
+
+	return str;
+}
+
+
+static s_str_init_func *
+get_function(char * restrict array,
+             size_t size)
+{
+	switch(array) {
+	case NULL:
+		switch(size) {
+		case 0:
+			return NULL_array_0_size;
+
+		default:
+			return NULL_array_non0_size;
+		}
+
+	default:
+		switch(size) {
+		case 0:
+			return nonNULL_array_0_size;
+
+		default:
+			return nonNULL_array_non0_size;
+		}
+	}
+}
+
+s_string *
+s_init2(s_string * restrict str,
+        char * restrict array,
+        size_t size)
+{
+	s_str_init_func init_function = get_function(array, size);
+
+	str = malloc(sizeof(s_string));
+
+	if(NULL == str)
+		return NULL;
+
+	return((init_function)(str, array, size));
+}
+
+
 void
 s_empty(s_string * restrict str)
 {
