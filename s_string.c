@@ -2,9 +2,6 @@
 
 #include <string.h>
 
-#define restrict __restrict__
-
-
 s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 	if(NULL == str) {
 		str = malloc(sizeof(s_string));
