@@ -4,7 +4,7 @@
 
 s_string *
 s_init(s_string * restrict str,
-       char *restrict array,
+       char * restrict array,
        size_t size)
 {
 	if(NULL == str) {
