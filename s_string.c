@@ -28,7 +28,8 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 
 	} else {
 		str->size = (0 == size) ? strlen(array) + 1 : size;
-		str->length = (size > strlen(array)) ? strlen(array) : size - 1;
+		str->length = (0 == size) ? str->size
+		              : ((size > strlen(array)) ? strlen(array) : size - 1);
 
 		str->string = malloc(str->size);
 		if(NULL == str->string)
