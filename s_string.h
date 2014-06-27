@@ -38,7 +38,7 @@ s_init(s_string * restrict str,
 s_string *
 s_init2(s_string * restrict str,
         char * restrict array,
-        size_t size)
+        size_t size) ;
 
 
 /******************************************************************************\
