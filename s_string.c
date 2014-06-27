@@ -73,7 +73,8 @@ s_free(s_string * restrict str)
 }
 
 
-char * s_sstos(s_string * restrict str)
+char *
+s_sstos(s_string * restrict str)
 {
 	if(NULL == str  ||  NULL == str->string)
 		return NULL;
@@ -84,7 +85,8 @@ char * s_sstos(s_string * restrict str)
 }
 
 
-char * s_sstonews(s_string * restrict str)
+char *
+s_sstonews(s_string * restrict str)
 {
 	char *s;
 	int i;
