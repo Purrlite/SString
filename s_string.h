@@ -31,7 +31,10 @@ it will search until it finds '\0' and length will get set automatically to the
 length of the array.
   Returns pointer to the initialized s_string;
 \******************************************************************************/
-s_string *s_init(s_string *restrict str, char *restrict array, size_t size) ;
+s_string *
+s_init(s_string * restrict str,
+       char * restrict array,
+       size_t size) ;
 
 
 /******************************************************************************\
@@ -39,7 +42,8 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) ;
   str is a s_string which will have its memory freed;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
-void s_empty(s_string *restrict str) ;
+void
+s_empty(s_string * restrict str) ;
 
 
 /******************************************************************************\
@@ -48,7 +52,8 @@ s_string;
   str is a s_string which will have its memory freed;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
-void s_free(s_string *restrict str) ;
+void
+s_free(s_string * restrict str) ;
 
 
 /******************************************************************************\
@@ -56,7 +61,8 @@ void s_free(s_string *restrict str) ;
   str is a s_string which will have it's string become Cstring;
   Returns pointer to a Cstring in str or NULL if argument or string is NULL;
 \******************************************************************************/
-char *s_sstos(s_string *restrict str) ;
+char *
+s_sstos(s_string * restrict str) ;
 
 
 /******************************************************************************\
@@ -65,9 +71,11 @@ char *s_sstos(s_string *restrict str) ;
   Returns pointer to a new Cstring copied from str or NULL if argument or string
 is NULL;
 \******************************************************************************/
-char *s_sstonews(s_string *restrict str) ;
+char *
+s_sstonews(s_string * restrict str) ;
 
-char *s_sstonews2(s_string *restrict str) ;
+char *
+s_sstonews2(s_string * restrict str) ;
 
 
 /******************************************************************************\
@@ -76,13 +84,21 @@ char *s_sstonews2(s_string *restrict str) ;
 that will be changed;
   Returns pointer to the start of the edited memory;
 \******************************************************************************/
-void *s_memnull(void *restrict memory, size_t num) ;
+void *
+s_memnull(void * restrict memory,
+          size_t num) ;
 
-void *s_memnull2(void *memory, size_t num) ;
+void *
+s_memnull2(void *memory,
+           size_t num) ;
 
-void *s_memnull3(void *restrict memory, size_t num) ;
+void *
+s_memnull3(void * restrict memory,
+           size_t num) ;
 
-void *s_memnull4(void *memory, size_t num) ;
+void *
+s_memnull4(void * memory,
+           size_t num) ;
 
 
 /******************************************************************************\
@@ -92,13 +108,20 @@ overlap with destination;
 be coppied from, num is the number of bytes that will be copied;
   Returns pointer to destination;
 \******************************************************************************/
-void *s_memcpy(void *destination, const void *source, size_t num) ;
+void *
+s_memcpy(void * destination,
+         const void * source,
+         size_t num) ;
 
-void *s_memcpy2(void *restrict destination, const void *restrict source,
-                size_t num) ;
+void *
+s_memcpy2(void * restrict destination,
+          const void * restrict source,
+          size_t num) ;
 
-void *s_memcpy3(void *restrict destination, const void *restrict source,
-                size_t num) ;
+void *
+s_memcpy3(void * restrict destination,
+          const void * restrict source,
+          size_t num) ;
 
 
 /******************************************************************************\
@@ -108,11 +131,20 @@ with destination;
 be coppied from, num is the number of bytes that will be copied;
   Returns pointer to destination;
 \******************************************************************************/
-void *s_memmove(void *destination, const void *source, size_t num) ;
+void *
+s_memmove(void * destination,
+          const void * source,
+          size_t num) ;
 
-void *s_memmove2(void *destination, const void *source, size_t num) ;
+void *
+s_memmove2(void * destination,
+           const void *source,
+           size_t num) ;
 
-void *s_memmove3(void *destination, const void *source, size_t num) ;
+void *
+s_memmove3(void * destination,
+           const void *source,
+           size_t num) ;
 
 
 /******************************************************************************\
@@ -122,17 +154,21 @@ be coppied from;
   Returns pointer to destination or NULL if any of the arguments is NULL or
 their string is NULL;
 \******************************************************************************/
-s_string *s_strcpy(s_string *restrict destination, const s_string *restrict
-                   source) ;
+s_string *
+s_strcpy(s_string * restrict destination,
+         const s_string * restrict source) ;
 
-s_string *s_strcpy2(s_string *restrict destination, const s_string *restrict
-                    source) ;
+s_string *
+s_strcpy2(s_string * restrict destination,
+          const s_string * restrict source) ;
 
-s_string *s_strcpy3(s_string *restrict destination, const s_string *restrict
-                    source) ;
+s_string *
+s_strcpy3(s_string * restrict destination,
+          const s_string * restrict source) ;
 
-s_string *s_strcpy4(s_string *restrict destination, const s_string *restrict
-                    source) ;
+s_string *
+s_strcpy4(s_string * restrict destination,
+          const s_string * restrict source) ;
 
 
 /******************************************************************************\
@@ -142,13 +178,20 @@ be coppied from, num is the number of bytes to be coppied;
   Returns pointer to destination or NULL if any of the arguments is null or
 their string member is;
 \******************************************************************************/
-s_string *s_strncpy(s_string *restrict destination, const s_string *restrict
-                    source, size_t num) ;
+s_string *
+s_strncpy(s_string * restrict destination,
+          const s_string * restrict source,
+          size_t num) ;
 
-s_string *s_strncpy2(s_string *restrict destination, const s_string *restrict
-                     source, size_t num) ;
+s_string *
+s_strncpy2(s_string * restrict destination,
+           const s_string * restrict source,
+           size_t num) ;
 
-s_string *s_strncpy3(s_string *destination, const s_string *source, size_t num);
+s_string *
+s_strncpy3(s_string * destination,
+           const s_string * source,
+           size_t num);
 
 
 /******************************************************************************\
@@ -157,11 +200,13 @@ s_string *s_strncpy3(s_string *destination, const s_string *source, size_t num);
 be coppied from;
   Returns pointer to destination;
 \******************************************************************************/
-s_string *s_strcat(s_string *restrict destination, const s_string *restrict
-                   source) ;
+s_string *
+s_strcat(s_string * restrict destination,
+         const s_string * restrict source) ;
 
-s_string *s_strcat2(s_string *restrict destination, const s_string *restrict
-                    source) ;
+s_string *
+s_strcat2(s_string * restrict destination,
+          const s_string * restrict source) ;
 
 
 /******************************************************************************\
@@ -170,14 +215,20 @@ s_string *s_strcat2(s_string *restrict destination, const s_string *restrict
 be coppied from, num is the number of bytes to be coppied;
   Returns pointer to destination;
 \******************************************************************************/
-s_string *s_strncat(s_string *restrict destination, const s_string *restrict
-                    source, size_t num) ;
+s_string *
+s_strncat(s_string * restrict destination,
+          const s_string * restrict source,
+          size_t num) ;
 
-s_string *s_strncat2(s_string *restrict destination, const s_string *restrict
-                     source, size_t num) ;
+s_string *
+s_strncat2(s_string * restrict destination,
+           const s_string * restrict source,
+           size_t num) ;
 
-s_string *s_strncat3(s_string *restrict destination, const s_string *restrict
-                     source, size_t num) ;
+s_string *
+s_strncat3(s_string * restrict destination,
+           const s_string * restrict source,
+           size_t num) ;
 
 
 /******************************************************************************\
@@ -188,9 +239,15 @@ compared;
 byte has higher value than ptr2's byte, negative if ptr1's byte has smaller
 value than ptr2's byte;
 \******************************************************************************/
-int s_memcmp(const void *ptr1, const void *ptr2, size_t num) ;
+int
+s_memcmp(const void * ptr1,
+         const void * ptr2,
+         size_t num) ;
 
-int s_memcmp2(const void *restrict ptr1, const void *restrict ptr2, size_t num);
+int
+s_memcmp2(const void * restrict ptr1,
+          const void * restrict ptr2,
+          size_t num);
 
 
 /******************************************************************************\
@@ -201,9 +258,13 @@ s_strings or a first different character;
 character has higher value than ptr2's, negative if ptr1's character has smaller
 value than ptr2's character;
 \******************************************************************************/
-int s_strcmp(const s_string *restrict str1, const s_string *restrict str2) ;
+int
+s_strcmp(const s_string * restrict str1,
+         const s_string * restrict str2) ;
 
-int s_strcmp2(const s_string *str1, const s_string *str2) ;
+int
+s_strcmp2(const s_string * str1,
+          const s_string * str2) ;
 
 
 /******************************************************************************\
@@ -215,7 +276,10 @@ characters being compared;
 character has higher value than ptr2's, negative if ptr1's character has smaller
 value than ptr2's character;
 \******************************************************************************/
-int s_strncmp(const s_string *str1, const s_string *str2, size_t num) ;
+int
+s_strncmp(const s_string * str1,
+          const s_string * str2,
+          size_t num) ;
 
 
 /******************************************************************************\
@@ -225,9 +289,15 @@ the number of bytes being searched
   Peturns a pointer to first matching byte. If such byte is not found then it
 returns NULL;
 \******************************************************************************/
-void *s_memchr(void *ptr, int value, size_t num) ;
+void *
+s_memchr(void * ptr,
+         int value,
+         size_t num) ;
 
-void *s_memchr2(void *ptr, int value, size_t num) ;
+void *
+s_memchr2(void * ptr,
+          int value,
+          size_t num) ;
 
 
 /******************************************************************************\
@@ -236,7 +306,9 @@ void *s_memchr2(void *ptr, int value, size_t num) ;
   Returns a pointer to the first matching character; if no matching character
 was found then it returns NULL;
 \******************************************************************************/
-s_string *s_strchr(s_string *str, int character) ;
+s_string *
+s_strchr(s_string * str,
+         int character) ;
 
 
 /******************************************************************************\
@@ -247,7 +319,9 @@ being searched against
   Returns the number of characters before the first non-matching character,
 returns -1 in case of no character from str2 being in str1;
 \******************************************************************************/
-size_t s_strspn(const s_string *str1, const s_string *str2) ;
+size_t
+s_strspn(const s_string * str1,
+         const s_string * str2) ;
 
 
 /******************************************************************************\
@@ -258,7 +332,9 @@ being searched against;
   Returns the number of characters before the first non-matching character,
 returns -1 in case of all characters from str2 are in str1;
 \******************************************************************************/
-size_t s_strcspn(const s_string *str1, const s_string *str2) ;
+size_t
+s_strcspn(const s_string * str1,
+          const s_string * str2) ;
 
 
 /******************************************************************************\
@@ -268,7 +344,9 @@ being searched against;
   Returns a pointer to the first matching character. If the character isn't
 found, returns NULL;
 \******************************************************************************/
-char *s_strpbrk(const s_string *str1, const s_string *str2) ;
+char *
+s_strpbrk(const s_string * str1,
+          const s_string * str2) ;
 
 
 /******************************************************************************\
@@ -278,7 +356,9 @@ searched for;
   Returns a pointer to the last occurance of such character. If the charecter
 isn't found, then it returns NULL;
 \******************************************************************************/
-char *s_strrchr(s_string *str, int character) ;
+char *
+s_strrchr(s_string * str,
+          int character) ;
 
 
 /******************************************************************************\
@@ -287,7 +367,9 @@ char *s_strrchr(s_string *str, int character) ;
 for;
   Returns a pointer to the start of the substring; Returns NULL if not found;
 \******************************************************************************/
-char *s_strstr(const s_string *str1, const s_string *str2) ;
+char *
+s_strstr(const s_string * str1,
+         const s_string * str2) ;
 
 
 /******************************************************************************\
@@ -299,7 +381,9 @@ tokens;
   Returns pointer to next token, which is a new string and returns NULL if there
 isn't any more tokens
 \******************************************************************************/
-char *s_strtok(s_string *str, const s_string *delimiters) ;
+char *
+s_strtok(s_string * str,
+         const s_string * delimiters) ;
 
 
 /******************************************************************************\
@@ -311,7 +395,9 @@ tokens;
   Returns pointer to next token, which is a new string and returns NULL if there
 isn't any more tokens
 \******************************************************************************/
-s_string *s_sstrtok(s_string *str, const s_string *delimiters) ;
+s_string *
+s_sstrtok(s_string * str,
+          const s_string * delimiters) ;
 
 
 /******************************************************************************\
@@ -320,9 +406,15 @@ s_string *s_sstrtok(s_string *str, const s_string *delimiters) ;
 is the number of bytes being changed;
   Returns pointer to the memory;
 \******************************************************************************/
-void *s_memset(void *ptr, int value, size_t num) ;
+void *
+s_memset(void * ptr,
+         int value,
+         size_t num) ;
 
-void *s_memset2(void *ptr, int value, size_t num) ;
+void *
+s_memset2(void * ptr,
+          int value,
+          size_t num) ;
 
 
 #endif // SSTRING_H_INCLUDED

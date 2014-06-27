@@ -2,7 +2,11 @@
 
 #include <string.h>
 
-s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
+s_string *
+s_init(s_string * restrict str,
+       char *restrict array,
+       size_t size)
+{
 	if(NULL == str) {
 		str = malloc(sizeof(s_string));
 
@@ -39,7 +43,9 @@ s_string *s_init(s_string *restrict str, char *restrict array, size_t size) {
 }
 
 
-void s_empty(s_string *restrict str) {
+void
+s_empty(s_string * restrict str)
+{
 	if(str == NULL  ||  str->string == NULL)
 		return ;
 
@@ -51,7 +57,9 @@ void s_empty(s_string *restrict str) {
 }
 
 
-void s_free(s_string *restrict str) {
+void
+s_free(s_string * restrict str)
+{
 	if(str == NULL)
 		return ;
 
@@ -65,7 +73,8 @@ void s_free(s_string *restrict str) {
 }
 
 
-char *s_sstos(s_string *restrict str) {
+char * s_sstos(s_string * restrict str)
+{
 	if(NULL == str  ||  NULL == str->string)
 		return NULL;
 
@@ -75,7 +84,8 @@ char *s_sstos(s_string *restrict str) {
 }
 
 
-char *s_sstonews(s_string *restrict str) {
+char * s_sstonews(s_string * restrict str)
+{
 	char *s;
 	int i;
 
@@ -94,7 +104,9 @@ char *s_sstonews(s_string *restrict str) {
 }
 
 // Version 2
-char *s_sstonews2(s_string *restrict str) {
+char *
+s_sstonews2(s_string * restrict str)
+{
 	char *s;
 	register int i;
 
@@ -113,7 +125,10 @@ char *s_sstonews2(s_string *restrict str) {
 }
 
 
-void *s_memnull(void *restrict memory, size_t num) {
+void *
+s_memnull(void * restrict memory,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num; i++)
@@ -123,7 +138,10 @@ void *s_memnull(void *restrict memory, size_t num) {
 }
 
 // version 2
-void *s_memnull2(void *memory, size_t num) {
+void *
+s_memnull2(void * memory,
+           size_t num)
+{
 	char *restrict _help = memory;
 	int i;
 
@@ -134,7 +152,10 @@ void *s_memnull2(void *memory, size_t num) {
 }
 
 // version 3
-void *s_memnull3(void *restrict memory, size_t num) {
+void *
+s_memnull3(void * restrict memory,
+           size_t num)
+{
 	register int i;
 
 	for(i = 0; i < num; i++)
@@ -144,7 +165,10 @@ void *s_memnull3(void *restrict memory, size_t num) {
 }
 
 // version 4
-void *s_memnull4(void *memory, size_t num) {
+void *
+s_memnull4(void * memory,
+           size_t num)
+{
 	char *restrict _help = memory;
 	register int i;
 
@@ -155,7 +179,11 @@ void *s_memnull4(void *memory, size_t num) {
 }
 
 
-void *s_memcpy(void *destination, const void *source, size_t num) {
+void *
+s_memcpy(void * destination,
+         const void * source,
+         size_t num)
+{
 	char *restrict _help = destination;
 	const char *restrict _help2 = source;
 	int i;
@@ -167,8 +195,11 @@ void *s_memcpy(void *destination, const void *source, size_t num) {
 }
 
 // version 2
-void *s_memcpy2(void *restrict destination, const void *restrict source,
-                size_t num) {
+void *
+s_memcpy2(void * restrict destination,
+          const void * restrict source,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num; i++)
@@ -178,8 +209,11 @@ void *s_memcpy2(void *restrict destination, const void *restrict source,
 }
 
 // version 3
-void *s_memcpy3(void *restrict destination, const void *restrict source,
-                size_t num) {
+void *
+s_memcpy3(void * restrict destination,
+          const void *restrict source,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num; i++)
@@ -189,7 +223,11 @@ void *s_memcpy3(void *restrict destination, const void *restrict source,
 }
 
 
-void *s_memmove(void *destination, const void *source, size_t num) {
+void *
+s_memmove(void * destination,
+          const void * source,
+          size_t num)
+{
 	char *restrict _copy = malloc(num),
 	     *_help = destination;
 	const char *_help2 = source;
@@ -209,7 +247,11 @@ void *s_memmove(void *destination, const void *source, size_t num) {
 }
 
 // version 2
-void *s_memmove2(void *destination, const void *source, size_t num) {
+void *
+s_memmove2(void * destination,
+           const void * source,
+           size_t num)
+{
 	void *restrict _copy = malloc(num);
 	int i;
 
@@ -227,7 +269,11 @@ void *s_memmove2(void *destination, const void *source, size_t num) {
 }
 
 // version 3
-void *s_memmove3(void *destination, const void *source, size_t num) {
+void *
+s_memmove3(void * destination,
+           const void * source,
+           size_t num)
+{
 	void *restrict _copy = malloc(num);
 	int i;
 
@@ -248,8 +294,10 @@ void *s_memmove3(void *destination, const void *source, size_t num) {
 }
 
 
-s_string *s_strcpy(s_string *restrict destination, const s_string *restrict
-                   source) {
+s_string *
+s_strcpy(s_string * restrict destination,
+         const s_string * restrict source)
+{
 	int i;
 	size_t length;
 
@@ -269,8 +317,10 @@ s_string *s_strcpy(s_string *restrict destination, const s_string *restrict
 }
 
 // Version 2
-s_string *s_strcpy2(s_string *restrict destination, const s_string *restrict
-                    source) {
+s_string *
+s_strcpy2(s_string * restrict destination,
+          const s_string * restrict source)
+{
 	register int i;
 	register size_t length;
 
@@ -290,8 +340,10 @@ s_string *s_strcpy2(s_string *restrict destination, const s_string *restrict
 }
 
 // Version 3
-s_string *s_strcpy3(s_string *restrict destination, const s_string *restrict
-                    source) {
+s_string *
+s_strcpy3(s_string * restrict destination,
+          const s_string * restrict source)
+{
 	int i;
 	size_t length;
 
@@ -314,8 +366,10 @@ s_string *s_strcpy3(s_string *restrict destination, const s_string *restrict
 }
 
 // Version 4
-s_string *s_strcpy4(s_string *restrict destination, const s_string *restrict
-                    source) {
+s_string *
+s_strcpy4(s_string * restrict destination,
+          const s_string * restrict source)
+{
 	int i;
 	uint64_t *_dest = (uint64_t *)(destination->string),
 	         *_sour = (uint64_t *)(source->string);
@@ -340,8 +394,11 @@ s_string *s_strcpy4(s_string *restrict destination, const s_string *restrict
 }
 
 
-s_string *s_strncpy(s_string *restrict destination, const s_string *restrict
-                    source, size_t num) {
+s_string *
+s_strncpy(s_string * restrict destination,
+          const s_string * restrict source,
+          size_t num)
+{
 	int i;
 	size_t length;
 
@@ -367,8 +424,11 @@ s_string *s_strncpy(s_string *restrict destination, const s_string *restrict
 }
 
 // version 2
-s_string *s_strncpy2(s_string *restrict destination, const s_string *restrict
-                     source, size_t num) {
+s_string *
+s_strncpy2(s_string * restrict destination,
+           const s_string * restrict source,
+           size_t num)
+{
 	int i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
@@ -390,7 +450,11 @@ s_string *s_strncpy2(s_string *restrict destination, const s_string *restrict
 }
 
 // version 3
-s_string *s_strncpy3(s_string *destination, const s_string *source, size_t num){
+s_string *
+s_strncpy3(s_string * destination,
+           const s_string * source,
+           size_t num)
+{
 	int i;
 	uint64_t *__restrict__ _dest = (uint64_t *)(destination->string),
 	         *__restrict__ _sour = (uint64_t *)(source->string);
@@ -417,8 +481,10 @@ s_string *s_strncpy3(s_string *destination, const s_string *source, size_t num){
 }
 
 
-s_string *s_strcat(s_string *restrict destination, const s_string *restrict
-                   source) {
+s_string *
+s_strcat(s_string * restrict destination,
+         const s_string * restrict source)
+{
 	int i,
 	    j;
 	size_t length;
@@ -439,8 +505,10 @@ s_string *s_strcat(s_string *restrict destination, const s_string *restrict
 }
 
 // version 2
-s_string *s_strcat2(s_string *restrict destination, const s_string *restrict
-                    source) {
+s_string *
+s_strcat2(s_string * restrict destination,
+          const s_string * restrict source)
+{
 	int i;
 	size_t length;
 
@@ -460,8 +528,11 @@ s_string *s_strcat2(s_string *restrict destination, const s_string *restrict
 }
 
 
-s_string *s_strncat(s_string *restrict destination, const s_string *restrict
-                    source, size_t num) {
+s_string *
+s_strncat(s_string * restrict destination,
+          const s_string * restrict source,
+          size_t num)
+{
 	int i,
 	    j;
 
@@ -478,8 +549,11 @@ s_string *s_strncat(s_string *restrict destination, const s_string *restrict
 }
 
 // version 2
-s_string *s_strncat2(s_string *restrict destination, const s_string *restrict
-                     source, size_t num) {
+s_string *
+s_strncat2(s_string * restrict destination,
+           const s_string * restrict source,
+           size_t num)
+{
 	int i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
@@ -495,8 +569,11 @@ s_string *s_strncat2(s_string *restrict destination, const s_string *restrict
 }
 
 // version 3
-s_string *s_strncat3(s_string *restrict destination, const s_string *restrict
-                     source, size_t num) {
+s_string *
+s_strncat3(s_string * restrict destination,
+           const s_string * restrict source,
+           size_t num)
+{
 	int _help;
 	int i;
 
@@ -515,7 +592,11 @@ s_string *s_strncat3(s_string *restrict destination, const s_string *restrict
 }
 
 
-int s_memcmp(const void *ptr1, const void *ptr2, size_t num) {
+int
+s_memcmp(const void * ptr1,
+         const void * ptr2,
+         size_t num)
+{
 	const char *restrict _p1 = ptr1,
 	           *restrict _p2 = ptr2;
 	int i;
@@ -531,7 +612,11 @@ int s_memcmp(const void *ptr1, const void *ptr2, size_t num) {
 }
 
 // Version 2
-int s_memcmp2(const void *restrict ptr1, const void *restrict ptr2, size_t num){
+int
+s_memcmp2(const void * restrict ptr1,
+          const void * restrict ptr2,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num; i++) {
@@ -545,7 +630,10 @@ int s_memcmp2(const void *restrict ptr1, const void *restrict ptr2, size_t num){
 }
 
 
-int s_strcmp(const s_string *restrict str1, const s_string *restrict str2) {
+int
+s_strcmp(const s_string * restrict str1,
+         const s_string * restrict str2)
+{
 	int i;
 
 	for(i = 0; i < str1->length && i < str2->length; i++) {
@@ -559,7 +647,10 @@ int s_strcmp(const s_string *restrict str1, const s_string *restrict str2) {
 }
 
 // Version 2
-int s_strcmp2(const s_string *str1, const s_string *str2) {
+int
+s_strcmp2(const s_string * str1,
+          const s_string * str2)
+{
 	int i;
 	const s_string *restrict _help = str1,
 	               *restrict _help2 = str2;
@@ -575,7 +666,11 @@ int s_strcmp2(const s_string *str1, const s_string *str2) {
 }
 
 
-int s_strncmp(const s_string *str1, const s_string *str2, size_t num) {
+int
+s_strncmp(const s_string * str1,
+          const s_string * str2,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num && i < str1->length && i < str2->length; i++) {
@@ -589,7 +684,11 @@ int s_strncmp(const s_string *str1, const s_string *str2, size_t num) {
 }
 
 
-void *s_memchr(void *ptr, int value, size_t num) {
+void *
+s_memchr(void * ptr,
+         int value,
+         size_t num)
+{
 	char *_p = ptr;
 	int i;
 
@@ -602,7 +701,11 @@ void *s_memchr(void *ptr, int value, size_t num) {
 }
 
 // version 2
-void *s_memchr2(void *ptr, int value, size_t num) {
+void *
+s_memchr2(void * ptr,
+          int value,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num; i++) {
@@ -614,7 +717,10 @@ void *s_memchr2(void *ptr, int value, size_t num) {
 }
 
 
-s_string *s_strchr(s_string *str, int character) {
+s_string *
+s_strchr(s_string * str,
+         int character)
+{
 	int i;
 
 	for(i = 0; i < str->length; i++) {
@@ -626,7 +732,10 @@ s_string *s_strchr(s_string *str, int character) {
 }
 
 
-size_t s_strspn(const s_string *str1, const s_string *str2) {
+size_t
+s_strspn(const s_string * str1,
+         const s_string * str2)
+{
 	int i,
 	    j;
 
@@ -641,7 +750,10 @@ size_t s_strspn(const s_string *str1, const s_string *str2) {
 }
 
 
-size_t s_strcspn(const s_string *str1, const s_string *str2) {
+size_t
+s_strcspn(const s_string * str1,
+          const s_string * str2)
+{
 	int i,
 	    j;
 
@@ -656,7 +768,10 @@ size_t s_strcspn(const s_string *str1, const s_string *str2) {
 }
 
 
-char *s_strpbrk(const s_string *str1, const s_string *str2) {
+char *
+s_strpbrk(const s_string * str1,
+          const s_string * str2)
+{
 	int i,
 	    j;
 
@@ -671,7 +786,10 @@ char *s_strpbrk(const s_string *str1, const s_string *str2) {
 }
 
 
-char *s_strrchr(s_string *str, int character) {
+char *
+s_strrchr(s_string * str,
+          int character)
+{
 	char *pointer = NULL;
 	int i;
 
@@ -684,7 +802,10 @@ char *s_strrchr(s_string *str, int character) {
 }
 
 
-char *s_strstr(const s_string *str1, const s_string *str2) {
+char *
+s_strstr(const s_string * str1,
+         const s_string * str2)
+{
 	int matching = 0;
 	int i;
 
@@ -702,7 +823,10 @@ char *s_strstr(const s_string *str1, const s_string *str2) {
 }
 
 
-char *s_strtok(s_string *str, const s_string *delimiters) {
+char *
+s_strtok(s_string * str,
+         const s_string * delimiters)
+{
 	static char *_lastPos = NULL;
 	static s_string *_str = NULL;
 	char *startOfToken = NULL;
@@ -748,7 +872,10 @@ char *s_strtok(s_string *str, const s_string *delimiters) {
 }
 
 
-s_string *s_sstrtok(s_string *str, const s_string *delimiters) {
+s_string *
+s_sstrtok(s_string * str,
+          const s_string * delimiters)
+{
 	static char *_lastPos = NULL;
 	static s_string *_str = NULL;
 	char *startOfToken = NULL;
@@ -794,7 +921,11 @@ s_string *s_sstrtok(s_string *str, const s_string *delimiters) {
 }
 
 
-void *s_memset(void *ptr, int value, size_t num) {
+void *
+s_memset(void * ptr,
+         int value,
+         size_t num)
+{
 	char *_p = ptr;
 	int i;
 
@@ -805,7 +936,11 @@ void *s_memset(void *ptr, int value, size_t num) {
 }
 
 // version 2
-void *s_memset2(void *ptr, int value, size_t num) {
+void *
+s_memset2(void * ptr,
+          int value,
+          size_t num)
+{
 	int i;
 
 	for(i = 0; i < num; i++)
