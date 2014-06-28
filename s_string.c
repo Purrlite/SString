@@ -7,6 +7,9 @@ s_init(s_string * restrict str,
        char * restrict array,
        size_t size)
 {
+	if(NULL == str)
+		return NULL;
+
 	str = malloc(sizeof(s_string));
 	if(NULL == str)
 		return NULL;
@@ -134,6 +137,9 @@ s_init2(s_string * restrict str,
         char * restrict array,
         size_t size)
 {
+	if(str == NULL)
+		return NULL;
+
 	s_str_init_func init_function = get_function(array, size);
 
 	str = malloc(sizeof(s_string));
