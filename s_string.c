@@ -170,10 +170,8 @@ s_free(s_string * restrict str)
 	if(str == NULL)
 		return ;
 
-	if(str->string != NULL) {
+	if(str->string != NULL)
 		free(str->string);
-		str->string = NULL;
-	}
 
 	free(str);
 	str = NULL;
