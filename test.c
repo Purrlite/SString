@@ -32,7 +32,7 @@ int main(void) {
 	long time_diffs[NUM_OF_LOOPS];
 	int i;
 	char * str;
-	s_string s_str;
+	s_string * s_str;
 	const char * test_strings[] = {
 		"Testing",
 		"Testing a test.",
@@ -52,10 +52,12 @@ int main(void) {
 	printf("%lli ns - assigning 8 chars to a string\n", average(time_diffs));
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
+		s_str = malloc(8);
 		START_COUNTING;
-		s_str = S_STRING("Testing");
+		*s_str = S_STRING("Testing");
 		END_COUNTING;
 		time_diffs[i] = TIME_DIFFERENCE;
+		free(s_str);
 	}
 	printf("%lli ns - assigning 8 chars to a s_string\n", average(time_diffs));
 
@@ -65,6 +67,7 @@ int main(void) {
 		str = strcpy(test_strings[0]);
 		END_COUNTING
 		time_diffs[i] = TIME_DIFFERENCE;
+		free(str);
 	}
 	printf("%lli ns - copying 8 chars into a string\n", average(time_diffs));
 
@@ -73,6 +76,7 @@ int main(void) {
 		s_init(s_str, test_strings[0], 8);
 		END_COUNTING
 		time_diffs[i] = TIME_DIFFERENCE;
+		s_free(s_str);
 	}
 	printf("%lli ns - copying 8 chars into a s_string\n", average(time_diffs));
 
@@ -81,6 +85,7 @@ int main(void) {
 		s_init2(s_str, test_strings[0], 8);
 		END_COUNTING
 		time_diffs[i] = TIME_DIFFERENCE;
+		s_free(s_str);
 	}
 	printf("%lli ns - copying 8 chars into a s_string 2\n", average(time_diffs));
 
