@@ -64,7 +64,7 @@ int main(void) {
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
 		START_COUNTING;
 		str = malloc(8);
-		str = strcpy(test_strings[0]);
+		strcpy(str, test_strings[0]);
 		END_COUNTING;
 		time_diffs[i] = TIME_DIFFERENCE;
 		free(str);
