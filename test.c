@@ -62,28 +62,28 @@ int main(void) {
 	printf("%lli ns - assigning 8 chars to a s_string\n", average(time_diffs));
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING
+		START_COUNTING;
 		str = malloc(8);
 		str = strcpy(test_strings[0]);
-		END_COUNTING
+		END_COUNTING;
 		time_diffs[i] = TIME_DIFFERENCE;
 		free(str);
 	}
 	printf("%lli ns - copying 8 chars into a string\n", average(time_diffs));
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING
+		START_COUNTING;
 		s_init(s_str, test_strings[0], 8);
-		END_COUNTING
+		END_COUNTING;
 		time_diffs[i] = TIME_DIFFERENCE;
 		s_free(s_str);
 	}
 	printf("%lli ns - copying 8 chars into a s_string\n", average(time_diffs));
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING
+		START_COUNTING;
 		s_init2(s_str, test_strings[0], 8);
-		END_COUNTING
+		END_COUNTING;
 		time_diffs[i] = TIME_DIFFERENCE;
 		s_free(s_str);
 	}
