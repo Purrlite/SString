@@ -4,7 +4,7 @@
 
 s_string *
 s_init(s_string * restrict str,
-       char * restrict array,
+       const char * restrict array,
        size_t size)
 {
 	if(NULL == str)
@@ -44,7 +44,7 @@ s_init(s_string * restrict str,
 
 
 typedef s_string * (s_str_init_func)(s_string * restrict str,
-                                     char * restrict array,
+                                     const char * restrict array,
                                      size_t size);
 
 
@@ -134,7 +134,7 @@ get_function(char * restrict array,
 
 s_string *
 s_init2(s_string * restrict str,
-        char * restrict array,
+        const char * restrict array,
         size_t size)
 {
 	if(str == NULL)
