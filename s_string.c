@@ -140,6 +140,7 @@ get_function(char * restrict array,
 	}
 }
 
+
 s_string *
 s_init2(s_string * restrict str,
         const char * restrict array,
