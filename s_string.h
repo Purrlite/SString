@@ -32,12 +32,12 @@ length of the array.
 \******************************************************************************/
 s_string *
 s_init(s_string * restrict str,
-       char * restrict array,
+       const char * restrict array,
        size_t size) ;
 
 s_string *
 s_init2(s_string * restrict str,
-        char * restrict array,
+        const char * restrict array,
         size_t size) ;
 
 
