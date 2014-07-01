@@ -32,8 +32,8 @@ int main(void) {
 	long time_diffs[NUM_OF_LOOPS];
 	int i;
 	int j;
-	char * str;
-	s_string * s_str;
+	char * str = NULL;
+	s_string * s_str = NULL;
 	const char * test_strings[] = {
 #include "lorem_ipsum.txt"
 	};
