@@ -43,6 +43,7 @@ int main(void) {
 	};
 	const int num_of_strings = 6;
 
+
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
 		START_COUNTING;
 		str = "Testing";
