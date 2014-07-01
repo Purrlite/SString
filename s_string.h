@@ -61,15 +61,6 @@ s_free(s_string * restrict str) ;
 
 
 /******************************************************************************\
-  Makes a Cstring out of a s_string;
-  str is a s_string which will have it's string become Cstring;
-  Returns pointer to a Cstring in str or NULL if argument or string is NULL;
-\******************************************************************************/
-char *
-s_sstos(s_string * restrict str) ;
-
-
-/******************************************************************************\
   Makes a new Cstring out of a s_string;
   str is a s_string from which the new Cstring will be created;
   Returns pointer to a new Cstring copied from str or NULL if argument or string

@@ -185,18 +185,6 @@ s_free(s_string * restrict str)
 
 
 char *
-s_sstos(s_string * restrict str)
-{
-	if(NULL == str  ||  NULL == str->string)
-		return NULL;
-
-	if('\0' != str->string[str->length])
-		str->string[str->length] = '\0';
-	return str->string;
-}
-
-
-char *
 s_sstonews(s_string * restrict str)
 {
 	char * s;
