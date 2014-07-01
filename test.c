@@ -38,7 +38,7 @@ int main(void) {
 #include "lorem_ipsum.txt"
 	};
 	const int num_of_strings = sizeof(test_strings) / 8;
-	const int size_of_strings[6] = { 8, 64, 1024 };
+	const int size_of_strings[5] = { 8, 64, 1024, 8192, 65536 };
 
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
