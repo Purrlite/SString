@@ -43,7 +43,7 @@ int main(void) {
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et scelerisque ipsum. Curabitur non ipsum auctor, porttitor quam quis, cursus lacus. Fusce suscipit porta arcu vel mollis. Ut commodo arcu at odio volutpat tempus. Nam scelerisque id orci id."
 	};
 	const int num_of_strings = 6;
-    const int size_of_strings[num_of_strings] = { 8, 16, 32, 64, 128, 256 };
+    const int size_of_strings[6] = { 8, 16, 32, 64, 128, 256 };
 
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
