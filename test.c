@@ -35,12 +35,7 @@ int main(void) {
 	char * str;
 	s_string * s_str;
 	const char * test_strings[] = {
-		"Testing",
-		"Testing a test.",
-		"Lorem ipsum dolor sit volutpat.",
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit posuere.",
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus libero mi, vitae ornare justo tristique eget turpis duis.",
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et scelerisque ipsum. Curabitur non ipsum auctor, porttitor quam quis, cursus lacus. Fusce suscipit porta arcu vel mollis. Ut commodo arcu at odio volutpat tempus. Nam scelerisque id orci id."
+#include "lorem_ipsum.txt"
 	};
 	const int num_of_strings = 6;
     const int size_of_strings[6] = { 8, 16, 32, 64, 128, 256 };
