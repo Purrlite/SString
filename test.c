@@ -11,7 +11,7 @@
 #define END_COUNTING    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)
 #define TIME_DIFFERENCE (end.tv_nsec - start.tv_nsec)
 
-#define NUM_OF_LOOPS  32
+#define NUM_OF_LOOPS  1024
 
 long long
 average(long numbers[NUM_OF_LOOPS])
