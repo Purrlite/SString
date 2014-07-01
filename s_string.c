@@ -116,7 +116,7 @@ nonNULL_array_non0_size(s_string * restrict str,
 
 
 static s_str_init_func *
-get_function(char * restrict array,
+get_function(const char * restrict array,
              size_t size)
 {
 	if(NULL == array)
