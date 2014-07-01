@@ -31,6 +31,7 @@ int main(void) {
 	struct timespec end;
 	long time_diffs[NUM_OF_LOOPS];
 	int i;
+    int j
 	char * str;
 	s_string * s_str;
 	const char * test_strings[] = {
@@ -42,6 +43,7 @@ int main(void) {
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et scelerisque ipsum. Curabitur non ipsum auctor, porttitor quam quis, cursus lacus. Fusce suscipit porta arcu vel mollis. Ut commodo arcu at odio volutpat tempus. Nam scelerisque id orci id."
 	};
 	const int num_of_strings = 6;
+    const size_t strings[num_of_strings] = { 8, 16, 32, 64, 128, 256 };
 
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
@@ -62,34 +64,38 @@ int main(void) {
 	}
 	printf("%lli ns - assigning 8 chars to a s_string\n", average(time_diffs));
 
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		str = malloc(8);
-		strcpy(str, test_strings[0]);
-		END_COUNTING;
-		time_diffs[i] = TIME_DIFFERENCE;
-		free(str);
-	}
-	printf("%lli ns - copying 8 chars into a string\n", average(time_diffs));
+    for(j = 0; j < num_of_strings; j++) {
+        for(i = 0; i < NUM_OF_LOOPS; i++) {
+            START_COUNTING;
+            str = malloc(strings[j]);
+            strcpy(str, test_strings[j]);
+            END_COUNTING;
+            time_diffs[i] = TIME_DIFFERENCE;
+            free(str);
+        }
+        printf("%lli ns - copying %i chars into a string\n",
+               strings[j], average(time_diffs));
 
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		s_init(s_str, test_strings[0], 8);
-		END_COUNTING;
-		time_diffs[i] = TIME_DIFFERENCE;
-		s_free(s_str);
-	}
-	printf("%lli ns - copying 8 chars into a s_string\n", average(time_diffs));
+        for(i = 0; i < NUM_OF_LOOPS; i++) {
+            START_COUNTING;
+            s_init(s_str, test_strings[j], strings[j]);
+            END_COUNTING;
+            time_diffs[i] = TIME_DIFFERENCE;
+            s_free(s_str);
+        }
+        printf("%lli ns - copying %i chars into a s_string\n",
+               strings[j] , average(time_diffs));
 
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		s_init2(s_str, test_strings[0], 8);
-		END_COUNTING;
-		time_diffs[i] = TIME_DIFFERENCE;
-		s_free(s_str);
-	}
-	printf("%lli ns - copying 8 chars into a s_string 2\n", average(time_diffs));
-
+        for(i = 0; i < NUM_OF_LOOPS; i++) {
+            START_COUNTING;
+            s_init2(s_str, test_strings[j], strings[j]);
+            END_COUNTING;
+            time_diffs[i] = TIME_DIFFERENCE;
+            s_free(s_str);
+        }
+        printf("%lli ns - copying %i chars into a s_string 2\n",
+               strings[j], average(time_diffs));
+    }
 
 	return 0;
 }
