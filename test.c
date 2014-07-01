@@ -62,7 +62,7 @@ int main(void) {
 		time_diffs[i] = TIME_DIFFERENCE;
 		free(s_str);
 	}
-	printf("%lli ns - assigning 8 chars to a s_string\n", average(time_diffs));
+	printf("%lli ns - assigning 8 chars to a s_string\n\n", average(time_diffs));
 
     for(j = 0; j < num_of_strings; j++) {
         for(i = 0; i < NUM_OF_LOOPS; i++) {
@@ -93,7 +93,7 @@ int main(void) {
             time_diffs[i] = TIME_DIFFERENCE;
             s_free(s_str);
         }
-        printf("%lli ns - copying %i chars into a s_string 2\n",
+        printf("%lli ns - copying %i chars into a s_string 2\n\n",
                average(time_diffs), size_of_strings[j]);
     }
 
