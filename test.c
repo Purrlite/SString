@@ -7,8 +7,8 @@
 // NOTE: Works only on Linux because standard C implementation wouldn't be
 //           accurate enough.
 
-#define START_COUNTING  clock_gettime(CLOCK_MONOTONIC, &start)
-#define END_COUNTING    clock_gettime(CLOCK_MONOTONIC, &end)
+#define START_COUNTING  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start)
+#define END_COUNTING    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)
 #define TIME_DIFFERENCE (end.tv_nsec - start.tv_nsec)
 
 #define NUM_OF_LOOPS  1024
