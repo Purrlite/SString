@@ -140,7 +140,7 @@ s_string *
 s_init2(const char * restrict string,
         size_t size)
 {
-	string * restrict s_str;
+	s_string * restrict s_str;
 
 	s_str_init_func * init_function = get_function(string, size);
 
