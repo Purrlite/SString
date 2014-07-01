@@ -48,8 +48,10 @@ typedef s_string * (s_str_init_func)(s_string * restrict str,
                                      size_t size);
 
 
-static s_str_init_func
-NULL_array_0_size
+static s_string *
+NULL_array_0_size(s_string * restrict str,
+                  const char * restrict array,
+                  size_t size)
 {
 	str->length = 0;
 	str->size = 0;
@@ -59,8 +61,10 @@ NULL_array_0_size
 }
 
 
-static s_str_init_func
-NULL_array_non0_size
+static s_string *
+NULL_array_non0_size(s_string * restrict str,
+                     const char * restrict array,
+                     size_t size)
 {
 	str->length = 0;
 	str->size = size;
@@ -75,8 +79,10 @@ NULL_array_non0_size
 }
 
 
-static s_str_init_func
-nonNULL_array_0_size
+static string *
+nonNULL_array_0_size(s_string * restrict str,
+                     const char * restrict array,
+                     size_t size)
 {
 	str->length = sizeof(array);
 	str->size = str->length + 1;
@@ -91,8 +97,10 @@ nonNULL_array_0_size
 }
 
 
-static s_str_init_func
-nonNULL_array_non0_size
+static string *
+nonNULL_array_non0_size(s_string * restrict str,
+                        const char * restrict array,
+                        size_t size)
 {
     str->length = sizeof(array);
     str->size = (size > str->length) ? size : str->length + 1;
