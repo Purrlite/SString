@@ -31,7 +31,7 @@ int main(void) {
 	struct timespec end;
 	long time_diffs[NUM_OF_LOOPS];
 	int i;
-    int j
+    int j;
 	char * str;
 	s_string * s_str;
 	const char * test_strings[] = {
