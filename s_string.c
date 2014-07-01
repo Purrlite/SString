@@ -119,8 +119,7 @@ static s_str_init_func *
 get_function(char * restrict array,
              size_t size)
 {
-	switch(array) {
-	case NULL:
+	if(NULL == array)
 		switch(size) {
 		case 0:
 			return NULL_array_0_size;
@@ -128,8 +127,7 @@ get_function(char * restrict array,
 		default:
 			return NULL_array_non0_size;
 		}
-
-	default:
+    else
 		switch(size) {
 		case 0:
 			return nonNULL_array_0_size;
@@ -137,7 +135,6 @@ get_function(char * restrict array,
 		default:
 			return nonNULL_array_non0_size;
 		}
-	}
 }
 
 
