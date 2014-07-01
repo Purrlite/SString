@@ -31,13 +31,11 @@ length of the array.
   Returns pointer to the initialized s_string;
 \******************************************************************************/
 s_string *
-s_init(s_string * restrict str,
-       const char * restrict array,
+s_init(const char * restrict string,
        size_t size) ;
 
 s_string *
-s_init2(s_string * restrict str,
-        const char * restrict array,
+s_init2(const char * restrict string,
         size_t size) ;
 
 

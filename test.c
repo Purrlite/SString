@@ -7,8 +7,8 @@
 // NOTE: Works only on Linux because standard C implementation wouldn't be
 //           accurate enough.
 
-#define START_COUNTING  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start)
-#define END_COUNTING    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)
+#define START_COUNTING  clock_gettime(CLOCK_MONOTONIC, &start)
+#define END_COUNTING    clock_gettime(CLOCK_MONOTONIC, &end)
 #define TIME_DIFFERENCE (end.tv_nsec - start.tv_nsec)
 
 #define NUM_OF_LOOPS  1024
@@ -73,7 +73,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_init(s_str, test_strings[j], size_of_strings[j]);
+			s_str = s_init(test_strings[j], size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = TIME_DIFFERENCE;
 			s_free(s_str);
@@ -83,7 +83,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_init2(s_str, test_strings[j], size_of_strings[j]);
+			s_str = s_init2(test_strings[j], size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = TIME_DIFFERENCE;
 			s_free(s_str);
