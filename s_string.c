@@ -79,7 +79,7 @@ NULL_array_non0_size(s_string * restrict str,
 }
 
 
-static string *
+static s_string *
 nonNULL_array_0_size(s_string * restrict str,
                      const char * restrict array,
                      size_t size)
