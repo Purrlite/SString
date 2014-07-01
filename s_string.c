@@ -87,13 +87,13 @@ nonNULL_array_0_size(s_string * restrict str,
 	str->length = sizeof(array);
 	str->size = str->length + 1;
 
-    str->string = malloc(str->size);
-    if(NULL == str->string)
-    	return NULL;
+	str->string = malloc(str->size);
+	if(NULL == str->string)
+		return NULL;
 
 	strncpy(str->string, array, str->size);
 
-    return str;
+	return str;
 }
 
 
@@ -102,12 +102,12 @@ nonNULL_array_non0_size(s_string * restrict str,
                         const char * restrict array,
                         size_t size)
 {
-    str->length = sizeof(array);
-    str->size = (size > str->length) ? size : str->length + 1;
+	str->length = sizeof(array);
+	str->size = (size > str->length) ? size : str->length + 1;
 
-    str->string = malloc(str->size);
-    if(NULL == str->string)
-    	return NULL;
+	str->string = malloc(str->size);
+	if(NULL == str->string)
+		return NULL;
 
 	strncpy(str->string, array, str->size);
 
@@ -127,7 +127,7 @@ get_function(const char * restrict array,
 		default:
 			return NULL_array_non0_size;
 		}
-    else
+	else
 		switch(size) {
 		case 0:
 			return nonNULL_array_0_size;
@@ -214,7 +214,7 @@ s_sstonews2(s_string * restrict str)
 	if(NULL == str  ||  NULL == str->string)
 		return NULL;
 
-	 s = malloc(str->length + 1);
+	s = malloc(str->length + 1);
 
 	for(i = 0; i < str->length; i++) {
 		s[i] = str->string[i];
