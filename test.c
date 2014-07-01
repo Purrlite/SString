@@ -74,7 +74,7 @@ int main(void) {
             free(str);
         }
         printf("%lli ns - copying %i chars into a string\n",
-               strings[j], average(time_diffs));
+               average(time_diffs), strings[j]);
 
         for(i = 0; i < NUM_OF_LOOPS; i++) {
             START_COUNTING;
@@ -84,7 +84,7 @@ int main(void) {
             s_free(s_str);
         }
         printf("%lli ns - copying %i chars into a s_string\n",
-               strings[j] , average(time_diffs));
+               average(time_diffs), strings[j]);
 
         for(i = 0; i < NUM_OF_LOOPS; i++) {
             START_COUNTING;
@@ -94,7 +94,7 @@ int main(void) {
             s_free(s_str);
         }
         printf("%lli ns - copying %i chars into a s_string 2\n",
-               strings[j], average(time_diffs));
+               average(time_diffs), strings[j]);
     }
 
 	return 0;
