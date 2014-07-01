@@ -43,7 +43,7 @@ int main(void) {
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et scelerisque ipsum. Curabitur non ipsum auctor, porttitor quam quis, cursus lacus. Fusce suscipit porta arcu vel mollis. Ut commodo arcu at odio volutpat tempus. Nam scelerisque id orci id."
 	};
 	const int num_of_strings = 6;
-    const size_t strings[num_of_strings] = { 8, 16, 32, 64, 128, 256 };
+    const int size_of_strings[num_of_strings] = { 8, 16, 32, 64, 128, 256 };
 
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
@@ -67,34 +67,34 @@ int main(void) {
     for(j = 0; j < num_of_strings; j++) {
         for(i = 0; i < NUM_OF_LOOPS; i++) {
             START_COUNTING;
-            str = malloc(strings[j]);
+            str = malloc(size_of_strings[j]);
             strcpy(str, test_strings[j]);
             END_COUNTING;
             time_diffs[i] = TIME_DIFFERENCE;
             free(str);
         }
         printf("%lli ns - copying %i chars into a string\n",
-               average(time_diffs), strings[j]);
+               average(time_diffs), size_of_strings[j]);
 
         for(i = 0; i < NUM_OF_LOOPS; i++) {
             START_COUNTING;
-            s_init(s_str, test_strings[j], strings[j]);
+            s_init(s_str, test_strings[j], size_of_strings[j]);
             END_COUNTING;
             time_diffs[i] = TIME_DIFFERENCE;
             s_free(s_str);
         }
         printf("%lli ns - copying %i chars into a s_string\n",
-               average(time_diffs), strings[j]);
+               average(time_diffs), size_of_strings[j]);
 
         for(i = 0; i < NUM_OF_LOOPS; i++) {
             START_COUNTING;
-            s_init2(s_str, test_strings[j], strings[j]);
+            s_init2(s_str, test_strings[j], size_of_strings[j]);
             END_COUNTING;
             time_diffs[i] = TIME_DIFFERENCE;
             s_free(s_str);
         }
         printf("%lli ns - copying %i chars into a s_string 2\n",
-               average(time_diffs), strings[j]);
+               average(time_diffs), size_of_strings[j]);
     }
 
 	return 0;
