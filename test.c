@@ -10,7 +10,7 @@
 #define START_COUNTING  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start)
 #define END_COUNTING    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)
 
-#define NUM_OF_LOOPS  1024
+#define NUM_OF_LOOPS  8192
 
 long
 time_difference(struct timespec end,
