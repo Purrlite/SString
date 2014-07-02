@@ -28,7 +28,7 @@ s_init(const char * restrict string,
 	} else {
 		s_str->size = (0 == size) ? strlen(string) + 1 : size;
 		s_str->length = (0 == size) ? s_str->size - 1
-		              : ((size > strlen(string)) ? strlen(string) : size - 1);
+		                : ((size > strlen(string)) ? strlen(string) : size - 1);
 
 		s_str->string = malloc(s_str->size);
 		if(NULL == s_str->string)
