@@ -60,96 +60,6 @@ int main(void) {
 		END_COUNTING;
 	}
 
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		str = "T";
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-	}
-	printf("%li ns - assigning 2 chars to a string\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		s_str = malloc(sizeof(s_string));
-		START_COUNTING;
-		*s_str = S_STRING("T");
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-		free(s_str);
-	}
-	printf("%li ns - assigning 2 chars to a s_string\n\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		str = "Testing";
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-	}
-	printf("%li ns - assigning 8 chars to a string\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		s_str = malloc(sizeof(s_string));
-		START_COUNTING;
-		*s_str = S_STRING("Testing");
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-		free(s_str);
-	}
-	printf("%li ns - assigning 8 chars to a s_string\n\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		str = "Testing it here";
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-	}
-	printf("%li ns - assigning 16 chars to a string\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		s_str = malloc(sizeof(s_string));
-		START_COUNTING;
-		*s_str = S_STRING("Testing it here");
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-		free(s_str);
-	}
-	printf("%li ns - assigning 16 chars to a s_string\n\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam.";
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-	}
-	printf("%li ns - assigning 64 chars to a string\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		s_str = malloc(sizeof(s_string));
-		START_COUNTING;
-		*s_str = S_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam.");
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-		free(s_str);
-	}
-	printf("%li ns - assigning 64 chars to a s_string\n\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
-		str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec molestie lacus. Sed suscipit faucibus leo, nec molestie turpis sodales nec. Cras pretium risus a leo luctus placerat. Curabitur rutrum, felis ac porttitor egestas, lacus magna accumsan mi, sit amet fermentum nisi tellus vel turpis. Curabitur quis venenatis mauris. Sed faucibus ipsum eu posuere faucibus. Morbi at magna eget augue condimentum imperdiet at id purus. Aenean quis tellus volutpat leo eleifend sagittis. Proin tempus neque mattis varius malesuada. Fusce non est blandit, viverra eros posuere, consectetur lectus. Nulla in convallis ipsum, non egestas dolor. Pellentesque elementum aliquam sollicitudin. Quisque mattis, dui sollicitudin ornare tempus, nibh eros aliquet ligula, in blandit odio tellus rutrum velit. Aliquam erat volutpat. Nulla vel lorem imperdiet, adipiscing erat non, dictum augue. Nunc quis pretium mauris. Sed et nisl nec nibh porttitor aliquam. Vestibulum eu ligula neque. Cum sociis natoque penatibus et magnis dis posuere";
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-	}
-	printf("%li ns - assigning 1024 chars to a string\n", average(time_diffs));
-
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		s_str = malloc(sizeof(s_string));
-		START_COUNTING;
-		*s_str = S_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec molestie lacus. Sed suscipit faucibus leo, nec molestie turpis sodales nec. Cras pretium risus a leo luctus placerat. Curabitur rutrum, felis ac porttitor egestas, lacus magna accumsan mi, sit amet fermentum nisi tellus vel turpis. Curabitur quis venenatis mauris. Sed faucibus ipsum eu posuere faucibus. Morbi at magna eget augue condimentum imperdiet at id purus. Aenean quis tellus volutpat leo eleifend sagittis. Proin tempus neque mattis varius malesuada. Fusce non est blandit, viverra eros posuere, consectetur lectus. Nulla in convallis ipsum, non egestas dolor. Pellentesque elementum aliquam sollicitudin. Quisque mattis, dui sollicitudin ornare tempus, nibh eros aliquet ligula, in blandit odio tellus rutrum velit. Aliquam erat volutpat. Nulla vel lorem imperdiet, adipiscing erat non, dictum augue. Nunc quis pretium mauris. Sed et nisl nec nibh porttitor aliquam. Vestibulum eu ligula neque. Cum sociis natoque penatibus et magnis dis posuere");
-		END_COUNTING;
-		time_diffs[i] = time_difference(end, start);
-		free(s_str);
-	}
-	printf("%li ns - assigning 1024 chars to a s_string\n\n", average(time_diffs));
-/*
 	for(j = 0; j < num_of_strings; j++) {
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
@@ -182,6 +92,6 @@ int main(void) {
 		printf("%li ns - copying %i chars into a s_string 2\n\n",
 		       average(time_diffs), size_of_strings[j]);
 	}
-*/
+
 	return 0;
 }
