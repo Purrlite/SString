@@ -55,9 +55,7 @@ int main(void) {
 	// This for is to make sure the first few costly assigments don't affect
 	//     the results
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		START_COUNTING;
 		str = "T";
-		END_COUNTING;
 	}
 
 	for(j = 0; j < num_of_strings; j++) {
