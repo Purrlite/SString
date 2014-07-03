@@ -108,7 +108,7 @@ nonNULL_array_non0_size(s_string * restrict s_str,
 		return NULL;
 
 	strncpy(s_str->string, string, s_str->length);
-	s_str->string[s_str->length] = '/0';
+	s_str->string[s_str->length] = '\0';
 
 	return s_str;
 }
