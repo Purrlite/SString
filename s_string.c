@@ -82,7 +82,7 @@ nonNULL_array_0_size(s_string * restrict s_str,
                      const char * restrict string,
                      size_t size)
 {
-	s_str->length = sizeof(string);
+	s_str->length = strlen(string);
 	s_str->size = s_str->length + 1;
 
 	s_str->string = malloc(s_str->size);
