@@ -52,6 +52,14 @@ int main(void) {
 	clock_getres(CLOCK_PROCESS_CPUTIME_ID, &start);
 	printf("Resultion of clock is %li ns.\n", start.tv_nsec);
 
+	// This for is to make sure the first few costly assigments don't affect
+	//     the results
+	for(i = 0; i < NUM_OF_LOOPS; i++) {
+		START_COUNTING;
+		str = "T";
+		END_COUNTING;
+	}
+
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
 		START_COUNTING;
 		str = "T";
