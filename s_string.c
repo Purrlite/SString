@@ -100,14 +100,15 @@ nonNULL_array_non0_size(s_string * restrict s_str,
                         const char * restrict string,
                         size_t size)
 {
-	s_str->length = sizeof(string);
-	s_str->size = (size > s_str->length) ? size : s_str->length + 1;
+	s_str->size = size;
+	s_str->length = (size <= strlen(string)) ? size - 1 : strlen(string);
 
 	s_str->string = malloc(s_str->size);
 	if(NULL == s_str->string)
 		return NULL;
 
-	strncpy(s_str->string, string, s_str->size);
+	strncpy(s_str->string, string, s_str->length);
+	s_str->string[s_str->length] = '/0';
 
 	return s_str;
 }
