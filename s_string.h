@@ -187,6 +187,12 @@ s_strncpy3(s_string * destination,
            size_t num);
 
 
+s_string *
+s_strcpyX(s_string * restrict destination,
+          const char * source,
+          size_t num);
+
+
 /******************************************************************************\
   Adds string source at the end of destination;
   destination is where the data will be copied to, source is where the data will

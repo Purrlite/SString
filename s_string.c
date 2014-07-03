@@ -579,6 +579,28 @@ s_strncpy3(s_string * destination,
 
 
 s_string *
+s_strcpyX(s_string * restrict destination,
+          const char * source,
+          size_t num)
+{
+	unsigned int i;
+	size_t max;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
+		return NULL;
+
+	max = (destination->size >= num) ? num - 1 : destination->size - 1;
+	for(i = 0; i < max; i++)
+		destination->string[i] = source[i];
+	destination->string[max] = '\0';
+
+	destination->length = max;
+
+	return destination;
+}
+
+
+s_string *
 s_strcat(s_string * restrict destination,
          const s_string * restrict source)
 {
