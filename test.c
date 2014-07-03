@@ -69,7 +69,7 @@ int main(void) {
 			time_diffs[i] = time_difference(end, start);
 			free(str);
 		}
-		printf("%li ns - copying %i chars into a string\n",
+		printf("%li ns - copying %i chars into a C string\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
