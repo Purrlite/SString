@@ -61,7 +61,7 @@ int main(void) {
 	printf("%li ns - assigning 8 chars to a string\n", average(time_diffs));
 
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		s_str = malloc(8);
+		s_str = malloc(sizeof(s_string));
 		START_COUNTING;
 		*s_str = S_STRING("Testing");
 		END_COUNTING;
@@ -70,6 +70,42 @@ int main(void) {
 	}
 	printf("%li ns - assigning 8 chars to a s_string\n\n", average(time_diffs));
 
+	for(i = 0; i < NUM_OF_LOOPS; i++) {
+		START_COUNTING;
+		str = "Testing it here";
+		END_COUNTING;
+		time_diffs[i] = time_difference(end, start);
+	}
+	printf("%li ns - assigning 16 chars to a string\n", average(time_diffs));
+
+	for(i = 0; i < NUM_OF_LOOPS; i++) {
+		s_str = malloc(sizeof(s_string));
+		START_COUNTING;
+		*s_str = S_STRING("Testing it here");
+		END_COUNTING;
+		time_diffs[i] = time_difference(end, start);
+		free(s_str);
+	}
+	printf("%li ns - assigning 16 chars to a s_string\n\n", average(time_diffs));
+
+	for(i = 0; i < NUM_OF_LOOPS; i++) {
+		START_COUNTING;
+		str = "Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam.";
+		END_COUNTING;
+		time_diffs[i] = time_difference(end, start);
+	}
+	printf("%li ns - assigning 64 chars to a string\n", average(time_diffs));
+
+	for(i = 0; i < NUM_OF_LOOPS; i++) {
+		s_str = malloc(sizeof(s_string));
+		START_COUNTING;
+		*s_str = S_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam.");
+		END_COUNTING;
+		time_diffs[i] = time_difference(end, start);
+		free(s_str);
+	}
+	printf("%li ns - assigning 64 chars to a s_string\n\n", average(time_diffs));
+/*
 	for(j = 0; j < num_of_strings; j++) {
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
@@ -102,6 +138,6 @@ int main(void) {
 		printf("%li ns - copying %i chars into a s_string 2\n\n",
 		       average(time_diffs), size_of_strings[j]);
 	}
-
+*/
 	return 0;
 }
