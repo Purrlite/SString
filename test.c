@@ -50,7 +50,7 @@ int main(void) {
 
 
 	clock_getres(CLOCK_PROCESS_CPUTIME_ID, &start);
-	printf("Resultion of clock is %li ns.\n", start.tv_nsec);
+	printf("Precision of clock is %li ns.\n", start.tv_nsec);
 
 	// This for is to make sure the first few costly assigments don't affect
 	//     the results
