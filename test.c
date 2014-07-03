@@ -16,10 +16,7 @@ long
 time_difference(struct timespec end,
                 struct timespec beginning)
 {
-	long long diff;
-
-	diff = (long long)end.tv_sec - (long long)beginning.tv_sec;
-
+	long long diff = (long long)end.tv_sec - (long long)beginning.tv_sec;
 	return(end.tv_nsec - beginning.tv_nsec + ((diff > 0) ? 1000000L : 0));
 }
 
