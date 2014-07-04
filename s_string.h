@@ -18,8 +18,8 @@ typedef struct s_string {
 
 
 /******************************************************************************\
-  Initializes s_string with characters from a C-string and allocates new memory
-for .string even if there was some allocated before.
+  Creates a s_string with characters from a C-string either fully or up to
+size - 1 if it's smaller than the whole string.
   str is a s_string to which the characters will be added, array is a string of
 characters to be added to str, num is the number of characters of the string to
 be copied unless it finds a '\0';
