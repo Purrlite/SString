@@ -19,15 +19,12 @@ typedef struct s_string {
 
 /******************************************************************************\
   Creates a s_string with characters from a C-string either fully or up to
-size - 1 if it's smaller than the whole string.
-  str is a s_string to which the characters will be added, array is a string of
-characters to be added to str, num is the number of characters of the string to
-be copied unless it finds a '\0';
-  If str is NULL, then it creates a new one. If array is NULL, then it allocates
-memory normally, but won't put any characters in there. If array is NULL and num
-is 0, then it sets length to 0, but doesn't allocate anything. If num is 0, then
-it will search until it finds '\0' and length will get set automatically to the
-length of the array.
+size - 1 if it's smaller than the whole string and allocates size amount of
+characters for s_string's string.
+  If string is NULL, then it just allocates memory as long as size isn't 0.
+Otherwise it just sets the variables members of the struct. If string isn't NULL
+and size is 0, then it will only allocate as much memory as it needs to hold the
+string including '/0'.
   Returns pointer to the initialized s_string;
 \******************************************************************************/
 s_string *
