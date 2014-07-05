@@ -73,7 +73,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init(test_strings[j], size_of_strings[j]);
+			s_str = new_sstring(test_strings[j], size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -83,7 +83,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init(test_strings[j], 0);
+			s_str = new_sstring(test_strings[j], 0);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -93,7 +93,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init(NULL, size_of_strings[j]);
+			s_str = new_sstring(NULL, size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -103,7 +103,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init(NULL, 0);
+			s_str = new_sstring(NULL, 0);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -114,7 +114,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init2(test_strings[j], size_of_strings[j]);
+			s_str = new_sstring2(test_strings[j], size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -124,7 +124,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init2(test_strings[j], 0);
+			s_str = new_sstring2(test_strings[j], 0);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -134,7 +134,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init2(NULL, size_of_strings[j]);
+			s_str = new_sstring2(NULL, size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
@@ -144,7 +144,7 @@ int main(void) {
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
-			s_str = s_init2(NULL, 0);
+			s_str = new_sstring2(NULL, 0);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);

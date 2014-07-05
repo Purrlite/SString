@@ -3,8 +3,8 @@
 #include <string.h>
 
 s_string *
-s_init(const char * restrict string,
-       size_t size)
+new_sstring(const char * restrict string,
+            size_t size)
 {
 	s_string * restrict s_str;
 
@@ -138,8 +138,8 @@ get_function(const char * restrict string,
 
 
 s_string *
-s_init2(const char * restrict string,
-        size_t size)
+new_sstring2(const char * restrict string,
+             size_t size)
 {
 	s_string * restrict s_str;
 
