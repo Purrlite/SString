@@ -7,4 +7,5 @@ TODO list
  - Make consistent equality checks with the value on the left side and variable on the right.
  - Improve the names of functions to me more readable instead of being like standard C functions.
  - Make strncpy() get the start and end as arguments for how much text to be copied.
+ - Get rid of the s_ and instead make the name of the new string better and easier to recognize instead of looking like accidentally writing 2 's' in row
 
