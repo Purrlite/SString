@@ -2,7 +2,7 @@
 #include <time.h>
 #include <string.h>
 
-#include "s_string.h"
+#include "sstring.h"
 
 // NOTE: Works only on Linux because standard C implementation wouldn't be
 //           accurate enough.

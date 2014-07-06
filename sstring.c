@@ -1,4 +1,4 @@
-#include "s_string.h"
+#include "sstring.h"
 
 #include <string.h>
 
