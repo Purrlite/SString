@@ -6,15 +6,15 @@
 
 #define restrict __restrict__
 
-typedef struct s_string {
+typedef struct SString {
 	size_t length;
 	size_t size;
 	char * string;
-} s_string;
+} SString;
 
 
 // Fast way to initialize s_string with a C string
-#define S_STRING(str) (s_string){ sizeof(str)-1 , sizeof(str) , str }
+#define SSTRING(str) (SString){ sizeof(str)-1 , sizeof(str) , str }
 
 
 /******************************************************************************\
@@ -27,11 +27,11 @@ and size is 0, then it will only allocate as much memory as it needs to hold the
 string including '/0'.
   Returns pointer to the initialized s_string;
 \******************************************************************************/
-s_string *
+SString *
 new_sstring(const char * restrict string,
             size_t size) ;
 
-s_string *
+SString *
 new_sstring2(const char * restrict string,
              size_t size) ;
 
@@ -42,7 +42,7 @@ new_sstring2(const char * restrict string,
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void
-s_empty(s_string * restrict str) ;
+s_empty(SString * restrict str) ;
 
 
 /******************************************************************************\
@@ -52,7 +52,7 @@ s_string;
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void
-s_free(s_string * restrict str) ;
+s_free(SString * restrict str) ;
 
 
 /******************************************************************************\
@@ -62,10 +62,10 @@ s_free(s_string * restrict str) ;
 is NULL;
 \******************************************************************************/
 char *
-s_sstonews(s_string * restrict str) ;
+s_sstonews(SString * restrict str) ;
 
 char *
-s_sstonews2(s_string * restrict str) ;
+s_sstonews2(SString * restrict str) ;
 
 
 /******************************************************************************\
@@ -144,21 +144,21 @@ be coppied from;
   Returns pointer to destination or NULL if any of the arguments is NULL or
 their string is NULL;
 \******************************************************************************/
-s_string *
-s_strcpy(s_string * restrict destination,
-         const s_string * restrict source) ;
+SString *
+s_strcpy(SString * restrict destination,
+         const SString * restrict source) ;
 
-s_string *
-s_strcpy2(s_string * restrict destination,
-          const s_string * restrict source) ;
+SString *
+s_strcpy2(SString * restrict destination,
+          const SString * restrict source) ;
 
-s_string *
-s_strcpy3(s_string * restrict destination,
-          const s_string * restrict source) ;
+SString *
+s_strcpy3(SString * restrict destination,
+          const SString * restrict source) ;
 
-s_string *
-s_strcpy4(s_string * restrict destination,
-          const s_string * restrict source) ;
+SString *
+s_strcpy4(SString * restrict destination,
+          const SString * restrict source) ;
 
 
 /******************************************************************************\
@@ -168,24 +168,24 @@ be coppied from, num is the number of bytes to be coppied;
   Returns pointer to destination or NULL if any of the arguments is null or
 their string member is;
 \******************************************************************************/
-s_string *
-s_strncpy(s_string * restrict destination,
-          const s_string * restrict source,
+SString *
+s_strncpy(SString * restrict destination,
+          const SString * restrict source,
           size_t num) ;
 
-s_string *
-s_strncpy2(s_string * restrict destination,
-           const s_string * restrict source,
+SString *
+s_strncpy2(SString * restrict destination,
+           const SString * restrict source,
            size_t num) ;
 
-s_string *
-s_strncpy3(s_string * destination,
-           const s_string * source,
+SString *
+s_strncpy3(SString * destination,
+           const SString * source,
            size_t num);
 
 
-s_string *
-s_strcpyX(s_string * restrict destination,
+SString *
+s_strcpyX(SString * restrict destination,
           const char * source,
           size_t num);
 
@@ -196,13 +196,13 @@ s_strcpyX(s_string * restrict destination,
 be coppied from;
   Returns pointer to destination;
 \******************************************************************************/
-s_string *
-s_strcat(s_string * restrict destination,
-         const s_string * restrict source) ;
+SString *
+s_strcat(SString * restrict destination,
+         const SString * restrict source) ;
 
-s_string *
-s_strcat2(s_string * restrict destination,
-          const s_string * restrict source) ;
+SString *
+s_strcat2(SString * restrict destination,
+          const SString * restrict source) ;
 
 
 /******************************************************************************\
@@ -211,19 +211,19 @@ s_strcat2(s_string * restrict destination,
 be coppied from, num is the number of bytes to be coppied;
   Returns pointer to destination;
 \******************************************************************************/
-s_string *
-s_strncat(s_string * restrict destination,
-          const s_string * restrict source,
+SString *
+s_strncat(SString * restrict destination,
+          const SString * restrict source,
           size_t num) ;
 
-s_string *
-s_strncat2(s_string * restrict destination,
-           const s_string * restrict source,
+SString *
+s_strncat2(SString * restrict destination,
+           const SString * restrict source,
            size_t num) ;
 
-s_string *
-s_strncat3(s_string * restrict destination,
-           const s_string * restrict source,
+SString *
+s_strncat3(SString * restrict destination,
+           const SString * restrict source,
            size_t num) ;
 
 
@@ -255,12 +255,12 @@ character has higher value than ptr2's, negative if ptr1's character has smaller
 value than ptr2's character;
 \******************************************************************************/
 int
-s_strcmp(const s_string * restrict str1,
-         const s_string * restrict str2) ;
+s_strcmp(const SString * restrict str1,
+         const SString * restrict str2) ;
 
 int
-s_strcmp2(const s_string * str1,
-          const s_string * str2) ;
+s_strcmp2(const SString * str1,
+          const SString * str2) ;
 
 
 /******************************************************************************\
@@ -273,8 +273,8 @@ character has higher value than ptr2's, negative if ptr1's character has smaller
 value than ptr2's character;
 \******************************************************************************/
 int
-s_strncmp(const s_string * str1,
-          const s_string * str2,
+s_strncmp(const SString * str1,
+          const SString * str2,
           size_t num) ;
 
 
@@ -302,8 +302,8 @@ s_memchr2(void * ptr,
   Returns a pointer to the first matching character; if no matching character
 was found then it returns NULL;
 \******************************************************************************/
-s_string *
-s_strchr(s_string * str,
+SString *
+s_strchr(SString * str,
          int character) ;
 
 
@@ -316,8 +316,8 @@ being searched against
 returns -1 in case of no character from str2 being in str1;
 \******************************************************************************/
 size_t
-s_strspn(const s_string * str1,
-         const s_string * str2) ;
+s_strspn(const SString * str1,
+         const SString * str2) ;
 
 
 /******************************************************************************\
@@ -329,8 +329,8 @@ being searched against;
 returns -1 in case of all characters from str2 are in str1;
 \******************************************************************************/
 size_t
-s_strcspn(const s_string * str1,
-          const s_string * str2) ;
+s_strcspn(const SString * str1,
+          const SString * str2) ;
 
 
 /******************************************************************************\
@@ -341,8 +341,8 @@ being searched against;
 found, returns NULL;
 \******************************************************************************/
 char *
-s_strpbrk(const s_string * str1,
-          const s_string * str2) ;
+s_strpbrk(const SString * str1,
+          const SString * str2) ;
 
 
 /******************************************************************************\
@@ -353,7 +353,7 @@ searched for;
 isn't found, then it returns NULL;
 \******************************************************************************/
 char *
-s_strrchr(s_string * str,
+s_strrchr(SString * str,
           int character) ;
 
 
@@ -364,8 +364,8 @@ for;
   Returns a pointer to the start of the substring; Returns NULL if not found;
 \******************************************************************************/
 char *
-s_strstr(const s_string * str1,
-         const s_string * str2) ;
+s_strstr(const SString * str1,
+         const SString * str2) ;
 
 
 /******************************************************************************\
@@ -378,8 +378,8 @@ tokens;
 isn't any more tokens
 \******************************************************************************/
 char *
-s_strtok(s_string * str,
-         const s_string * delimiters) ;
+s_strtok(SString * str,
+         const SString * delimiters) ;
 
 
 /******************************************************************************\
@@ -391,9 +391,9 @@ tokens;
   Returns pointer to next token, which is a new string and returns NULL if there
 isn't any more tokens
 \******************************************************************************/
-s_string *
-s_sstrtok(s_string * str,
-          const s_string * delimiters) ;
+SString *
+s_sstrtok(SString * str,
+          const SString * delimiters) ;
 
 
 /******************************************************************************\

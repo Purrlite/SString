@@ -41,7 +41,7 @@ int main(void) {
 	int i;
 	int j;
 	char * str = NULL;
-	s_string * s_str = NULL;
+	SString * s_str = NULL;
 	const char * test_strings[] = {
 #include "lorem_ipsum.txt"
 	};

@@ -2,13 +2,13 @@
 
 #include <string.h>
 
-s_string *
+SString *
 new_sstring(const char * restrict string,
             size_t size)
 {
-	s_string * restrict s_str;
+	SString * restrict s_str;
 
-	s_str = malloc(sizeof(s_string));
+	s_str = malloc(sizeof(SString));
 	if(NULL == s_str)
 		return NULL;
 
@@ -41,13 +41,13 @@ new_sstring(const char * restrict string,
 }
 
 
-typedef s_string * (s_str_init_func)(s_string * restrict s_str,
+typedef SString * (s_str_init_func)(SString * restrict s_str,
                                      const char * restrict string,
                                      size_t size);
 
 
-static s_string *
-NULL_array_0_size(s_string * restrict s_str,
+static SString *
+NULL_array_0_size(SString * restrict s_str,
                   const char * restrict string,
                   size_t size)
 {
@@ -59,8 +59,8 @@ NULL_array_0_size(s_string * restrict s_str,
 }
 
 
-static s_string *
-NULL_array_non0_size(s_string * restrict s_str,
+static SString *
+NULL_array_non0_size(SString * restrict s_str,
                      const char * restrict string,
                      size_t size)
 {
@@ -77,8 +77,8 @@ NULL_array_non0_size(s_string * restrict s_str,
 }
 
 
-static s_string *
-nonNULL_array_0_size(s_string * restrict s_str,
+static SString *
+nonNULL_array_0_size(SString * restrict s_str,
                      const char * restrict string,
                      size_t size)
 {
@@ -95,8 +95,8 @@ nonNULL_array_0_size(s_string * restrict s_str,
 }
 
 
-static s_string *
-nonNULL_array_non0_size(s_string * restrict s_str,
+static SString *
+nonNULL_array_non0_size(SString * restrict s_str,
                         const char * restrict string,
                         size_t size)
 {
@@ -137,15 +137,15 @@ get_function(const char * restrict string,
 }
 
 
-s_string *
+SString *
 new_sstring2(const char * restrict string,
              size_t size)
 {
-	s_string * restrict s_str;
+	SString * restrict s_str;
 
 	s_str_init_func * init_function = get_function(string, size);
 
-	s_str = malloc(sizeof(s_string));
+	s_str = malloc(sizeof(SString));
 	if(NULL == s_str)
 		return NULL;
 
@@ -154,7 +154,7 @@ new_sstring2(const char * restrict string,
 
 
 void
-s_empty(s_string * restrict str)
+s_empty(SString * restrict str)
 {
 	if(str == NULL  ||  str->string == NULL)
 		return ;
@@ -168,7 +168,7 @@ s_empty(s_string * restrict str)
 
 
 void
-s_free(s_string * restrict str)
+s_free(SString * restrict str)
 {
 	if(str == NULL)
 		return ;
@@ -182,7 +182,7 @@ s_free(s_string * restrict str)
 
 
 char *
-s_sstonews(s_string * restrict str)
+s_sstonews(SString * restrict str)
 {
 	char * s;
 	unsigned int i;
@@ -203,7 +203,7 @@ s_sstonews(s_string * restrict str)
 
 // Version 2
 char *
-s_sstonews2(s_string * restrict str)
+s_sstonews2(SString * restrict str)
 {
 	char * s;
 	register unsigned int i;
@@ -392,9 +392,9 @@ s_memmove3(void * destination,
 }
 
 
-s_string *
-s_strcpy(s_string * restrict destination,
-         const s_string * restrict source)
+SString *
+s_strcpy(SString * restrict destination,
+         const SString * restrict source)
 {
 	unsigned int i;
 	size_t length;
@@ -415,9 +415,9 @@ s_strcpy(s_string * restrict destination,
 }
 
 // Version 2
-s_string *
-s_strcpy2(s_string * restrict destination,
-          const s_string * restrict source)
+SString *
+s_strcpy2(SString * restrict destination,
+          const SString * restrict source)
 {
 	register unsigned int i;
 	register size_t length;
@@ -438,9 +438,9 @@ s_strcpy2(s_string * restrict destination,
 }
 
 // Version 3
-s_string *
-s_strcpy3(s_string * restrict destination,
-          const s_string * restrict source)
+SString *
+s_strcpy3(SString * restrict destination,
+          const SString * restrict source)
 {
 	unsigned int i;
 	size_t length;
@@ -464,9 +464,9 @@ s_strcpy3(s_string * restrict destination,
 }
 
 // Version 4
-s_string *
-s_strcpy4(s_string * restrict destination,
-          const s_string * restrict source)
+SString *
+s_strcpy4(SString * restrict destination,
+          const SString * restrict source)
 {
 	unsigned int i;
 	uint64_t * _dest = (uint64_t *)(destination->string);
@@ -492,9 +492,9 @@ s_strcpy4(s_string * restrict destination,
 }
 
 
-s_string *
-s_strncpy(s_string * restrict destination,
-          const s_string * restrict source,
+SString *
+s_strncpy(SString * restrict destination,
+          const SString * restrict source,
           size_t num)
 {
 	unsigned int i;
@@ -522,9 +522,9 @@ s_strncpy(s_string * restrict destination,
 }
 
 // version 2
-s_string *
-s_strncpy2(s_string * restrict destination,
-           const s_string * restrict source,
+SString *
+s_strncpy2(SString * restrict destination,
+           const SString * restrict source,
            size_t num)
 {
 	unsigned int i;
@@ -548,9 +548,9 @@ s_strncpy2(s_string * restrict destination,
 }
 
 // version 3
-s_string *
-s_strncpy3(s_string * destination,
-           const s_string * source,
+SString *
+s_strncpy3(SString * destination,
+           const SString * source,
            size_t num)
 {
 	unsigned int i;
@@ -579,8 +579,8 @@ s_strncpy3(s_string * destination,
 }
 
 
-s_string *
-s_strcpyX(s_string * restrict destination,
+SString *
+s_strcpyX(SString * restrict destination,
           const char * source,
           size_t num)
 {
@@ -601,9 +601,9 @@ s_strcpyX(s_string * restrict destination,
 }
 
 
-s_string *
-s_strcat(s_string * restrict destination,
-         const s_string * restrict source)
+SString *
+s_strcat(SString * restrict destination,
+         const SString * restrict source)
 {
 	unsigned int i;
 	unsigned int j;
@@ -625,9 +625,9 @@ s_strcat(s_string * restrict destination,
 }
 
 // version 2
-s_string *
-s_strcat2(s_string * restrict destination,
-          const s_string * restrict source)
+SString *
+s_strcat2(SString * restrict destination,
+          const SString * restrict source)
 {
 	unsigned int i;
 	size_t length;
@@ -648,9 +648,9 @@ s_strcat2(s_string * restrict destination,
 }
 
 
-s_string *
-s_strncat(s_string * restrict destination,
-          const s_string * restrict source,
+SString *
+s_strncat(SString * restrict destination,
+          const SString * restrict source,
           size_t num)
 {
 	unsigned int i;
@@ -669,9 +669,9 @@ s_strncat(s_string * restrict destination,
 }
 
 // version 2
-s_string *
-s_strncat2(s_string * restrict destination,
-           const s_string * restrict source,
+SString *
+s_strncat2(SString * restrict destination,
+           const SString * restrict source,
            size_t num)
 {
 	unsigned int i;
@@ -689,9 +689,9 @@ s_strncat2(s_string * restrict destination,
 }
 
 // version 3
-s_string *
-s_strncat3(s_string * restrict destination,
-           const s_string * restrict source,
+SString *
+s_strncat3(SString * restrict destination,
+           const SString * restrict source,
            size_t num)
 {
 	int _help;
@@ -751,8 +751,8 @@ s_memcmp2(const void * restrict ptr1,
 
 
 int
-s_strcmp(const s_string * restrict str1,
-         const s_string * restrict str2)
+s_strcmp(const SString * restrict str1,
+         const SString * restrict str2)
 {
 	unsigned int i;
 
@@ -768,12 +768,12 @@ s_strcmp(const s_string * restrict str1,
 
 // Version 2
 int
-s_strcmp2(const s_string * str1,
-          const s_string * str2)
+s_strcmp2(const SString * str1,
+          const SString * str2)
 {
 	unsigned int i;
-	const s_string * restrict _help = str1;
-	const s_string * restrict _help2 = str2;
+	const SString * restrict _help = str1;
+	const SString * restrict _help2 = str2;
 
 	for(i = 0; i < _help->length && i < _help2->length; i++) {
 		if(_help->string[i] > _help2->string[i])
@@ -787,8 +787,8 @@ s_strcmp2(const s_string * str1,
 
 
 int
-s_strncmp(const s_string * str1,
-          const s_string * str2,
+s_strncmp(const SString * str1,
+          const SString * str2,
           size_t num)
 {
 	unsigned int i;
@@ -837,8 +837,8 @@ s_memchr2(void * ptr,
 }
 
 
-s_string *
-s_strchr(s_string * str,
+SString *
+s_strchr(SString * str,
          int character)
 {
 	unsigned int i;
@@ -853,8 +853,8 @@ s_strchr(s_string * str,
 
 
 size_t
-s_strspn(const s_string * str1,
-         const s_string * str2)
+s_strspn(const SString * str1,
+         const SString * str2)
 {
 	unsigned int i;
 	unsigned int j;
@@ -871,8 +871,8 @@ s_strspn(const s_string * str1,
 
 
 size_t
-s_strcspn(const s_string * str1,
-          const s_string * str2)
+s_strcspn(const SString * str1,
+          const SString * str2)
 {
 	unsigned int i;
 	unsigned int j;
@@ -889,8 +889,8 @@ s_strcspn(const s_string * str1,
 
 
 char *
-s_strpbrk(const s_string * str1,
-          const s_string * str2)
+s_strpbrk(const SString * str1,
+          const SString * str2)
 {
 	unsigned int i;
 	unsigned int j;
@@ -907,7 +907,7 @@ s_strpbrk(const s_string * str1,
 
 
 char *
-s_strrchr(s_string * str,
+s_strrchr(SString * str,
           int character)
 {
 	char * pointer = NULL;
@@ -923,8 +923,8 @@ s_strrchr(s_string * str,
 
 
 char *
-s_strstr(const s_string * str1,
-         const s_string * str2)
+s_strstr(const SString * str1,
+         const SString * str2)
 {
 	unsigned int matching = 0;
 	unsigned int i;
@@ -944,11 +944,11 @@ s_strstr(const s_string * str1,
 
 
 char *
-s_strtok(s_string * str,
-         const s_string * delimiters)
+s_strtok(SString * str,
+         const SString * delimiters)
 {
 	static char * _lastPos = NULL;
-	static s_string * _str = NULL;
+	static SString * _str = NULL;
 	char * startOfToken = NULL;
 	char numOfDelimiters;
 	unsigned int lengthOfToken = 0;
@@ -992,18 +992,18 @@ s_strtok(s_string * str,
 }
 
 
-s_string *
-s_sstrtok(s_string * str,
-          const s_string * delimiters)
+SString *
+s_sstrtok(SString * str,
+          const SString * delimiters)
 {
 	static char * _lastPos = NULL;
-	static s_string *_str = NULL;
+	static SString *_str = NULL;
 	char * startOfToken = NULL;
 	char numOfDelimiters;
 	unsigned int lengthOfToken = 0;
 	unsigned int i;
 	unsigned int j;
-	s_string * newSstr = malloc(sizeof(s_string));
+	SString * newSstr = malloc(sizeof(SString));
 
 	if(str != NULL)
 		_str = str;
