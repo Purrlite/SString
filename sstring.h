@@ -38,7 +38,7 @@ new_sstring(const char * restrict string,
   Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void
-s_empty(SString * restrict str) ;
+empty_sstring(SString * restrict str) ;
 
 
 /******************************************************************************\

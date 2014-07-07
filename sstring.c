@@ -115,7 +115,7 @@ new_sstring(const char * restrict string,
 
 
 void
-s_empty(SString * restrict str)
+empty_sstring(SString * restrict str)
 {
 	if(str == NULL)
 		return ;
