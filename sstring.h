@@ -31,10 +31,6 @@ SString *
 new_sstring(const char * restrict string,
             size_t size) ;
 
-SString *
-new_sstring2(const char * restrict string,
-             size_t size) ;
-
 
 /******************************************************************************\
   Empties a s_string and frees memory used for the string inside it

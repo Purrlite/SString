@@ -2,45 +2,6 @@
 
 #include <string.h>
 
-SString *
-new_sstring(const char * restrict string,
-            size_t size)
-{
-	SString * restrict s_str;
-
-	s_str = malloc(sizeof(SString));
-	if(NULL == s_str)
-		return NULL;
-
-	if(NULL == string) {
-		s_str->length = 0;
-		s_str->size = size;
-
-		if(0 != size) {
-			s_str->string = malloc(size);
-			if(NULL == s_str->string)
-				return NULL;
-
-			s_str->string[0] = '\0';
-		} else
-			s_str->string = NULL;
-
-	} else {
-		s_str->size = (0 == size) ? strlen(string) + 1 : size;
-		s_str->length = (0 == size) ? s_str->size - 1
-		                : ((size > strlen(string)) ? strlen(string) : size - 1);
-
-		s_str->string = malloc(s_str->size);
-		if(NULL == s_str->string)
-			return NULL;
-
-		strncpy(s_str->string, string, s_str->size);
-	}
-
-	return s_str;
-}
-
-
 typedef SString * (s_str_init_func)(SString * restrict s_str,
                                      const char * restrict string,
                                      size_t size);
@@ -138,8 +99,8 @@ get_function(const char * restrict string,
 
 
 SString *
-new_sstring2(const char * restrict string,
-             size_t size)
+new_sstring(const char * restrict string,
+            size_t size)
 {
 	SString * restrict s_str;
 
