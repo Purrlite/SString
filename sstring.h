@@ -34,8 +34,6 @@ new_sstring(const char * restrict string,
 
 /******************************************************************************\
   Empties a s_string and frees memory used for the string inside it
-  str is a s_string which will have its memory freed;
-  Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void
 empty_sstring(SString * restrict str) ;
@@ -44,8 +42,6 @@ empty_sstring(SString * restrict str) ;
 /******************************************************************************\
   Frees the memory allocated for s_string. Use this for actual pointers to
 s_string;
-  str is a s_string which will have its memory freed;
-  Doesn't return anything (apart from the memory that it returns to OS);
 \******************************************************************************/
 void
 s_free(SString * restrict str) ;
