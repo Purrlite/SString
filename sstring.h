@@ -13,13 +13,13 @@ typedef struct SString {
 } SString;
 
 
-// Fast way to initialize s_string with a C string
+// Fast way to initialize SString with a C string
 #define SSTRING(str) (SString){ sizeof(str)-1 , sizeof(str) , str }
 
 
-/* Creates a s_string with characters from a C-string either fully or up to
+/* Creates a SString with characters from a C-string either fully or up to
  * size - 1 if it's smaller than the whole string and allocates size amount of
- * characters for s_string's string.
+ * characters for SString's string.
  *     If string is NULL, then it just allocates memory as long as size isn't 0.
  * Otherwise it just sets the variables members of the struct. If string isn't
  * NULL and size is 0, then it will only allocate as much memory as it needs to
@@ -31,21 +31,21 @@ new_sstring(const char * restrict string,
             size_t size) ;
 
 
-/* Empties a s_string and frees memory used for the string inside it.
+/* Empties a SString and frees memory used for the string inside it.
  */
 void
 empty_sstring(SString * restrict str) ;
 
 
-/* Frees the memory allocated for s_string. Use this for actual pointers to
- * s_string.
+/* Frees the memory allocated for SString. Use this for actual pointers to
+ * SString.
  */
 void
 s_free(SString * restrict str) ;
 
 
-/* Makes a new Cstring out of a s_string.
- *     str is a s_string from which the new Cstring will be created.
+/* Makes a new Cstring out of a SString.
+ *     str is a SString from which the new Cstring will be created.
  *     Returns pointer to a new Cstring copied from str or NULL if argument or
  * string is NULL.
  */
@@ -122,7 +122,7 @@ s_memmove3(void * destination,
            size_t num) ;
 
 
-/* Copies s_string from source and replaces destination with it.
+/* Copies SString from source and replaces destination with it.
  *     destination is where the data will be copied to, source is where the data
  * will be coppied from.
  *     Returns pointer to destination or NULL if any of the arguments is NULL or
@@ -226,9 +226,9 @@ s_memcmp2(const void * restrict ptr1,
           size_t num);
 
 
-/* Lexically compares characters in the s_strings until the end of one of the
- * s_strings or a first different character.
- *     str1 and str2 are the s_strings being compared.
+/* Lexically compares characters in the SStrings until the end of one of the
+ * SStrings or a first different character.
+ *     str1 and str2 are the SStrings being compared.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
  * smaller value than ptr2's character.
@@ -242,9 +242,9 @@ s_strcmp2(const SString * str1,
           const SString * str2) ;
 
 
-/* Lexically compares characters in the s_strings until the end of one of the
- * s_strings, a first different character or num characters.
- *     str1 and str2 are the s_strings being compared, num is the number of
+/* Lexically compares characters in the SStrings until the end of one of the
+ * SStrings, a first different character or num characters.
+ *     str1 and str2 are the SStrings being compared, num is the number of
  * characters being compared.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
@@ -273,8 +273,8 @@ s_memchr2(void * ptr,
           size_t num) ;
 
 
-/* Locates specified character in s_string.
- *     ptr is s_string being searched, character is the character being searched
+/* Locates specified character in SString.
+ *     ptr is SString being searched, character is the character being searched
  * for.
  *     Returns a pointer to the first matching character; if no matching
  * character was found then it returns NULL.
@@ -286,7 +286,7 @@ s_strchr(SString * str,
 
 /* Get the amount of characters before the first occurance of a character that
  * isn't in str2.
- *     str1 is the s_strings being searched in, str2 contians characters that
+ *     str1 is the SStrings being searched in, str2 contians characters that
  * are being searched against.
  *     Returns the number of characters before the first non-matching character.
  * Returns -1 in case of no character from str2 being in str1.
@@ -298,7 +298,7 @@ s_strspn(const SString * str1,
 
 /* Get the amount of characters before the first occurance of a character that
  * is in str2.
- *     str1 is the s_string being searched in, str2 contians characters that are
+ *     str1 is the SString being searched in, str2 contians characters that are
  * being searched against.
  *     Returns the number of characters before the first non-matching character,
  * Returns -1 in case of all characters from str2 are in str1.
@@ -309,7 +309,7 @@ s_strcspn(const SString * str1,
 
 
 /* Locates one of the characters from str2 in str1.
- *     str1 is the s_string being searched in, str2 contians characters that are
+ *     str1 is the SString being searched in, str2 contians characters that are
  * being searched against.
  *     Returns a pointer to the first matching character. If the character isn't
  * found, returns NULL.
@@ -320,7 +320,7 @@ s_strpbrk(const SString * str1,
 
 
 /* Locates the last occurance of the specified character.
- *     str is the s_string being searched in, character is the character being
+ *     str is the SString being searched in, character is the character being
  * searched for.
  *     Returns a pointer to the last occurance of such character. If the
  * charecter isn't found, then it returns NULL.
@@ -341,10 +341,10 @@ s_strstr(const SString * str1,
          const SString * str2) ;
 
 
-/* Splits s_string into tokens (smaller Cstrings devided by one of the signs in
+/* Splits SString into tokens (smaller Cstrings devided by one of the signs in
  * delimiters). The function is intialized by giving it string in str and
  * continues searching through the last string supplied on NULL.
- *     str is the s_string being split, delimeners are the characters deviding
+ *     str is the SString being split, delimeners are the characters deviding
  * the tokens.
  *     Returns pointer to next token, which is a new string and returns NULL if
  * there isn't any more tokens.
@@ -354,10 +354,10 @@ s_strtok(SString * str,
          const SString * delimiters) ;
 
 
-/* Splits s_string into tokens (smaller s_strings devided by one of the signs in
+/* Splits SString into tokens (smaller SStrings devided by one of the signs in
  * delimiters). The function is intialized by giving it string in str and
  * continues searching through the last string supplied on NULL.
- *     str is the s_string being split, delimeners are the characters deviding
+ *     str is the SString being split, delimeners are the characters deviding
  * the tokens.
  *     Returns pointer to next token, which is a new string and returns NULL if
  * there isn't any more tokens.
