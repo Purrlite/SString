@@ -108,7 +108,7 @@ int main(void) {
 			time_diffs[i] = time_difference(end, start);
 			s_free(s_str);
 		}
-		printf("%4li ns - copying %i chars into a s_string - NULL 0\n",
+		printf("%4li ns - copying %i chars into a s_string - NULL 0\n\n",
 		       average(time_diffs), size_of_strings[j]);
 	}
 
