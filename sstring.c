@@ -2,9 +2,9 @@
 
 #include <string.h>
 
-typedef SString * (s_str_init_func)(SString * restrict s_str,
-                                     const char * restrict string,
-                                     size_t size);
+typedef SString * (new_SStr_func)(SString * restrict s_str,
+                                  const char * restrict string,
+                                  size_t size);
 
 
 static SString *
@@ -75,9 +75,9 @@ nonNULL_array_non0_size(SString * restrict s_str,
 }
 
 
-static s_str_init_func *
-get_function(const char * restrict string,
-             size_t size)
+static new_SStr_func *
+get_new_SS_func(const char * restrict string,
+                size_t size)
 {
 	if(NULL == string)
 		switch(size) {
@@ -104,13 +104,13 @@ new_sstring(const char * restrict string,
 {
 	SString * restrict s_str;
 
-	s_str_init_func * init_function = get_function(string, size);
+	new_SStr_func * new_SS_func = get_new_SS_func(string, size);
 
 	s_str = malloc(sizeof(SString));
 	if(NULL == s_str)
 		return NULL;
 
-	return((init_function)(s_str, string, size));
+	return((new_SS_func)(s_str, string, size));
 }
 
 
