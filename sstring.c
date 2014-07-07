@@ -156,12 +156,14 @@ new_sstring2(const char * restrict string,
 void
 s_empty(SString * restrict str)
 {
-	if(str == NULL  ||  str->string == NULL)
+	if(str == NULL)
 		return ;
 
-	free(str->string);
+	if(str->string != NULL) {
+		free(str->string);
+		str->string = NULL;
+	}
 
-	str->string = NULL;
 	str->length = 0;
 	str->size = 0;
 }
