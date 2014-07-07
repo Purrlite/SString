@@ -25,7 +25,7 @@ characters for s_string's string.
 Otherwise it just sets the variables members of the struct. If string isn't NULL
 and size is 0, then it will only allocate as much memory as it needs to hold the
 string including '/0'.
-  Returns pointer to the initialized s_string;
+  Returns pointer to the initialized SString;
 \******************************************************************************/
 SString *
 new_sstring(const char * restrict string,
