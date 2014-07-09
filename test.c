@@ -12,7 +12,7 @@
 
 #define NUM_OF_LOOPS  20000
 
-unsigned long
+static unsigned long
 time_difference(struct timespec end,
                 struct timespec beginning)
 {
@@ -22,7 +22,7 @@ time_difference(struct timespec end,
 }
 
 
-unsigned long
+static unsigned long
 average(unsigned long numbers[NUM_OF_LOOPS])
 {
 	unsigned long long sum = 0;
