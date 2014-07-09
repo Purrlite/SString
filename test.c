@@ -49,9 +49,6 @@ int main(void) {
 	const int size_of_strings[5] = { 8, 64, 1024, 8192, 65536 };
 
 
-	clock_getres(CLOCK_PROCESS_CPUTIME_ID, &start);
-	printf("Precision of clock is %li ns.\n", start.tv_nsec);
-
 	// This for is to make sure the first few costly assigments don't affect
 	//     the results
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
