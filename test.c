@@ -79,7 +79,7 @@ int main(void) {
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
 		}
-		printf("%4li ns - emptying SString v1\n",
+		printf("%4li ns - emptying %s chars from SString v1\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
@@ -90,7 +90,7 @@ int main(void) {
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
 		}
-		printf("%4li ns - emptying SString v2\n",
+		printf("%4li ns - emptying %s chars from SString v2\n",
 		       average(time_diffs), size_of_strings[j]);
 	}
 
