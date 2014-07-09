@@ -43,50 +43,6 @@ void
 free_sstring(SString * str) ;
 
 
-/* Copies momory from source and replaces destination with it. Source can't
- * overlap with destination.
- *     destination is where the data will be copied to, source is where the data
- * will be coppied from, num is the number of bytes that will be copied.
- *     Returns pointer to destination.
- */
-void *
-s_memcpy(void * destination,
-         const void * source,
-         size_t num) ;
-
-void *
-s_memcpy2(void * restrict destination,
-          const void * restrict source,
-          size_t num) ;
-
-void *
-s_memcpy3(void * restrict destination,
-          const void * restrict source,
-          size_t num) ;
-
-
-/* Copies momory from source and replaces destination with it. Source can
- * overlap with destination.
- *     destination is where the data will be copied to, source is where the data
- * will be coppied from, num is the number of bytes that will be copied.
- *     Returns pointer to destination.
- */
-void *
-s_memmove(void * destination,
-          const void * source,
-          size_t num) ;
-
-void *
-s_memmove2(void * destination,
-           const void *source,
-           size_t num) ;
-
-void *
-s_memmove3(void * destination,
-           const void *source,
-           size_t num) ;
-
-
 /* Copies SString from source and replaces destination with it.
  *     destination is where the data will be copied to, source is where the data
  * will be coppied from.
