@@ -31,7 +31,7 @@ new_sstring(const char * restrict string,
             size_t size) ;
 
 
-/* Empties a SString and frees memory used for the string inside it.
+/* Empties a SString, but doesn't free any memory.
  */
 void
 empty_sstring(SString * restrict str) ;
