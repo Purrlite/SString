@@ -76,7 +76,7 @@ int main(void) {
 			s_str = new_sstring(test_strings[j], size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
-			s_free(s_str);
+			free_sstring(s_str);
 		}
 		printf("%4li ns - copying %i chars into a s_string - nonNULL non0\n",
 		       average(time_diffs), size_of_strings[j]);
@@ -86,7 +86,7 @@ int main(void) {
 			s_str = new_sstring(test_strings[j], 0);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
-			s_free(s_str);
+			free_sstring(s_str);
 		}
 		printf("%4li ns - copying %i chars into a s_string - nonNULL 0\n",
 		       average(time_diffs), size_of_strings[j]);
@@ -96,7 +96,7 @@ int main(void) {
 			s_str = new_sstring(NULL, size_of_strings[j]);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
-			s_free(s_str);
+			free_sstring(s_str);
 		}
 		printf("%4li ns - copying %i chars into a s_string - NULL non0\n",
 		       average(time_diffs), size_of_strings[j]);
@@ -106,7 +106,7 @@ int main(void) {
 			s_str = new_sstring(NULL, 0);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
-			s_free(s_str);
+			free_sstring(s_str);
 		}
 		printf("%4li ns - copying %i chars into a s_string - NULL 0\n\n",
 		       average(time_diffs), size_of_strings[j]);
