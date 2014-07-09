@@ -92,6 +92,8 @@ int main(void) {
 		}
 		printf("%4li ns - emptying %s chars from SString v2\n",
 		       average(time_diffs), size_of_strings[j]);
+
+		putchar('\n');
 	}
 
 	return 0;
