@@ -12,19 +12,20 @@
 
 #define NUM_OF_LOOPS  20000
 
-long
+unsigned long
 time_difference(struct timespec end,
                 struct timespec beginning)
 {
-	long long diff = (long long)end.tv_sec - (long long)beginning.tv_sec;
-	return(end.tv_nsec - beginning.tv_nsec + ((diff > 0) ? 1000000L : 0));
+	unsigned long long diff = (unsigned long long)end.tv_sec
+	                          - (unsigned long long)beginning.tv_sec;
+	return(end.tv_nsec - beginning.tv_nsec + ((diff > 0) ? 1000000UL : 0));
 }
 
 
-long
-average(long numbers[NUM_OF_LOOPS])
+unsigned long
+average(unsigned long numbers[NUM_OF_LOOPS])
 {
-	long long sum = 0;
+	unsigned long long sum = 0;
 	int i;
 
 	for(i = 0; i < NUM_OF_LOOPS; i++)
@@ -37,7 +38,7 @@ average(long numbers[NUM_OF_LOOPS])
 int main(void) {
 	struct timespec start;
 	struct timespec end;
-	long time_diffs[NUM_OF_LOOPS];
+	unsigned long time_diffs[NUM_OF_LOOPS];
 	int i;
 	int j;
 	char * str = NULL;
@@ -52,7 +53,7 @@ int main(void) {
 	// This for is to make sure the first few costly assigments don't affect
 	//     the results
 	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		str = "T";
+		str = test_strings[i % num_of_strings];
 	}
 
 	for(j = 0; j < num_of_strings; j++) {/*
@@ -76,7 +77,7 @@ int main(void) {
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
 		}
-		printf("%4li ns - emptying %i chars from SString v1\n",
+		printf("%4lu ns - emptying %i chars from SString v1\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
@@ -87,7 +88,7 @@ int main(void) {
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
 		}
-		printf("%4li ns - emptying %i chars from SString v2\n",
+		printf("%4lu ns - emptying %i chars from SString v2\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		putchar('\n');
