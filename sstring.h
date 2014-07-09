@@ -13,7 +13,7 @@ typedef struct SString {
 } SString;
 
 
-// Fast way to initialize SString with a C string
+// Static allocation of a SString
 #define SSTRING(str) (SString){ sizeof(str)-1 , sizeof(str) , str }
 
 
