@@ -37,7 +37,7 @@ void
 empty_sstring(SString * restrict str) ;
 
 void
-empty_sstring(SString * str) ;
+empty_sstring2(SString * str) ;
 
 /* Frees the memory allocated for SString.
  */
