@@ -37,8 +37,7 @@ void
 empty_sstring(SString * restrict str) ;
 
 
-/* Frees the memory allocated for SString. Use this for actual pointers to
- * SString.
+/* Frees the memory allocated for SString.
  */
 void
 s_free(SString * restrict str) ;
