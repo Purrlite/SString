@@ -141,60 +141,6 @@ free_sstring(SString * str)
 
 
 void *
-s_memnull(void * restrict memory,
-          size_t num)
-{
-	unsigned int i;
-
-	for(i = 0; i < num; i++)
-		*((char*)memory + i) = 0;
-
-	return memory;
-}
-
-// version 2
-void *
-s_memnull2(void * memory,
-           size_t num)
-{
-	char * restrict _help = memory;
-	unsigned int i;
-
-	for(i = 0; i < num; i++)
-		_help[i] = 0;
-
-	return _help;
-}
-
-// version 3
-void *
-s_memnull3(void * restrict memory,
-           size_t num)
-{
-	register unsigned int i;
-
-	for(i = 0; i < num; i++)
-		*((char*)memory + i) = 0;
-
-	return memory;
-}
-
-// version 4
-void *
-s_memnull4(void * memory,
-           size_t num)
-{
-	char * restrict _help = memory;
-	register unsigned int i;
-
-	for(i = 0; i < num; i++)
-		_help[i] = 0;
-
-	return _help;
-}
-
-
-void *
 s_memcpy(void * destination,
          const void * source,
          size_t num)

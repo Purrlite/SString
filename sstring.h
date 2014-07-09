@@ -43,28 +43,6 @@ void
 free_sstring(SString * str) ;
 
 
-/* Makes num bytes in memory 0.
- *     memory is the memory that is going to get edited, num is the amount of
- * bytes that will be changed.
- *     Returns pointer to the start of the edited memory.
- */
-void *
-s_memnull(void * restrict memory,
-          size_t num) ;
-
-void *
-s_memnull2(void *memory,
-           size_t num) ;
-
-void *
-s_memnull3(void * restrict memory,
-           size_t num) ;
-
-void *
-s_memnull4(void * memory,
-           size_t num) ;
-
-
 /* Copies momory from source and replaces destination with it. Source can't
  * overlap with destination.
  *     destination is where the data will be copied to, source is where the data
