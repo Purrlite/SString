@@ -58,7 +58,7 @@ int main(void) {
 		str = "T";
 	}
 
-	for(j = 0; j < num_of_strings; j++) {
+	for(j = 0; j < num_of_strings; j++) {/*
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			START_COUNTING;
 			str = malloc(size_of_strings[j]);
@@ -69,46 +69,28 @@ int main(void) {
 		}
 		printf("%4li ns - copying %i chars into a C string\n",
 		       average(time_diffs), size_of_strings[j]);
-
+*/
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			START_COUNTING;
 			s_str = new_sstring(test_strings[j], size_of_strings[j]);
+			START_COUNTING;
+			empty_sstring(s_str);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
 		}
-		printf("%4li ns - copying %i chars into a s_string - nonNULL non0\n",
+		printf("%4li ns - emptying SString v1\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
+			s_str = new_sstring(test_strings[j], size_of_strings[j]);
 			START_COUNTING;
-			s_str = new_sstring(test_strings[j], 0);
+			empty_sstring2(s_str);
 			END_COUNTING;
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
 		}
-		printf("%4li ns - copying %i chars into a s_string - nonNULL 0\n",
-		       average(time_diffs), size_of_strings[j]);
-
-		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			START_COUNTING;
-			s_str = new_sstring(NULL, size_of_strings[j]);
-			END_COUNTING;
-			time_diffs[i] = time_difference(end, start);
-			free_sstring(s_str);
-		}
-		printf("%4li ns - copying %i chars into a s_string - NULL non0\n",
-		       average(time_diffs), size_of_strings[j]);
-
-		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			START_COUNTING;
-			s_str = new_sstring(NULL, 0);
-			END_COUNTING;
-			time_diffs[i] = time_difference(end, start);
-			free_sstring(s_str);
-		}
-		printf("%4li ns - copying %i chars into a s_string - NULL 0\n\n",
+		printf("%4li ns - emptying SString v2\n",
 		       average(time_diffs), size_of_strings[j]);
 	}
 

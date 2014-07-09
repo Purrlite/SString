@@ -127,6 +127,18 @@ empty_sstring(SString * restrict str)
 
 
 void
+empty_sstring2(SString * str)
+{
+	if(str == NULL)
+		return ;
+
+	str->string = NULL;
+	str->length = 0;
+	str->size = 0;
+}
+
+
+void
 free_sstring(SString * restrict str)
 {
 	if(str == NULL)

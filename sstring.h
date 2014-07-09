@@ -36,6 +36,8 @@ new_sstring(const char * restrict string,
 void
 empty_sstring(SString * restrict str) ;
 
+void
+empty_sstring(SString * str) ;
 
 /* Frees the memory allocated for SString.
  */
