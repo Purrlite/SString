@@ -57,14 +57,6 @@ SString *
 s_strcpy2(SString * restrict destination,
           const SString * restrict source) ;
 
-SString *
-s_strcpy3(SString * restrict destination,
-          const SString * restrict source) ;
-
-SString *
-s_strcpy4(SString * restrict destination,
-          const SString * restrict source) ;
-
 
 /* Copies n characters from source and replaces destination with it.
  *     destination is where the data will be copied to, source is where the data
@@ -76,16 +68,6 @@ SString *
 s_strncpy(SString * restrict destination,
           const SString * restrict source,
           size_t num) ;
-
-SString *
-s_strncpy2(SString * restrict destination,
-           const SString * restrict source,
-           size_t num) ;
-
-SString *
-s_strncpy3(SString * destination,
-           const SString * source,
-           size_t num);
 
 
 SString *

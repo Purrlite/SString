@@ -185,60 +185,6 @@ s_strcpy2(SString * restrict destination,
 	return destination;
 }
 
-// Version 3
-SString *
-s_strcpy3(SString * restrict destination,
-          const SString * restrict source)
-{
-	unsigned int i;
-	size_t length;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
-		return NULL;
-
-	length = (source->length > destination->size) ? destination->size
-	         : source->length;
-
-	for(i = 0; i < length / 8; i++)
-		((uint64_t *)(destination->string))[i] = ((uint64_t *)(source->string))[i];
-
-	for(i *= 8; i < length; i++)
-		destination->string[i] = source->string[i];
-
-	destination->length = i;
-
-	return destination;
-}
-
-// Version 4
-SString *
-s_strcpy4(SString * restrict destination,
-          const SString * restrict source)
-{
-	unsigned int i;
-	uint64_t * _dest = (uint64_t *)(destination->string);
-	uint64_t * _sour = (uint64_t *)(source->string);
-	size_t length;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
-		return NULL;
-
-	length = (source->length > destination->size) ? destination->size
-	         : source->length;
-
-	for(i = 0; i < length / 8; i++)
-		_dest[i] = _sour[i];
-
-	for(i *= 8; i < length; i++)
-		destination->string[i] = source->string[i];
-
-	destination->length = i;
-
-	return destination;
-}
-
 
 SString *
 s_strncpy(SString * restrict destination,
@@ -265,63 +211,6 @@ s_strncpy(SString * restrict destination,
 		destination->string[i] = source->string[i];
 
 	destination->length = length;
-
-	return destination;
-}
-
-// version 2
-SString *
-s_strncpy2(SString * restrict destination,
-           const SString * restrict source,
-           size_t num)
-{
-	unsigned int i;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
-		return NULL;
-
-	if(0 == num)
-		return destination;
-
-	for(i = 0; i < num / 8; i++)
-		((uint64_t *)(destination->string))[i] = ((uint64_t *)(source->string))[i];
-
-	for(i *= 8; i < num; i++)
-		destination->string[i] = source->string[i];
-
-	destination->length = num;
-
-	return destination;
-}
-
-// version 3
-SString *
-s_strncpy3(SString * destination,
-           const SString * source,
-           size_t num)
-{
-	unsigned int i;
-	uint64_t * restrict _dest = (uint64_t *)(destination->string);
-	uint64_t * restrict _sour = (uint64_t *)(source->string);
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
-		return NULL;
-
-	if(0 == num)
-		return destination;
-
-	_dest = (uint64_t *)(destination->string);
-	_sour = (uint64_t *)(source->string);
-
-	for(i = 0; i < num / 8; i++)
-		_dest[i] = _sour[i];
-
-	for(i *= 8; i < num; i++)
-		_dest[i] = _sour[i];
-
-	destination->length = num;
 
 	return destination;
 }
