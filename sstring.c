@@ -127,7 +127,7 @@ empty_sstring(SString * restrict str)
 
 
 void
-s_free(SString * restrict str)
+free_sstring(SString * restrict str)
 {
 	if(str == NULL)
 		return ;
@@ -137,48 +137,6 @@ s_free(SString * restrict str)
 
 	free(str);
 	str = NULL;
-}
-
-
-char *
-s_sstonews(SString * restrict str)
-{
-	char * s;
-	unsigned int i;
-
-	if(NULL == str  ||  NULL == str->string)
-		return NULL;
-
-	 s = malloc(str->length + 1);
-
-	for(i = 0; i < str->length; i++) {
-		s[i] = str->string[i];
-	}
-
-	s[str->length] = '\0';
-
-	return s;
-}
-
-// Version 2
-char *
-s_sstonews2(SString * restrict str)
-{
-	char * s;
-	register unsigned int i;
-
-	if(NULL == str  ||  NULL == str->string)
-		return NULL;
-
-	s = malloc(str->length + 1);
-
-	for(i = 0; i < str->length; i++) {
-		s[i] = str->string[i];
-	}
-
-	s[str->length] = '\0';
-
-	return s;
 }
 
 

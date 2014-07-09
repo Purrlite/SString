@@ -40,19 +40,7 @@ empty_sstring(SString * restrict str) ;
 /* Frees the memory allocated for SString.
  */
 void
-s_free(SString * restrict str) ;
-
-
-/* Makes a new Cstring out of a SString.
- *     str is a SString from which the new Cstring will be created.
- *     Returns pointer to a new Cstring copied from str or NULL if argument or
- * string is NULL.
- */
-char *
-s_sstonews(SString * restrict str) ;
-
-char *
-s_sstonews2(SString * restrict str) ;
+free_sstring(SString * restrict str) ;
 
 
 /* Makes num bytes in memory 0.
