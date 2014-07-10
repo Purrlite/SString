@@ -161,7 +161,7 @@ copy_sstring(SString * restrict destination,
 	for(i = 0; i <= source->length; i++)
 		destination->string[i] = source->string[i];
 
-	destination->length = source->length - 1;
+	destination->length = source->length;
 
 	return destination;
 }
