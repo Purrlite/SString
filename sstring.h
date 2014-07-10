@@ -54,8 +54,6 @@ copy_sstring(SString * restrict destination,
 
 
 /* Copies num characters from source starting at start to destination.
- *     destination is where the data will be copied to, source is where the data
- * will be coppied from, num is the number of bytes to be coppied.
  *     Returns number of copyied characters or -1 if any of the arguments is
  * NULL or their string member is or -2 if allocating memory fails when there
  * wasn't enough memory allocated to destination.
