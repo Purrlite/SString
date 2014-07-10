@@ -145,19 +145,20 @@ s_strcpy(SString * restrict destination,
          const SString * restrict source)
 {
 	unsigned int i;
-	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
 		return NULL;
 
-	length = (source->length > destination->size) ? destination->size
-	         : source->length;
+	if(source->length > destination->size) {
+		destination->size = source->length + 1;
+		destination->string = malloc(destination->size);
+	}
 
-	for(i = 0; i < length; i++)
+	for(i = 0; i <= source->length; i++)
 		destination->string[i] = source->string[i];
 
-	destination->length = length;
+	destination->length = source->length - 1;
 
 	return destination;
 }
@@ -168,19 +169,20 @@ s_strcpy2(SString * restrict destination,
           const SString * restrict source)
 {
 	register unsigned int i;
-	register size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
 		return NULL;
 
-	length = (source->length > destination->size) ? destination->size
-	         : source->length;
+	if(source->length > destination->size) {
+		destination->size = source->length + 1;
+		destination->string = malloc(destination->size);
+	}
 
-	for(i = 0; i < length; i++)
+	for(i = 0; i <= source->length; i++)
 		destination->string[i] = source->string[i];
 
-	destination->length = length;
+	destination->length = source->length - 1;
 
 	return destination;
 }
