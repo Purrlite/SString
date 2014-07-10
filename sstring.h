@@ -43,11 +43,10 @@ void
 free_sstring(SString * str) ;
 
 
-/* Copies SString from source and replaces destination with it.
- *     destination is where the data will be copied to, source is where the data
- * will be coppied from.
+/* Copies string from source into destination
  *     Returns pointer to destination or NULL if any of the arguments is NULL or
- * their string is NULL.
+ * their string is NULL or if allocating memory fails when there wasn't enough
+ * memory allocated to destination.
  */
 SString *
 s_strcpy(SString * restrict destination,
