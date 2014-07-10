@@ -169,10 +169,10 @@ copy_sstring(SString * restrict destination,
 
 
 SString *
-s_strncpy(SString * restrict destination,
-          const SString * restrict source,
-          size_t start,
-          size_t num)
+copy_n_sstring(SString * restrict destination,
+               const SString * restrict source,
+               size_t start,
+               size_t num)
 {
 	unsigned int i;
 	size_t length;
