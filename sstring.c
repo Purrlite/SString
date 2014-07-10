@@ -141,8 +141,8 @@ free_sstring(SString * str)
 
 
 SString *
-s_strcpy(SString * restrict destination,
-         const SString * restrict source)
+copy_sstring(SString * restrict destination,
+             const SString * restrict source)
 {
 	unsigned int i;
 
@@ -168,8 +168,8 @@ s_strcpy(SString * restrict destination,
 
 // Version 2
 SString *
-s_strcpy2(SString * restrict destination,
-          const SString * restrict source)
+copy_sstring(SString * restrict destination,
+             const SString * restrict source)
 {
 	register unsigned int i;
 

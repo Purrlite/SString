@@ -49,12 +49,12 @@ free_sstring(SString * str) ;
  * memory allocated to destination.
  */
 SString *
-s_strcpy(SString * restrict destination,
-         const SString * restrict source) ;
+copy_sstring(SString * restrict destination,
+             const SString * restrict source) ;
 
 SString *
-s_strcpy2(SString * restrict destination,
-          const SString * restrict source) ;
+copy_sstring2(SString * restrict destination,
+              const SString * restrict source) ;
 
 
 /* Copies n characters from source and replaces destination with it.
