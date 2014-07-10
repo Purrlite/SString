@@ -153,6 +153,9 @@ s_strcpy(SString * restrict destination,
 	if(source->length > destination->size) {
 		destination->size = source->length + 1;
 		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return NULL;
 	}
 
 	for(i = 0; i <= source->length; i++)
@@ -177,6 +180,9 @@ s_strcpy2(SString * restrict destination,
 	if(source->length > destination->size) {
 		destination->size = source->length + 1;
 		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return NULL;
 	}
 
 	for(i = 0; i <= source->length; i++)
