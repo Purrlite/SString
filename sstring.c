@@ -144,7 +144,7 @@ SString *
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
-	unsigned int i;
+	register size_t i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
@@ -171,7 +171,7 @@ SString *
 copy_sstring2(SString * restrict destination,
               const SString * restrict source)
 {
-	register unsigned int i;
+	register size_t i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
