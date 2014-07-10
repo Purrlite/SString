@@ -152,6 +152,7 @@ copy_sstring(SString * restrict destination,
 
 	if(source->length >= destination->size) {
 		destination->size = source->length + 1;
+		free(destination->string);
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
