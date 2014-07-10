@@ -155,7 +155,7 @@ copy_sstring(SString * restrict destination,
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
-			return -1;
+			return -2;
 	}
 
 	for(i = 0; i <= source->length; i++)
