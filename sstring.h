@@ -44,11 +44,11 @@ free_sstring(SString * str) ;
 
 
 /* Copies string from source into destination
- *     Returns pointer to destination or NULL if any of the arguments is NULL or
- * their string is NULL or if allocating memory fails when there wasn't enough
- * memory allocated to destination.
+ *     Returns amount of copyied characters or -1 if any of the arguments is or
+ * their string is NULL or -2 if allocating memory fails when there wasn't
+ * enough memory allocated to destination.
  */
-SString *
+int
 copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 

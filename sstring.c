@@ -140,7 +140,7 @@ free_sstring(SString * str)
 }
 
 
-SString *
+int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
@@ -148,14 +148,14 @@ copy_sstring(SString * restrict destination,
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 	   || NULL == source->string)
-		return NULL;
+		return -1;
 
 	if(source->length >= destination->size) {
 		destination->size = source->length + 1;
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
-			return NULL;
+			return -1;
 	}
 
 	for(i = 0; i <= source->length; i++)
@@ -163,7 +163,7 @@ copy_sstring(SString * restrict destination,
 
 	destination->length = source->length;
 
-	return destination;
+	return destination->length;
 }
 
 
