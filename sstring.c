@@ -168,7 +168,7 @@ copy_sstring(SString * restrict destination,
 }
 
 
-SString *
+int
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
@@ -182,7 +182,7 @@ copy_n_sstring(SString * restrict destination,
 		return NULL;
 
 	if(0 == num)
-		return destination;
+		return -1;
 
 	if(start + num > source->length)
 		length = (num > source->length) ? source->length : num;
@@ -195,7 +195,7 @@ copy_n_sstring(SString * restrict destination,
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
-			return NULL;
+			return -2;
 	}
 
 	for(i = 0; i <= length; i++)
@@ -203,7 +203,7 @@ copy_n_sstring(SString * restrict destination,
 
 	destination->length = length;
 
-	return destination;
+	return length;
 }
 
 

@@ -44,7 +44,7 @@ free_sstring(SString * str) ;
 
 
 /* Copies string from source into destination
- *     Returns amount of copyied characters or -1 if any of the arguments is or
+ *     Returns number of copyied characters or -1 if any of the arguments is or
  * their string is NULL or -2 if allocating memory fails when there wasn't
  * enough memory allocated to destination.
  */
@@ -53,13 +53,14 @@ copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
 
-/* Copies n characters from source and replaces destination with it.
+/* Copies num characters from source starting at start to destination.
  *     destination is where the data will be copied to, source is where the data
  * will be coppied from, num is the number of bytes to be coppied.
- *     Returns pointer to destination or NULL if any of the arguments is null or
- * their string member is.
+ *     Returns number of copyied characters or -1 if any of the arguments is
+ * NULL or their string member is or -2 if allocating memory fails when there
+ * wasn't enough memory allocated to destination.
  */
-SString *
+int
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
