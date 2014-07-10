@@ -174,7 +174,7 @@ copy_n_sstring(SString * restrict destination,
                size_t start,
                size_t num)
 {
-	unsigned int i;
+	register size_t i;
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
