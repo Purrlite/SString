@@ -166,33 +166,6 @@ copy_sstring(SString * restrict destination,
 	return destination;
 }
 
-// Version 2
-SString *
-copy_sstring2(SString * restrict destination,
-              const SString * restrict source)
-{
-	register size_t i;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
-		return NULL;
-
-	if(source->length >= destination->size) {
-		destination->size = source->length + 1;
-		destination->string = malloc(destination->size);
-
-		if(NULL == destination->string)
-			return NULL;
-	}
-
-	for(i = 0; i <= source->length; i++)
-		destination->string[i] = source->string[i];
-
-	destination->length = source->length - 1;
-
-	return destination;
-}
-
 
 SString *
 s_strncpy(SString * restrict destination,

@@ -52,10 +52,6 @@ SString *
 copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
-SString *
-copy_sstring2(SString * restrict destination,
-              const SString * restrict source) ;
-
 
 /* Copies n characters from source and replaces destination with it.
  *     destination is where the data will be copied to, source is where the data
