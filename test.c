@@ -72,7 +72,7 @@ int main(void) {
 			free(str);
 			free(str2);
 		}
-		printf("%4li ns - copying %i chars into a C string\n",
+		printf("%5li ns - copying %i chars into a C string\n",
 		       average(time_diffs), size_of_strings[j]);
 
 
@@ -88,7 +88,7 @@ int main(void) {
 			free_sstring(s_str);
 			free_sstring(s_str2);
 		}
-		printf("%4lu ns - copying %i chars between SStrings v1\n",
+		printf("%5lu ns - copying %i chars between SStrings v1\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
@@ -103,7 +103,7 @@ int main(void) {
 			free_sstring(s_str);
 			free_sstring(s_str2);
 		}
-		printf("%4lu ns - copying %i chars between SStrings v2\n",
+		printf("%5lu ns - copying %i chars between SStrings v2\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		putchar('\n');
