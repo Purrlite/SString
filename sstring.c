@@ -171,6 +171,7 @@ copy_sstring(SString * restrict destination,
 SString *
 s_strncpy(SString * restrict destination,
           const SString * restrict source,
+          size_t start,
           size_t num)
 {
 	unsigned int i;
@@ -183,14 +184,22 @@ s_strncpy(SString * restrict destination,
 	if(0 == num)
 		return destination;
 
-	if(num > source->length)
-		length = (source->length > destination->size) ? destination->size
-		          : source->length;
+	if(start + num > source->length)
+		length = (num > source->length) ? source->length : num;
 	else
-		length = (num > destination->size) ? destination->size : num;
+		length = num;
 
-	for(i = 0; i < length; i++)
-		destination->string[i] = source->string[i];
+	if(length > destination->size) {
+		destination->size = length + 1;
+		free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return NULL;
+	}
+
+	for(i = 0; i <= length; i++)
+		destination->string[i] = source->string[start + i];
 
 	destination->length = length;
 
