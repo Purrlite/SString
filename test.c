@@ -42,7 +42,9 @@ int main(void) {
 	int i;
 	int j;
 	char * str = NULL;
+	char * str2 = NULL;
 	SString * s_str = NULL;
+	SString * s_str2 = NULL;
 	const char * test_strings[] = {
 #include "lorem_ipsum.txt"
 	};
@@ -56,39 +58,52 @@ int main(void) {
 		str = test_strings[i % num_of_strings];
 	}
 
-	for(j = 0; j < num_of_strings; j++) {/*
+	for(j = 0; j < num_of_strings; j++) {
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			START_COUNTING;
 			str = malloc(size_of_strings[j]);
+			str2 = malloc(size_of_strings[j]);
 			strcpy(str, test_strings[j]);
+
+			START_COUNTING;
+			strcpy(str2, str);
 			END_COUNTING;
+
 			time_diffs[i] = time_difference(end, start);
 			free(str);
+			free(str2);
 		}
 		printf("%4li ns - copying %i chars into a C string\n",
 		       average(time_diffs), size_of_strings[j]);
-*/
+
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			s_str = new_sstring(test_strings[j], size_of_strings[j]);
+			s_str2 = new_sstring(NULL, size_of_strings[j]);
+
 			START_COUNTING;
-			empty_sstring(s_str);
+			copy_sstring(s_str2, s_str);
 			END_COUNTING;
+
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
+			free_sstring(s_str2);
 		}
-		printf("%4lu ns - emptying %i chars from SString v1\n",
+		printf("%4lu ns - copying %i chars between SStrings v1\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
 			s_str = new_sstring(test_strings[j], size_of_strings[j]);
+			s_str2 = new_sstring(NULL, size_of_strings[j]);
+
 			START_COUNTING;
-			empty_sstring2(s_str);
+			copy_sstring2(s_str2, s_str);
 			END_COUNTING;
+
 			time_diffs[i] = time_difference(end, start);
 			free_sstring(s_str);
+			free_sstring(s_str2);
 		}
-		printf("%4lu ns - emptying %i chars from SString v2\n",
+		printf("%4lu ns - copying %i chars between SStrings v2\n",
 		       average(time_diffs), size_of_strings[j]);
 
 		putchar('\n');
