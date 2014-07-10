@@ -168,8 +168,8 @@ copy_sstring(SString * restrict destination,
 
 // Version 2
 SString *
-copy_sstring(SString * restrict destination,
-             const SString * restrict source)
+copy_sstring2(SString * restrict destination,
+              const SString * restrict source)
 {
 	register unsigned int i;
 
