@@ -212,7 +212,7 @@ s_strcpyX(SString * restrict destination,
           const char * restrict source,
           size_t num)
 {
-	unsigned int i;
+	register size_t i;
 	size_t max;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
