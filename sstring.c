@@ -216,7 +216,7 @@ copy_string_to_sstring(SString * restrict destination,
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
 		return -1;
 
-	max = (num > strlen(source)) ? strlen(source) - 1: num;
+	max = (num > strlen(source)) ? strlen(source) - 1 : num;
 
 	if(num > destination->size) {
 		destination->size = num + 1;
