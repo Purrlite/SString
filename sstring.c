@@ -218,7 +218,17 @@ copy_string_to_sstring(SString * restrict destination,
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
 		return NULL;
 
-	max = (destination->size >= num) ? num - 1 : destination->size - 1;
+	max = (num > strlen(source)) ? strlen(source) - 1: num;
+
+	if(num > destination->size) {
+		destination->size = num + 1;
+		free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return NULL;
+	}
+
 	for(i = 0; i < max; i++)
 		destination->string[i] = source[i];
 	destination->string[max] = '\0';
