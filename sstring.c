@@ -184,7 +184,7 @@ copy_n_sstring(SString * restrict destination,
 	if(0 == num)
 		return -1;
 
-	length = (num > source->length) ? source->length : num;
+	length = (num > source->length) ? source->length - 1 : num;
 
 	if(length > destination->size) {
 		destination->size = length + 1;
@@ -195,8 +195,9 @@ copy_n_sstring(SString * restrict destination,
 			return -2;
 	}
 
-	for(i = 0; i <= length; i++)
+	for(i = 0; i < length; i++)
 		destination->string[i] = source->string[start + i];
+	destination->string[length] = '\0';
 
 	destination->length = length;
 
