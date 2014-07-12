@@ -184,10 +184,7 @@ copy_n_sstring(SString * restrict destination,
 	if(0 == num)
 		return -1;
 
-	if(start + num > source->length)
-		length = (num > source->length) ? source->length : num;
-	else
-		length = num;
+	length = (num > source->length) ? source->length : num;
 
 	if(length > destination->size) {
 		destination->size = length + 1;
