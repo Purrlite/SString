@@ -66,9 +66,9 @@ copy_n_sstring(SString * restrict destination,
 
 
 SString *
-s_strcpyX(SString * restrict destination,
-          const char * restrict source,
-          size_t num);
+copy_string_to_sstring(SString * restrict destination,
+                       const char * restrict source,
+                       size_t num);
 
 
 /* Adds string source at the end of destination.

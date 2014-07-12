@@ -208,9 +208,9 @@ copy_n_sstring(SString * restrict destination,
 
 
 SString *
-s_strcpyX(SString * restrict destination,
-          const char * restrict source,
-          size_t num)
+copy_string_to_sstring(SString * restrict destination,
+                       const char * restrict source,
+                       size_t num)
 {
 	register size_t i;
 	size_t max;
