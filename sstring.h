@@ -65,7 +65,7 @@ copy_n_sstring(SString * restrict destination,
                size_t num) ;
 
 
-SString *
+int
 copy_string_to_sstring(SString * restrict destination,
                        const char * restrict source,
                        size_t num);

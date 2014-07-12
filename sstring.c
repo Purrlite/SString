@@ -204,7 +204,7 @@ copy_n_sstring(SString * restrict destination,
 }
 
 
-SString *
+int
 copy_string_to_sstring(SString * restrict destination,
                        const char * restrict source,
                        size_t num)
@@ -213,7 +213,7 @@ copy_string_to_sstring(SString * restrict destination,
 	size_t max;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
-		return NULL;
+		return -1;
 
 	max = (num > strlen(source)) ? strlen(source) - 1: num;
 
@@ -223,7 +223,7 @@ copy_string_to_sstring(SString * restrict destination,
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
-			return NULL;
+			return -2;
 	}
 
 	for(i = 0; i < max; i++)
@@ -232,7 +232,7 @@ copy_string_to_sstring(SString * restrict destination,
 
 	destination->length = max;
 
-	return destination;
+	return max;
 }
 
 
