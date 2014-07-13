@@ -81,12 +81,12 @@ copy_string_to_sstring(SString * restrict destination,
  *     Returns pointer to destination.
  */
 SString *
-s_strcat(SString * restrict destination,
-         const SString * restrict source) ;
+append_sstring(SString * restrict destination,
+               const SString * restrict source) ;
 
 SString *
-s_strcat2(SString * restrict destination,
-          const SString * restrict source) ;
+append_sstring2(SString * restrict destination,
+                const SString * restrict source) ;
 
 
 /* Adds n characters from source at the end of destination.

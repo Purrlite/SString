@@ -239,8 +239,8 @@ copy_string_to_sstring(SString * restrict destination,
 
 
 SString *
-s_strcat(SString * restrict destination,
-         const SString * restrict source)
+append_sstring(SString * restrict destination,
+               const SString * restrict source)
 {
 	unsigned int i;
 	unsigned int j;
@@ -263,8 +263,8 @@ s_strcat(SString * restrict destination,
 
 // version 2
 SString *
-s_strcat2(SString * restrict destination,
-          const SString * restrict source)
+append_sstring2(SString * restrict destination,
+                const SString * restrict source)
 {
 	unsigned int i;
 	size_t length;
