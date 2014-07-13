@@ -95,19 +95,19 @@ append_sstring2(SString * restrict destination,
  *     Returns pointer to destination.
  */
 SString *
-s_strncat(SString * restrict destination,
-          const SString * restrict source,
-          size_t num) ;
+append_n_sstring(SString * restrict destination,
+                 const SString * restrict source,
+                 size_t num) ;
 
 SString *
-s_strncat2(SString * restrict destination,
-           const SString * restrict source,
-           size_t num) ;
+append_n_sstring2(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
 
 SString *
-s_strncat3(SString * restrict destination,
-           const SString * restrict source,
-           size_t num) ;
+append_n_sstring3(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
 
 
 /* Compares bytes in memories until num bytes or a first differnt byte.

@@ -286,9 +286,9 @@ append_sstring2(SString * restrict destination,
 
 
 SString *
-s_strncat(SString * restrict destination,
-          const SString * restrict source,
-          size_t num)
+append_n_sstring(SString * restrict destination,
+                 const SString * restrict source,
+                 size_t num)
 {
 	unsigned int i;
 	unsigned int j;
@@ -307,9 +307,9 @@ s_strncat(SString * restrict destination,
 
 // version 2
 SString *
-s_strncat2(SString * restrict destination,
-           const SString * restrict source,
-           size_t num)
+append_n_sstring2(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num)
 {
 	unsigned int i;
 
@@ -327,9 +327,9 @@ s_strncat2(SString * restrict destination,
 
 // version 3
 SString *
-s_strncat3(SString * restrict destination,
-           const SString * restrict source,
-           size_t num)
+append_n_sstring3(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num)
 {
 	int _help;
 	unsigned int i;
