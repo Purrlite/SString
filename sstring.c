@@ -213,14 +213,15 @@ copy_string_to_sstring(SString * restrict destination,
 	register size_t i;
 	size_t lenght;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
+	if(NULL == destination  ||  NULL == source)
 		return -1;
 
 	lenght = (num > strlen(source)) ? strlen(source) - 1 : num;
 
-	if(num > destination->size) {
+	if(num > destination->size  ||  NULL == destination->string) {
 		destination->size = num + 1;
-		free(destination->string);
+		if(NULL != destination->string)
+			free(destination->string);
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
