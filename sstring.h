@@ -65,6 +65,10 @@ copy_n_sstring(SString * restrict destination,
                size_t num) ;
 
 
+/* Copies num characters from string source into SString destination.
+ *     Returns the number of copyied characters excluding \0 or exits and
+ * returns -1 if any of the arguments is NULL or -2 if allocating memory fails.
+ */
 int
 copy_string_to_sstring(SString * restrict destination,
                        const char * restrict source,
