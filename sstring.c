@@ -211,12 +211,12 @@ copy_string_to_sstring(SString * restrict destination,
                        size_t num)
 {
 	register size_t i;
-	size_t max;
+	size_t lenght;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string)
 		return -1;
 
-	max = (num > strlen(source)) ? strlen(source) - 1 : num;
+	lenght = (num > strlen(source)) ? strlen(source) - 1 : num;
 
 	if(num > destination->size) {
 		destination->size = num + 1;
@@ -227,13 +227,13 @@ copy_string_to_sstring(SString * restrict destination,
 			return -2;
 	}
 
-	for(i = 0; i < max; i++)
+	for(i = 0; i < lenght; i++)
 		destination->string[i] = source[i];
-	destination->string[max] = '\0';
+	destination->string[lenght] = '\0';
 
-	destination->length = max;
+	destination->length = lenght;
 
-	return max;
+	return lenght;
 }
 
 
