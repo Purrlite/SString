@@ -146,13 +146,13 @@ copy_sstring(SString * restrict destination,
 {
 	register size_t i;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	if(NULL == destination  ||  NULL == source  || NULL == source->string)
 		return -1;
 
-	if(source->length >= destination->size) {
+	if(source->length >= destination->size  ||  NULL == destination->string) {
 		destination->size = source->length + 1;
-		free(destination->string);
+		if(NULL != destination->string)
+			free(destination->string);
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
@@ -177,8 +177,7 @@ copy_n_sstring(SString * restrict destination,
 	register size_t i;
 	size_t length;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	if(NULL == destination  ||  NULL == source  || NULL == source->string)
 		return NULL;
 
 	if(0 == num)
@@ -186,9 +185,10 @@ copy_n_sstring(SString * restrict destination,
 
 	length = (num > source->length) ? source->length - 1 : num;
 
-	if(length > destination->size) {
+	if(length > destination->size  ||  NULL == destination->string) {
 		destination->size = length + 1;
-		free(destination->string);
+		if(NULL != destination->string)
+			free(destination->string);
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
