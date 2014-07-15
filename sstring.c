@@ -244,16 +244,21 @@ append_sstring(SString * restrict destination,
 {
 	unsigned int i;
 	unsigned int j;
-	size_t length;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   ||  NULL == source->string)
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
-	length = (source->length > destination->length) ? destination->length
-	         : source->length;
+	if(num > destination->size  ||  NULL == destination->string) {
+		destination->size = source->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
 
-	for(i = destination->length, j = 0;  j < length;  i++, j++)
+		if(NULL == destination->string)
+			return NULL;
+	}
+
+	for(i = destination->length, j = 0;  j < source->length;  i++, j++)
 		destination->string[i] = source->string[j];
 
 	destination->length += source->length;
@@ -267,16 +272,21 @@ append_sstring2(SString * restrict destination,
                 const SString * restrict source)
 {
 	unsigned int i;
-	size_t length;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   ||  NULL == source->string)
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
-	length = (source->length > destination->length) ? destination->length
-	         : source->length;
+	if(num > destination->size  ||  NULL == destination->string) {
+		destination->size = source->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
 
-	for(i = 0; i < length; i++)
+		if(NULL == destination->string)
+			return NULL;
+	}
+
+	for(i = 0; i < source->length; i++)
 		destination->string[i + destination->length] = source->string[i];
 
 	destination->length += source->length;
