@@ -146,7 +146,7 @@ copy_sstring(SString * restrict destination,
 {
 	register size_t i;
 
-	if(NULL == destination  ||  NULL == source  || NULL == source->string)
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return -1;
 
 	if(source->length >= destination->size  ||  NULL == destination->string) {
@@ -177,7 +177,7 @@ copy_n_sstring(SString * restrict destination,
 	register size_t i;
 	size_t length;
 
-	if(NULL == destination  ||  NULL == source  || NULL == source->string)
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
 	if(0 == num)
@@ -247,7 +247,7 @@ append_sstring(SString * restrict destination,
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	   ||  NULL == source->string)
 		return NULL;
 
 	length = (source->length > destination->length) ? destination->length
@@ -270,7 +270,7 @@ append_sstring2(SString * restrict destination,
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	   ||  NULL == source->string)
 		return NULL;
 
 	length = (source->length > destination->length) ? destination->length
@@ -294,7 +294,7 @@ append_n_sstring(SString * restrict destination,
 	unsigned int j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	   ||  NULL == source->string)
 		return NULL;
 
 	for(i = destination->length, j = 0;  j < num;  i++, j++)
@@ -314,7 +314,7 @@ append_n_sstring2(SString * restrict destination,
 	unsigned int i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	   ||  NULL == source->string)
 		return NULL;
 
 	for(i = 0; i < num; i++)
@@ -335,7 +335,7 @@ append_n_sstring3(SString * restrict destination,
 	unsigned int i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   || NULL == source->string)
+	   ||  NULL == source->string)
 		return NULL;
 
 	_help = destination->length;
@@ -393,7 +393,7 @@ s_strcmp(const SString * restrict str1,
 {
 	unsigned int i;
 
-	for(i = 0;  i < str1->length && i < str2->length;  i++) {
+	for(i = 0;  i < str1->length  &&  i < str2->length;  i++) {
 		if(str1->string[i] > str2->string[i])
 			return (str1->string[i] - str2->string[i]);
 		else if(str1->string[i] < str2->string[i])
@@ -412,7 +412,7 @@ s_strcmp2(const SString * str1,
 	const SString * restrict _help = str1;
 	const SString * restrict _help2 = str2;
 
-	for(i = 0;  i < _help->length && i < _help2->length;  i++) {
+	for(i = 0;  i < _help->length  &&  i < _help2->length;  i++) {
 		if(_help->string[i] > _help2->string[i])
 			return (_help->string[i] - _help2->string[i]);
 		else if(_help->string[i] < _help2->string[i])
@@ -430,7 +430,7 @@ s_strncmp(const SString * str1,
 {
 	unsigned int i;
 
-	for(i = 0;  i < num && i < str1->length && i < str2->length;  i++) {
+	for(i = 0;  i < num  &&  i < str1->length  &&  i < str2->length;  i++) {
 		if(str1->string[i] > str2->string[i])
 			return (str1->string[i] - str2->string[i]);
 		else if(str1->string[i] < str2->string[i])
