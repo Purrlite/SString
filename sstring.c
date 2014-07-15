@@ -253,7 +253,7 @@ append_sstring(SString * restrict destination,
 	length = (source->length > destination->length) ? destination->length
 	         : source->length;
 
-	for(i = destination->length, j = 0; j < length; i++, j++)
+	for(i = destination->length, j = 0;  j < length;  i++, j++)
 		destination->string[i] = source->string[j];
 
 	destination->length += source->length;
@@ -297,7 +297,7 @@ append_n_sstring(SString * restrict destination,
 	   || NULL == source->string)
 		return NULL;
 
-	for(i = destination->length, j = 0; j < num; i++, j++)
+	for(i = destination->length, j = 0;  j < num;  i++, j++)
 		destination->string[i] = source->string[j];
 
 	destination->length += num;
@@ -393,7 +393,7 @@ s_strcmp(const SString * restrict str1,
 {
 	unsigned int i;
 
-	for(i = 0; i < str1->length && i < str2->length; i++) {
+	for(i = 0;  i < str1->length && i < str2->length;  i++) {
 		if(str1->string[i] > str2->string[i])
 			return (str1->string[i] - str2->string[i]);
 		else if(str1->string[i] < str2->string[i])
@@ -412,7 +412,7 @@ s_strcmp2(const SString * str1,
 	const SString * restrict _help = str1;
 	const SString * restrict _help2 = str2;
 
-	for(i = 0; i < _help->length && i < _help2->length; i++) {
+	for(i = 0;  i < _help->length && i < _help2->length;  i++) {
 		if(_help->string[i] > _help2->string[i])
 			return (_help->string[i] - _help2->string[i]);
 		else if(_help->string[i] < _help2->string[i])
@@ -430,7 +430,7 @@ s_strncmp(const SString * str1,
 {
 	unsigned int i;
 
-	for(i = 0; i < num && i < str1->length && i < str2->length; i++) {
+	for(i = 0;  i < num && i < str1->length && i < str2->length;  i++) {
 		if(str1->string[i] > str2->string[i])
 			return (str1->string[i] - str2->string[i]);
 		else if(str1->string[i] < str2->string[i])
@@ -599,7 +599,7 @@ s_strtok(SString * str,
 	if(_lastPos == NULL)
 		_lastPos = &(str->string[0]);
 
-	for(i = _lastPos - &(str->string[0]); i < _str->length; i++) {
+	for(i = _lastPos - &(str->string[0]);  i < _str->length;  i++) {
 		numOfDelimiters = 0;
 
 		for(j = 0; j < delimiters->length; j++) {
@@ -648,7 +648,7 @@ s_sstrtok(SString * str,
 	if(_lastPos == NULL)
 		_lastPos = &(_str->string[0]);
 
-	for(i = _lastPos - &(_str->string[0]); i < _str->length; i++) {
+	for(i = _lastPos - &(_str->string[0]);  i < _str->length;  i++) {
 		numOfDelimiters = 0;
 
 		for(j = 0; j < (*delimiters).length; j++) {
