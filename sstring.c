@@ -178,7 +178,7 @@ copy_n_sstring(SString * restrict destination,
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string
-	    ||  0 == num)
+		    ||  0 == num)
 		return -1;
 
 	length = (num > source->length) ? source->length - 1 : num;
@@ -302,7 +302,7 @@ append_n_sstring(SString * restrict destination,
 	unsigned int j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   ||  NULL == source->string)
+		    ||  NULL == source->string)
 		return NULL;
 
 	for(i = destination->length, j = 0;  j < num;  i++, j++)
@@ -322,7 +322,7 @@ append_n_sstring2(SString * restrict destination,
 	unsigned int i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   ||  NULL == source->string)
+		    ||  NULL == source->string)
 		return NULL;
 
 	for(i = 0; i < num; i++)
@@ -343,7 +343,7 @@ append_n_sstring3(SString * restrict destination,
 	unsigned int i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-	   ||  NULL == source->string)
+		    ||  NULL == source->string)
 		return NULL;
 
 	_help = destination->length;
