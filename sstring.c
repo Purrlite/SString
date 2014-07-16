@@ -177,10 +177,8 @@ copy_n_sstring(SString * restrict destination,
 	register size_t i;
 	size_t length;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return NULL;
-
-	if(0 == num)
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string
+	    ||  0 == num)
 		return -1;
 
 	length = (num > source->length) ? source->length - 1 : num;
