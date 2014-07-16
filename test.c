@@ -42,7 +42,6 @@ int main(void) {
 	int i;
 	int j;
 	char * str = NULL;
-	char * str2 = NULL;
 	SString * s_str = NULL;
 	SString * s_str2 = NULL;
 	const char * test_strings[] = {
@@ -60,28 +59,26 @@ int main(void) {
 
 	for(j = 0; j < num_of_strings; j++) {
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			str = malloc(size_of_strings[j]);
-			str2 = malloc(size_of_strings[j]);
+			str = malloc(size_of_strings[j] * 2);
 			strcpy(str, test_strings[j]);
 
 			START_COUNTING;
-			strcpy(str2, str);
+			strcat(str, test_strings[j]);
 			END_COUNTING;
 
 			time_diffs[i] = time_difference(end, start);
 			free(str);
-			free(str2);
 		}
 		printf("%5li ns - copying %i chars into a C string\n",
 		       average(time_diffs), size_of_strings[j]);
 
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j]);
-			s_str2 = new_sstring(NULL, size_of_strings[j]);
+			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2);
+			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
 			START_COUNTING;
-			copy_sstring(s_str2, s_str);
+			append_sstring2(s_str, s_str2);
 			END_COUNTING;
 
 			time_diffs[i] = time_difference(end, start);
@@ -92,11 +89,11 @@ int main(void) {
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j]);
-			s_str2 = new_sstring(NULL, size_of_strings[j]);
+			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2);
+			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
 			START_COUNTING;
-			copy_sstring2(s_str2, s_str);
+			append_sstring2(s_str, s_str2);
 			END_COUNTING;
 
 			time_diffs[i] = time_difference(end, start);
