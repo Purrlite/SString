@@ -10,7 +10,7 @@
 #define START_COUNTING  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start)
 #define END_COUNTING    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end)
 
-#define NUM_OF_LOOPS  2000
+#define NUM_OF_LOOPS  10000
 
 static unsigned long
 time_difference(struct timespec end,
@@ -75,7 +75,7 @@ int main(void) {
 		       average(time_diffs), size_of_strings[j]);
 
 
-		for(i = 0; i < NUM_OF_LOOPS; i++) {
+		for(i = 0; i < ((j < 3) ? NUM_OF_LOOPS : (NUM_OF_LOOPS / 10)); i++) {
 			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
 			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
@@ -90,7 +90,7 @@ int main(void) {
 		printf("%5lu ns - appending %i chars to a SString v1\n",
 		       average(time_diffs), size_of_strings[j]);
 
-		for(i = 0; i < NUM_OF_LOOPS; i++) {
+		for(i = 0; i < ((j < 3) ? NUM_OF_LOOPS : (NUM_OF_LOOPS / 10)); i++) {
 			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
 			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
