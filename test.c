@@ -38,8 +38,8 @@ int main(void) {
 	struct timespec start;
 	struct timespec end;
 	unsigned long time_diffs[NUM_OF_LOOPS];
-	int i;
-	int j;
+	long i;
+	long j;
 	char * str = NULL;
 	SString * s_str = NULL;
 	SString * s_str2 = NULL;
