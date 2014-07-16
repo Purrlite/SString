@@ -76,8 +76,6 @@ copy_string_to_sstring(SString * restrict destination,
 
 
 /* Appends source at the end of destination.
- *     destination is where the data will be copied to, source is where the data
- * will be coppied from.
  *     Returns pointer to destination.
  */
 SString *
@@ -86,8 +84,6 @@ append_sstring(SString * restrict destination,
 
 
 /* Appends n characters from source at the end of destination.
- *     destination is where the data will be copied to, source is where the data
- * will be coppied from, num is the number of bytes to be coppied.
  *     Returns pointer to destination.
  */
 SString *
