@@ -52,8 +52,11 @@ int main(void) {
 
 	// This for is to make sure the first few costly assigments don't affect
 	//     the results
-	for(i = 0; i < NUM_OF_LOOPS; i++) {
-		str = test_strings[i % num_of_strings];
+	for(i = 0; i < 100000; i++) {
+		str = malloc(size_of_strings[0] * 2 + 1);
+		strcpy(str, test_strings[0]);
+		strcat(str, test_strings[0]);
+		free(str);
 	}
 
 	for(j = 0; j < num_of_strings; j++) {
