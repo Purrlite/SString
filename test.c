@@ -65,7 +65,7 @@ int main(void) {
 			strcpy(str, test_strings[j]);
 
 			START_COUNTING;
-			strcat(str, test_strings[j]);
+			strncat(str, test_strings[j], size_of_strings[j]);
 			END_COUNTING;
 
 			time_diffs[i] = time_difference(end, start);
@@ -76,11 +76,11 @@ int main(void) {
 
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2);
+			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
 			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
 			START_COUNTING;
-			append_sstring2(s_str, s_str2);
+			append_n_sstring(s_str, s_str2, size_of_strings[j]);
 			END_COUNTING;
 
 			time_diffs[i] = time_difference(end, start);
@@ -91,11 +91,11 @@ int main(void) {
 		       average(time_diffs), size_of_strings[j]);
 
 		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2);
+			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
 			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
 			START_COUNTING;
-			append_sstring2(s_str, s_str2);
+			append_n_sstring2(s_str, s_str2, size_of_strings[j]);
 			END_COUNTING;
 
 			time_diffs[i] = time_difference(end, start);
