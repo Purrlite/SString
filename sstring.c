@@ -240,7 +240,7 @@ int
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
-	size_t i;
+	register size_t i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return -1;
