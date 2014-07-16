@@ -246,7 +246,7 @@ append_sstring(SString * restrict destination,
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
-	if(source->lenght + destination->length > destination->size
+	if(source->length + destination->length > destination->size
 		    ||  NULL == destination->string) {
 		destination->size = source->length + destination->length + 1;
 		if(NULL != destination->string)
@@ -275,7 +275,7 @@ append_sstring2(SString * restrict destination,
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
-	if(source->lenght + destination->length > destination->size
+	if(source->length + destination->length > destination->size
 		    ||  NULL == destination->string) {
 		destination->size = source->length + destination->length + 1;
 		if(NULL != destination->string)
