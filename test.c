@@ -16,8 +16,7 @@ static unsigned long
 time_difference(struct timespec end,
                 struct timespec beginning)
 {
-	unsigned long long diff = (unsigned long long)end.tv_sec
-	                          - (unsigned long long)beginning.tv_sec;
+	long diff = end.tv_sec - beginning.tv_sec;
 	return(end.tv_nsec - beginning.tv_nsec + ((diff > 0) ? 1000000UL : 0));
 }
 
