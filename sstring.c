@@ -241,7 +241,6 @@ append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
 	size_t i;
-	size_t j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return -1;
@@ -257,8 +256,8 @@ append_sstring(SString * restrict destination,
 			return -2;
 	}
 
-	for(i = destination->length, j = 0;  j < source->length;  i++, j++)
-		destination->string[i] = source->string[j];
+	for(i = 0; i < source->length; i++)
+		destination->string[i + destination->length] = source->string[i];
 
 	destination->length += source->length;
 
