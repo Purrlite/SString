@@ -306,29 +306,6 @@ append_n_sstring2(SString * restrict destination,
 	return 1;
 }
 
-// version 3
-int
-append_n_sstring3(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num)
-{
-	int _help;
-	unsigned int i;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-		    ||  NULL == source->string)
-		return -1;
-
-	_help = destination->length;
-
-	for(i = 0; i < num; i++)
-		destination->string[i + _help] = source->string[i];
-
-	destination->length += num;
-
-	return 1;
-}
-
 
 int
 s_memcmp(const void * ptr1,
