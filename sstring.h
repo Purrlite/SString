@@ -84,10 +84,6 @@ SString *
 append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
-SString *
-append_sstring2(SString * restrict destination,
-                const SString * restrict source) ;
-
 
 /* Appends n characters from source at the end of destination.
  *     destination is where the data will be copied to, source is where the data

@@ -240,8 +240,8 @@ SString *
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
-	unsigned int i;
-	unsigned int j;
+	size_t i;
+	size_t j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
@@ -259,35 +259,6 @@ append_sstring(SString * restrict destination,
 
 	for(i = destination->length, j = 0;  j < source->length;  i++, j++)
 		destination->string[i] = source->string[j];
-
-	destination->length += source->length;
-
-	return destination;
-}
-
-// version 2
-SString *
-append_sstring2(SString * restrict destination,
-                const SString * restrict source)
-{
-	unsigned int i;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return NULL;
-
-	if(source->length + destination->length > destination->size
-		    ||  NULL == destination->string) {
-		destination->size = source->length + destination->length + 1;
-		if(NULL != destination->string)
-			free(destination->string);
-		destination->string = malloc(destination->size);
-
-		if(NULL == destination->string)
-			return NULL;
-	}
-
-	for(i = 0; i < source->length; i++)
-		destination->string[i + destination->length] = source->string[i];
 
 	destination->length += source->length;
 
