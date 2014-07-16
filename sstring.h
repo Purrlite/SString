@@ -44,9 +44,8 @@ free_sstring(SString * str) ;
 
 
 /* Copies string from source into destination
- *     Returns the number of copyied characters or exits with -1 if any of the
- * arguments is NULL or destination's string is NULL or with -2 if allocating
- * memory fails.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL
+ * or destination's string is NULL or with -2 if allocating memory fails.
  */
 int
 copy_sstring(SString * restrict destination,
@@ -54,9 +53,8 @@ copy_sstring(SString * restrict destination,
 
 
 /* Copies num characters from source starting at start to destination.
- *     Returns the number of copyied characters or exits with -1 if any of the
- * arguments is NULL or destination's string is NULL or with -2 if allocating
- * memory fails.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL
+ * or source's string is NULL or with -2 if allocating memory fails.
  */
 int
 copy_n_sstring(SString * restrict destination,
@@ -66,8 +64,8 @@ copy_n_sstring(SString * restrict destination,
 
 
 /* Copies num characters from string source into SString destination.
- *     Returns the number of copyied characters excluding \0 or exits with -1
- * if any of the arguments is NULL or with -2 if allocating memory fails.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL
+ * or with -2 if allocating memory fails.
  */
 int
 copy_string_to_sstring(SString * restrict destination,
@@ -76,27 +74,29 @@ copy_string_to_sstring(SString * restrict destination,
 
 
 /* Appends source at the end of destination.
- *     Returns pointer to destination.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL
+ * or source's string is NULL or with -2 if allocating memory fails.
  */
-SString *
+int
 append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
 
 /* Appends n characters from source at the end of destination.
- *     Returns pointer to destination.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL
+ * or source's string is NULL or with -2 if allocating memory fails.
  */
-SString *
+int
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t num) ;
 
-SString *
+int
 append_n_sstring2(SString * restrict destination,
                   const SString * restrict source,
                   size_t num) ;
 
-SString *
+int
 append_n_sstring3(SString * restrict destination,
                   const SString * restrict source,
                   size_t num) ;

@@ -164,7 +164,7 @@ copy_sstring(SString * restrict destination,
 
 	destination->length = source->length;
 
-	return destination->length;
+	return 1;
 }
 
 
@@ -199,7 +199,7 @@ copy_n_sstring(SString * restrict destination,
 
 	destination->length = length;
 
-	return length;
+	return 1;
 }
 
 
@@ -232,11 +232,11 @@ copy_string_to_sstring(SString * restrict destination,
 
 	destination->length = lenght;
 
-	return lenght;
+	return 1;
 }
 
 
-SString *
+int
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
@@ -244,7 +244,7 @@ append_sstring(SString * restrict destination,
 	size_t j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return NULL;
+		return -1;
 
 	if(source->length + destination->length > destination->size
 		    ||  NULL == destination->string) {
@@ -254,7 +254,7 @@ append_sstring(SString * restrict destination,
 		destination->string = malloc(destination->size);
 
 		if(NULL == destination->string)
-			return NULL;
+			return -2;
 	}
 
 	for(i = destination->length, j = 0;  j < source->length;  i++, j++)
@@ -262,11 +262,11 @@ append_sstring(SString * restrict destination,
 
 	destination->length += source->length;
 
-	return destination;
+	return 1;
 }
 
 
-SString *
+int
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t num)
@@ -276,18 +276,18 @@ append_n_sstring(SString * restrict destination,
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 		    ||  NULL == source->string)
-		return NULL;
+		return -1;
 
 	for(i = destination->length, j = 0;  j < num;  i++, j++)
 		destination->string[i] = source->string[j];
 
 	destination->length += num;
 
-	return destination;
+	return 1;
 }
 
 // version 2
-SString *
+int
 append_n_sstring2(SString * restrict destination,
                   const SString * restrict source,
                   size_t num)
@@ -296,18 +296,18 @@ append_n_sstring2(SString * restrict destination,
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 		    ||  NULL == source->string)
-		return NULL;
+		return -1;
 
 	for(i = 0; i < num; i++)
 		destination->string[i + destination->length] = source->string[i];
 
 	destination->length += num;
 
-	return destination;
+	return 1;
 }
 
 // version 3
-SString *
+int
 append_n_sstring3(SString * restrict destination,
                   const SString * restrict source,
                   size_t num)
@@ -317,7 +317,7 @@ append_n_sstring3(SString * restrict destination,
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 		    ||  NULL == source->string)
-		return NULL;
+		return -1;
 
 	_help = destination->length;
 
@@ -326,7 +326,7 @@ append_n_sstring3(SString * restrict destination,
 
 	destination->length += num;
 
-	return destination;
+	return 1;
 }
 
 
