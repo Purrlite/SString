@@ -246,8 +246,9 @@ append_sstring(SString * restrict destination,
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
-	if(num > destination->size  ||  NULL == destination->string) {
-		destination->size = source->length + 1;
+	if(source->lenght + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = source->length + destination->length + 1;
 		if(NULL != destination->string)
 			free(destination->string);
 		destination->string = malloc(destination->size);
@@ -274,8 +275,9 @@ append_sstring2(SString * restrict destination,
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return NULL;
 
-	if(num > destination->size  ||  NULL == destination->string) {
-		destination->size = source->length + 1;
+	if(source->lenght + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = source->length + destination->length + 1;
 		if(NULL != destination->string)
 			free(destination->string);
 		destination->string = malloc(destination->size);
