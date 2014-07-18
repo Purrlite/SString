@@ -58,6 +58,16 @@ int main(void) {
 			free_sstring(s_str);
 			free_sstring(s_str2);
 		}
+
+		for(i = 0; i <NUM_OF_LOOPS; i++) {
+			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
+			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
+
+			append_n_sstring3(s_str, s_str2, size_of_strings[j]);
+
+			free_sstring(s_str);
+			free_sstring(s_str2);
+		}
 	}
 
 	return 0;
