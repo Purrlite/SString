@@ -4,8 +4,6 @@
 
 #include "sstring.h"
 
-#define NUM_OF_LOOPS  1000
-
 int main(void) {
 	long i;
 	long j;
@@ -29,45 +27,39 @@ int main(void) {
 	}
 
 	for(j = 0; j < num_of_strings; j++) {
-		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			str = malloc(size_of_strings[j] * 2 + 1);
-			strcpy(str, test_strings[j]);
+		str = malloc(size_of_strings[j] * 2 + 1);
+		strcpy(str, test_strings[j]);
 
-			strncat(str, test_strings[j], size_of_strings[j]);
+		strncat(str, test_strings[j], size_of_strings[j]);
 
-			free(str);
-		}
+		free(str);
 
 
-		for(i = 0; i < NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
-			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
+		s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
+		s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
-			append_n_sstring(s_str, s_str2, size_of_strings[j]);
+		append_n_sstring(s_str, s_str2, size_of_strings[j]);
 
-			free_sstring(s_str);
-			free_sstring(s_str2);
-		}
+		free_sstring(s_str);
+		free_sstring(s_str2);
 
-		for(i = 0; i <NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
-			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
-			append_n_sstring2(s_str, s_str2, size_of_strings[j]);
+		s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
+		s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
 
-			free_sstring(s_str);
-			free_sstring(s_str2);
-		}
+		append_n_sstring2(s_str, s_str2, size_of_strings[j]);
 
-		for(i = 0; i <NUM_OF_LOOPS; i++) {
-			s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
-			s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
+		free_sstring(s_str);
+		free_sstring(s_str2);
 
-			append_n_sstring3(s_str, s_str2, size_of_strings[j]);
 
-			free_sstring(s_str);
-			free_sstring(s_str2);
-		}
+		s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
+		s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
+
+		append_n_sstring3(s_str, s_str2, size_of_strings[j]);
+
+		free_sstring(s_str);
+		free_sstring(s_str2);
 	}
 
 	return 0;
