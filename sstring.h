@@ -91,36 +91,6 @@ append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t num) ;
 
-int
-append_n_sstring2(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num) ;
-
-int
-append_n_sstring3(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num) ;
-
-int
-append_n_sstring4(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num) ;
-
-int
-append_n_sstring5(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num) ;
-
-int
-append_n_sstring5(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num) ;
-
-int
-append_n_sstring6(SString * restrict destination,
-                  const SString * restrict source,
-                  size_t num) ;
-
 
 
 
