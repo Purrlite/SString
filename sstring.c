@@ -363,6 +363,84 @@ append_n_sstring4(SString * restrict destination,
 	return 1;
 }
 
+// version 5
+int
+append_n_sstring5(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num)
+{
+	register size_t i;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
+		    ||  NULL == source->string)
+		return -1;
+
+	for(i = 0; i + 15 < num; i++) {
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+	}
+	for( ; i < num; i++)
+		destination->string[i + destination->length] = source->string[i];
+
+	destination->length += num;
+
+	return 1;
+}
+
+// version 6
+int
+append_n_sstring6(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num)
+{
+	char * restrict dest_str = &(destination->string[destination->length]);
+	char * restrict source_str = source->string;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
+		    ||  NULL == source->string)
+		return -1;
+
+	while(source_str - source->string < num) {
+		*dest_str = *source_str;
+		dest_str++;
+		source_str++;
+	}
+
+	destination->length += num;
+
+	return 1;
+}
+
 
 int
 s_memcmp(const void * ptr1,

@@ -33,13 +33,13 @@ new_sstring(const char * restrict string,
 
 /* Empties a SString, but doesn't free any memory.
  */
-void
+inline void
 empty_sstring(SString * str) ;
 
 
 /* Frees the memory allocated for SString.
  */
-void
+inline void
 free_sstring(SString * str) ;
 
 
@@ -105,6 +105,23 @@ int
 append_n_sstring4(SString * restrict destination,
                   const SString * restrict source,
                   size_t num) ;
+
+int
+append_n_sstring5(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
+
+int
+append_n_sstring5(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
+
+int
+append_n_sstring6(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
+
+
 
 
 /* Compares bytes in memories until num bytes or a first differnt byte.
