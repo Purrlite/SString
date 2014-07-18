@@ -26,7 +26,7 @@ typedef struct SString {
  * hold the string including '/0'.
  *     Returns pointer to the initialized SString or NULL on failure.
  */
-SString *
+SString
 new_sstring(const char * restrict string,
             size_t size) ;
 

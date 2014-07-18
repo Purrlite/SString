@@ -2,81 +2,74 @@
 
 #include <string.h>
 
-typedef SString * (new_SStr_func)(SString * restrict s_str,
-                                  const char * restrict string,
-                                  size_t size);
+typedef SString (new_SStr_func)(const char * string,
+                                size_t size);
 
 
-static SString *
-NULL_array_0_size(SString * restrict s_str,
-                  const char * restrict string,
+static SString
+NULL_array_0_size(const char * string,
                   size_t size)
 {
-	s_str->length = 0;
-	s_str->size = 0;
-	s_str->string = NULL;
-
-	return s_str;
+	return (SString){ 0, 0, NULL };
 }
 
 
-static SString *
-NULL_array_non0_size(SString * restrict s_str,
-                     const char * restrict string,
+static SString
+NULL_array_non0_size(const char * string,
                      size_t size)
 {
-	s_str->length = 0;
-	s_str->size = size;
+	SString s_str = (SString){ 0, size, NULL };
 
-	s_str->string = malloc(s_str->size);
-	if(NULL == s_str->string)
-		return NULL;
+	s_str.string = malloc(s_str.size);
+	if(NULL == s_str.string)
+		return (SString){0};
 
-	s_str->string[0] = '\0';
+	s_str.string[0] = '\0';
 
 	return s_str;
 }
 
 
-static SString *
-nonNULL_array_0_size(SString * restrict s_str,
-                     const char * restrict string,
+static SString
+nonNULL_array_0_size(const char * string,
                      size_t size)
 {
-	s_str->length = strlen(string);
-	s_str->size = s_str->length + 1;
+	size_t length = strlen(string);
+	SString s_str = (SString){ length, length + 1, NULL };
 
-	s_str->string = malloc(s_str->size);
-	if(NULL == s_str->string)
-		return NULL;
+	s_str.string = malloc(s_str.size);
+	if(NULL == s_str.string)
+		return (SString){0};
 
-	strncpy(s_str->string, string, s_str->size);
+	strncpy(s_str.string, string, s_str.size);
 
 	return s_str;
 }
 
 
-static SString *
-nonNULL_array_non0_size(SString * restrict s_str,
-                        const char * restrict string,
+static SString
+nonNULL_array_non0_size(const char * string,
                         size_t size)
 {
-	s_str->size = size;
-	s_str->length = (size <= strlen(string)) ? size - 1 : strlen(string);
+	size_t length = strlen(string);
+	SString s_str = (SString){
+		.size = size,
+		.length = (length > size) ? size - 1 : length
+	};
 
-	s_str->string = malloc(s_str->size);
-	if(NULL == s_str->string)
-		return NULL;
+	s_str.string = malloc(s_str.size);
+	if(NULL == s_str.string)
+		return (SString){0};
 
-	strncpy(s_str->string, string, s_str->length);
-	s_str->string[s_str->length] = '\0';
+	strncpy(s_str.string, string, s_str.length);
+	s_str.string[s_str.length] = '\0';
 
 	return s_str;
 }
 
 
 static new_SStr_func *
-get_new_SS_func(const char * restrict string,
+get_new_SS_func(const char * string,
                 size_t size)
 {
 	if(NULL == string)
@@ -98,19 +91,13 @@ get_new_SS_func(const char * restrict string,
 }
 
 
-SString *
-new_sstring(const char * restrict string,
+SString
+new_sstring(const char * string,
             size_t size)
 {
-	SString * restrict s_str;
-
 	new_SStr_func * new_SS_func = get_new_SS_func(string, size);
 
-	s_str = malloc(sizeof(SString));
-	if(NULL == s_str)
-		return NULL;
-
-	return((new_SS_func)(s_str, string, size));
+	return((new_SS_func)(string, size));
 }
 
 
