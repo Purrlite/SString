@@ -101,6 +101,11 @@ append_n_sstring3(SString * restrict destination,
                   const SString * restrict source,
                   size_t num) ;
 
+int
+append_n_sstring4(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
+
 
 /* Compares bytes in memories until num bytes or a first differnt byte.
  *     ptr1 and ptr2 are the memories being compared, num is number of bytes

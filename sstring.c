@@ -336,6 +336,44 @@ append_n_sstring3(SString * restrict destination,
 	return 1;
 }
 
+// version 4
+int
+append_n_sstring4(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num)
+{
+	register size_t i;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
+		    ||  NULL == source->string)
+		return -1;
+
+	for(i = 0; i + 7 < num; i++) {
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+	}
+	for( ; i < num; i++)
+		destination->string[i + destination->length] = source->string[i];
+
+	destination->length += num;
+
+	return 1;
+}
+
 
 int
 s_memcmp(const void * ptr1,
