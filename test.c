@@ -60,6 +60,15 @@ int main(void) {
 
 		free_sstring(s_str);
 		free_sstring(s_str2);
+
+
+		s_str = new_sstring(test_strings[j], size_of_strings[j] * 2 + 1);
+		s_str2 = new_sstring(test_strings[j], size_of_strings[j]);
+
+		append_n_sstring4(s_str, s_str2, size_of_strings[j]);
+
+		free_sstring(s_str);
+		free_sstring(s_str2);
 	}
 
 	return 0;
