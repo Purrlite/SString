@@ -261,9 +261,19 @@ append_n_sstring(SString * restrict destination,
 {
 	register size_t i;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
-		    ||  NULL == source->string)
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return -1;
+
+	if(num + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = num + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
 
 	for(i = 0; i + 7 < num; i++) {
 		destination->string[i + destination->length] = source->string[i];
