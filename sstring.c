@@ -101,7 +101,7 @@ new_sstring(const char * string,
 }
 
 
-void
+inline void
 empty_sstring(SString * str)
 {
 	if(str == NULL)
@@ -113,7 +113,7 @@ empty_sstring(SString * str)
 }
 
 
-void
+inline void
 free_sstring(SString * str)
 {
 	if(str == NULL)
