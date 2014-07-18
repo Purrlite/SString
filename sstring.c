@@ -250,6 +250,8 @@ append_sstring(SString * restrict destination,
 
 	destination->length += source->length;
 
+	destination->string[destination->length] = '\0';
+
 	return 1;
 }
 
@@ -297,6 +299,8 @@ append_n_sstring(SString * restrict destination,
 		destination->string[i + destination->length] = source->string[i];
 
 	destination->length += num;
+
+	destination->string[destination->length] = '\0';
 
 	return 1;
 }
