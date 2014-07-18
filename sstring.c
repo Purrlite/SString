@@ -270,8 +270,8 @@ append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t num)
 {
-	unsigned int i;
-	unsigned int j;
+	register size_t i;
+	register size_t j;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 		    ||  NULL == source->string)
@@ -291,7 +291,7 @@ append_n_sstring2(SString * restrict destination,
                   const SString * restrict source,
                   size_t num)
 {
-	unsigned int i;
+	register size_t i;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == destination->string
 		    ||  NULL == source->string)
