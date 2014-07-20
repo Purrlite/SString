@@ -34,24 +34,8 @@ int main(void) {
 
 
 		s_str = new_sstring(NULL, size_of_strings[i] + 1);
-		s_str2 = new_sstring(test_strings[i], 0);
-
-		copy_sstring2(&s_str, &s_str2);
-
-		free(s_str.string);
-		free(s_str2.string);
-
-
-		s_str = new_sstring(NULL, size_of_strings[i] + 1);
 
 		copy_string_to_sstring(&s_str, test_strings[i], size_of_strings[i]);
-
-		free(s_str.string);
-
-
-		s_str = new_sstring(NULL, size_of_strings[i] + 1);
-
-		copy_string_to_sstring2(&s_str, test_strings[i], size_of_strings[i]);
 
 		free(s_str.string);
 	}

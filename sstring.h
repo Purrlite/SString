@@ -51,10 +51,6 @@ int
 copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
-int
-copy_sstring2(SString * restrict destination,
-             const SString * restrict source) ;
-
 
 /* Copies num characters from source starting at start to destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
@@ -73,11 +69,6 @@ copy_n_sstring(SString * restrict destination,
  */
 int
 copy_string_to_sstring(SString * restrict destination,
-                       const char * restrict source,
-                       size_t num);
-
-int
-copy_string_to_sstring2(SString * restrict destination,
                        const char * restrict source,
                        size_t num);
 
