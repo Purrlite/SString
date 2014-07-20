@@ -201,7 +201,7 @@ copy_string_to_sstring(SString * restrict destination,
 		return -1;
 
 	len = strlen(source);
-	lenght = (num > len) ? len - 1 : num;
+	lenght = (num > len  ||  0 == num) ? len - 1 : num;
 
 	if(lenght > destination->size  ||  NULL == destination->string) {
 		destination->size = lenght + 1;
