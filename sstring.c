@@ -160,40 +160,6 @@ copy_n_sstring(SString * restrict destination,
                size_t start,
                size_t num)
 {
-	register size_t i;
-	size_t length;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string
-		    ||  0 == num)
-		return -1;
-
-	length = (num > source->length) ? source->length - 1 : num;
-
-	if(length > destination->size  ||  NULL == destination->string) {
-		destination->size = length + 1;
-		if(NULL != destination->string)
-			free(destination->string);
-		destination->string = malloc(destination->size);
-
-		if(NULL == destination->string)
-			return -2;
-	}
-
-	for(i = 0; i < length; i++)
-		destination->string[i] = source->string[start + i];
-	destination->string[length] = '\0';
-
-	destination->length = length;
-
-	return 1;
-}
-
-int
-copy_n_sstring2(SString * restrict destination,
-                const SString * restrict source,
-                size_t start,
-                size_t num)
-{
 	size_t length;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string

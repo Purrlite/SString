@@ -31,15 +31,6 @@ int main(void) {
 
 		free(s_str.string);
 		free(s_str2.string);
-
-
-		s_str = new_sstring(NULL, size_of_strings[i] + 1);
-		s_str2 = new_sstring(test_strings[i], 0);
-
-		copy_n_sstring2(&s_str, &s_str2, 0, size_of_strings[i]);
-
-		free(s_str.string);
-		free(s_str2.string);
 	}
 
 	return 0;
