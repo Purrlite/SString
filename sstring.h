@@ -92,8 +92,6 @@ append_n_sstring(SString * restrict destination,
                  size_t num) ;
 
 
-
-
 /* Compares bytes in memories until num bytes or a first differnt byte.
  *     ptr1 and ptr2 are the memories being compared, num is number of bytes
  * being compared.
