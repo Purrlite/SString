@@ -81,22 +81,6 @@ int
 append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
-int
-append_sstring2(SString * restrict destination,
-                const SString * restrict source) ;
-
-int
-append_sstring3(SString * restrict destination,
-                const SString * restrict source) ;
-
-int
-append_sstring4(SString * restrict destination,
-                const SString * restrict source) ;
-
-int
-append_sstring5(SString * restrict destination,
-                const SString * restrict source) ;
-
 
 /* Appends n characters from source at the end of destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
