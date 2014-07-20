@@ -158,6 +158,31 @@ copy_sstring(SString * restrict destination,
 
 
 int
+copy_sstring2(SString * restrict destination,
+              const SString * restrict source)
+{
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(source->length >= destination->size  ||  NULL == destination->string) {
+		destination->size = source->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	strcpy(destination->string, source->string);
+
+	destination->length = source->length;
+
+	return 1;
+}
+
+
+int
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
@@ -217,6 +242,39 @@ copy_string_to_sstring(SString * restrict destination,
 
 	for(i = 0; i < lenght; i++)
 		destination->string[i] = source[i];
+	destination->string[lenght] = '\0';
+
+	destination->length = lenght;
+
+	return 1;
+}
+
+
+int
+copy_string_to_sstring2(SString * restrict destination,
+                       const char * restrict source,
+                       size_t num)
+{
+	size_t len;
+	size_t lenght;
+
+	if(NULL == destination  ||  NULL == source)
+		return -1;
+
+	len = strlen(source);
+	lenght = (num > len) ? len - 1 : num;
+
+	if(lenght > destination->size  ||  NULL == destination->string) {
+		destination->size = lenght + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	strncpy(destination->string, source, lenght);
 	destination->string[lenght] = '\0';
 
 	destination->length = lenght;
