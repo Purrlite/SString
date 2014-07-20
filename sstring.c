@@ -255,6 +255,54 @@ append_sstring(SString * restrict destination,
 	return 1;
 }
 
+int
+append_sstring2(SString * restrict destination,
+                const SString * restrict source)
+{
+	register size_t i;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(source->length + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = source->length + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	for(i = 0; i + 7 < source->length; i++) {
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+		i++;
+		destination->string[i + destination->length] = source->string[i];
+	}
+	for(; i < source->length; i++)
+		destination->string[i + destination->length] = source->string[i];
+
+	destination->length += source->length;
+
+	destination->string[destination->length] = '\0';
+
+	return 1;
+}
+
 
 int
 append_n_sstring(SString * restrict destination,

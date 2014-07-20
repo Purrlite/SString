@@ -20,7 +20,7 @@ int main(void) {
 		str = malloc(size_of_strings[i] * 2 + 1);
 		strcpy(str, test_strings[i]);
 
-		strncat(str, test_strings[i], size_of_strings[i]);
+		strcat(str, test_strings[i]);
 
 		free(str);
 
@@ -28,7 +28,16 @@ int main(void) {
 		s_str = new_sstring(test_strings[i], size_of_strings[i] * 2 + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i]);
 
-		append_n_sstring(&s_str, &s_str2, size_of_strings[i]);
+		append_sstring(&s_str, &s_str2);
+
+		free(s_str.string);
+		free(s_str2.string);
+
+
+		s_str = new_sstring(test_strings[i], size_of_strings[i] * 2 + 1);
+		s_str2 = new_sstring(test_strings[i], size_of_strings[i]);
+
+		append_sstring2(&s_str, &s_str2);
 
 		free(s_str.string);
 		free(s_str2.string);
