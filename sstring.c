@@ -304,6 +304,36 @@ append_n_sstring(SString * restrict destination,
 
 
 int
+append_n_sstring2(SString * restrict destination,
+                 const SString * restrict source,
+                 size_t num)
+{
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(num + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = num + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	strncpy(&(destination->string[destination->length]), source->string,
+	        num);
+
+	destination->length += num;
+
+	destination->string[destination->length] = '\0';
+
+	return 1;
+}
+
+
+int
 s_memcmp(const void * ptr1,
          const void * ptr2,
          size_t num)
