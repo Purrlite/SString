@@ -19,7 +19,7 @@ int main(void) {
 	for(i = 0; i < num_of_strings; i++) {
 		str = malloc(size_of_strings[i] + 1);
 
-		strcpy(str, test_strings[i]);
+		strncpy(str, test_strings[i], size_of_strings[i]);
 
 		free(str);
 
