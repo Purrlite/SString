@@ -303,6 +303,93 @@ append_sstring2(SString * restrict destination,
 	return 1;
 }
 
+int
+append_sstring3(SString * restrict destination,
+                const SString * restrict source)
+{
+	typedef struct { char h[source->length]; } hack;
+
+	hack * dest = &(destination->string[destination->length]);
+	hack * sour = source->string;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(source->length + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = source->length + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	*dest = *sour;
+
+	destination->length += source->length;
+
+	destination->string[destination->length] = '\0';
+
+	return 1;
+}
+
+int
+append_sstring4(SString * restrict destination,
+                const SString * restrict source)
+{
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(source->length + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = source->length + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	strncpy(&(destination->string[destination->length]), source->string,
+	        source->length);
+
+	destination->length += source->length;
+
+	destination->string[destination->length] = '\0';
+
+	return 1;
+}
+
+int
+append_sstring5(SString * restrict destination,
+                const SString * restrict source)
+{
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(source->length + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = source->length + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	strcpy(&(destination->string[destination->length]), source->string);
+
+	destination->length += source->length;
+
+	destination->string[destination->length] = '\0';
+
+	return 1;
+}
+
 
 int
 append_n_sstring(SString * restrict destination,
