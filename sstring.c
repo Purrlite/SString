@@ -41,7 +41,7 @@ nonNULL_array_0_size(const char * string,
 	if(NULL == s_str.string)
 		return (SString){0};
 
-	strncpy(s_str.string, string, s_str.size);
+	strcpy(s_str.string, string);
 
 	return s_str;
 }
