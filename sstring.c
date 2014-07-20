@@ -258,56 +258,6 @@ append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t num)
 {
-	register size_t i;
-
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return -1;
-
-	if(num + destination->length > destination->size
-		    ||  NULL == destination->string) {
-		destination->size = num + destination->length + 1;
-		if(NULL != destination->string)
-			free(destination->string);
-		destination->string = malloc(destination->size);
-
-		if(NULL == destination->string)
-			return -2;
-	}
-
-	for(i = 0; i + 7 < num; i++) {
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-		destination->string[i + destination->length] = source->string[i];
-		i++;
-		destination->string[i + destination->length] = source->string[i];
-	}
-	for( ; i < num; i++)
-		destination->string[i + destination->length] = source->string[i];
-
-	destination->length += num;
-
-	destination->string[destination->length] = '\0';
-
-	return 1;
-}
-
-
-int
-append_n_sstring2(SString * restrict destination,
-                 const SString * restrict source,
-                 size_t num)
-{
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
 		return -1;
 
