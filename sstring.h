@@ -122,23 +122,6 @@ s_strncmp(const SString * str1,
           size_t num) ;
 
 
-/* Locates byte with specified value in memory in the first num bytes.
- *     ptr is memory being searched, value is the value being searched for, num
- * is the number of bytes being searched.
- *     Peturns a pointer to first matching byte. If such byte is not found then
- * it returns NULL.
- */
-void *
-s_memchr(void * ptr,
-         int value,
-         size_t num) ;
-
-void *
-s_memchr2(void * ptr,
-          int value,
-          size_t num) ;
-
-
 /* Locates specified character in SString.
  *     ptr is SString being searched, character is the character being searched
  * for.
@@ -231,22 +214,6 @@ s_strtok(SString * str,
 SString *
 s_sstrtok(SString * str,
           const SString * delimiters) ;
-
-
-/* Fills block of memory with value.
- *     ptr is the memory being changed, value is the value being filled up with,
- * num is the number of bytes being changed.
- *     Returns pointer to the memory.
- */
-void *
-s_memset(void * ptr,
-         int value,
-         size_t num) ;
-
-void *
-s_memset2(void * ptr,
-          int value,
-          size_t num) ;
 
 
 #endif // SSTRING_H_INCLUDED

@@ -327,39 +327,6 @@ s_strncmp(const SString * str1,
 }
 
 
-void *
-s_memchr(void * ptr,
-         int value,
-         size_t num)
-{
-	char * _p = ptr;
-	unsigned int i;
-
-	for(i = 0; i < num; i++) {
-		if(_p[i] == value)
-			return(ptr+i);
-	}
-
-	return NULL;
-}
-
-// version 2
-void *
-s_memchr2(void * ptr,
-          int value,
-          size_t num)
-{
-	unsigned int i;
-
-	for(i = 0; i < num; i++) {
-		if(*((char *)ptr + i) == value)
-			return(ptr+i);
-	}
-
-	return NULL;
-}
-
-
 SString *
 s_strchr(SString * str,
          int character)
@@ -561,33 +528,4 @@ s_sstrtok(SString * str,
 	_lastPos = startOfToken;
 
 	return newSstr;
-}
-
-
-void *
-s_memset(void * ptr,
-         int value,
-         size_t num)
-{
-	char * _p = ptr;
-	unsigned int i;
-
-	for(i = 0; i < num; i++)
-		_p[i] = value;
-
-	return ptr;
-}
-
-// version 2
-void *
-s_memset2(void * ptr,
-          int value,
-          size_t num)
-{
-	unsigned int i;
-
-	for(i = 0; i < num; i++)
-		*((char *)ptr + i) = value;
-
-	return ptr;
 }
