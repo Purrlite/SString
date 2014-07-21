@@ -160,13 +160,11 @@ copy_n_sstring(SString * restrict destination,
                size_t start,
                size_t num)
 {
-	size_t length;
+	size_t length = (start + num > source->length) ? source->length - start : num;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string
 		    ||  0 == num  ||  start >= source->length)
 		return -1;
-
-	length = (start + num > source->length) ? source->length - start : num;
 
 	if(length > destination->size  ||  NULL == destination->string) {
 		destination->size = length + 1;
@@ -192,14 +190,11 @@ copy_string_to_sstring(SString * restrict destination,
                        const char * restrict source,
                        size_t num)
 {
-	size_t len;
-	size_t lenght;
+	size_t len = strlen(source);
+	size_t lenght = (num > len  ||  0 == num) ? len - 1 : num;
 
 	if(NULL == destination  ||  NULL == source)
 		return -1;
-
-	len = strlen(source);
-	lenght = (num > len  ||  0 == num) ? len - 1 : num;
 
 	if(lenght > destination->size  ||  NULL == destination->string) {
 		destination->size = lenght + 1;
