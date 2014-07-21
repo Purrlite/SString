@@ -274,44 +274,6 @@ append_n_sstring(SString * restrict destination,
 
 
 int
-s_memcmp(const void * ptr1,
-         const void * ptr2,
-         size_t num)
-{
-	const char * restrict _p1 = ptr1;
-	const char * restrict _p2 = ptr2;
-	unsigned int i;
-
-	for(i = 0; i < num; i++) {
-		if(_p1[i] > _p2[i])
-			return (_p1[i] - _p2[i]);
-		else if(_p1[i] < _p2[i])
-			return (_p1[i] - _p2[i]);
-	}
-
-	return 0;
-}
-
-// Version 2
-int
-s_memcmp2(const void * restrict ptr1,
-          const void * restrict ptr2,
-          size_t num)
-{
-	unsigned int i;
-
-	for(i = 0; i < num; i++) {
-		if(*((char*)ptr1 + i) > *((char*)ptr2 + i))
-			return (*((char*)ptr1 + i) - *((char*)ptr2 + i));
-		else if(*((char*)ptr1 + i) < *((char*)ptr2 + i))
-			return (*((char*)ptr1 + i) - *((char*)ptr2 + i));
-	}
-
-	return 0;
-}
-
-
-int
 s_strcmp(const SString * restrict str1,
          const SString * restrict str2)
 {

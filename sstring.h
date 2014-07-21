@@ -92,24 +92,6 @@ append_n_sstring(SString * restrict destination,
                  size_t num) ;
 
 
-/* Compares bytes in memories until num bytes or a first differnt byte.
- *     ptr1 and ptr2 are the memories being compared, num is number of bytes
- * being compared.
- *     Returns either 0 if there is no difference, positive number if ptr1's
- * byte has higher value than ptr2's byte, negative if ptr1's byte has smaller
- * value than ptr2's byte.
- */
-int
-s_memcmp(const void * ptr1,
-         const void * ptr2,
-         size_t num) ;
-
-int
-s_memcmp2(const void * restrict ptr1,
-          const void * restrict ptr2,
-          size_t num);
-
-
 /* Lexically compares characters in the SStrings until the end of one of the
  * SStrings or a first different character.
  *     str1 and str2 are the SStrings being compared.
