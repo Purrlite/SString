@@ -99,16 +99,16 @@ append_n_sstring(SString * restrict destination,
  * than ptr2's character.
  */
 int
-s_strcmp(const SString * restrict str1,
-         const SString * restrict str2) ;
+compare_sstrings(const SString * restrict str1,
+                 const SString * restrict str2) ;
 
 int
-s_strcmp2(const SString * str1,
-          const SString * str2) ;
+compare_sstrings2(const SString * str1,
+                  const SString * str2) ;
 
 int
-s_strcmp3(const SString * restrict str1,
-          const SString * restrict str2) ;
+compare_sstrings3(const SString * restrict str1,
+                  const SString * restrict str2) ;
 
 
 /* Lexically compares characters in the SStrings until the end of one of the

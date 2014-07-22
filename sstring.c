@@ -274,8 +274,8 @@ append_n_sstring(SString * restrict destination,
 
 
 int
-s_strcmp(const SString * restrict str1,
-         const SString * restrict str2)
+compare_sstrings(const SString * restrict str1,
+                 const SString * restrict str2)
 {
 	unsigned int i;
 
@@ -291,8 +291,8 @@ s_strcmp(const SString * restrict str1,
 
 // Version 2
 int
-s_strcmp2(const SString * str1,
-          const SString * str2)
+compare_sstrings2(const SString * str1,
+                  const SString * str2)
 {
 	unsigned int i;
 	const SString * restrict _help = str1;
@@ -309,8 +309,8 @@ s_strcmp2(const SString * str1,
 }
 
 int
-s_strcmp3(const SString * restrict str1,
-          const SString * restrict str2)
+compare_sstrings3(const SString * restrict str1,
+                  const SString * restrict str2)
 {
 	unsigned int i;
 	unsigned int length = (str1->length > str2->length)
