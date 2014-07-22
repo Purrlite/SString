@@ -308,6 +308,21 @@ s_strcmp2(const SString * str1,
 	return 0;
 }
 
+int
+s_strcmp3(const SString * restrict str1,
+          const SString * restrict str2)
+{
+	unsigned int i;
+	unsigned int length = (str1->length > str2->length)
+	                      ? str2->length : str1->length;
+
+	for(i = 0; i < length; i++)
+		if(str1->string[i] != str2->string[i])
+			return (str1->string[i] - str2->string[i]);
+
+	return 0;
+}
+
 
 int
 s_strncmp(const SString * str1,

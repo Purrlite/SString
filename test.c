@@ -7,6 +7,7 @@
 int main(void) {
 	long i;
 	char * str = NULL;
+	char * str2 = NULL;
 	SString s_str;
 	SString s_str2;
 	const char * test_strings[] = {
@@ -18,16 +19,37 @@ int main(void) {
 
 	for(i = 0; i < num_of_strings; i++) {
 		str = malloc(size_of_strings[i] + 1);
+		str2 = malloc(size_of_strings[i] + 1);
+		strcpy(str, test_strings[i]);
+		strcpy(str2, test_strings[i]);
 
-		strncpy(str, test_strings[i], size_of_strings[i]);
+		strcmp(str, str2);
 
 		free(str);
 
 
-		s_str = new_sstring(NULL, size_of_strings[i] + 1);
-		s_str2 = new_sstring(test_strings[i], 0);
+		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		copy_n_sstring(&s_str, &s_str2, 0, size_of_strings[i]);
+		s_strcmp(s_str, s_str2);
+
+		free(s_str.string);
+		free(s_str2.string);
+
+
+		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
+
+		s_strcmp2(s_str, s_str2);
+
+		free(s_str.string);
+		free(s_str2.string);
+
+
+		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
+
+		s_strcmp3(s_str, s_str2);
 
 		free(s_str.string);
 		free(s_str2.string);
