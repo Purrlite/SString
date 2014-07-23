@@ -24,7 +24,7 @@ int main(void) {
 		strcpy(str, test_strings[i]);
 		strcpy(str2, test_strings[i]);
 
-		x = strcmp(str, str2);
+		x = strncmp(str, str2, size_of_strings[i]);
 
 		free(str);
 
@@ -32,7 +32,7 @@ int main(void) {
 		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		compare_sstrings(&s_str, &s_str2);
+		compare_n_sstrings(&s_str, &s_str2, size_of_strings[i]);
 
 		free(s_str.string);
 		free(s_str2.string);
@@ -41,16 +41,7 @@ int main(void) {
 		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		compare_sstrings2(&s_str, &s_str2);
-
-		free(s_str.string);
-		free(s_str2.string);
-
-
-		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
-		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
-
-		compare_sstrings3(&s_str, &s_str2);
+		compare_n_sstrings2(&s_str, &s_str2, size_of_strings[i]);
 
 		free(s_str.string);
 		free(s_str2.string);

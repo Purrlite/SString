@@ -289,6 +289,30 @@ compare_n_sstrings(const SString * restrict str1,
 	return stcncmp(str1->string, str2->string, num);
 }
 
+int
+compare_n_sstrings2(const SString * restrict str1,
+                    const SString * restrict str2,
+                    size_t num)
+{
+	int return_val;
+	size_t lenght = (str1->length > str2->length) ? str2->length : str1->length;
+	const char temp;
+
+	if(num >= lenght)
+		return strcmp(str1->string, str2->string);
+	else
+		length = num;
+
+	temp = str1->string[lenght];
+	str1->string[lenght] = '\0';
+
+	return_val = strcmp(str1->string, str2->string);
+
+	str1->string[lenght] = temp;
+
+	return return_val;
+}
+
 
 SString *
 s_strchr(SString * str,
