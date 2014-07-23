@@ -286,7 +286,7 @@ compare_n_sstrings(const SString * restrict str1,
                    const SString * restrict str2,
                    size_t num)
 {
-	return stcncmp(str1->string, str2->string, num);
+	return strncmp(str1->string, str2->string, num);
 }
 
 int
