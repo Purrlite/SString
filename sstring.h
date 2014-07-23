@@ -108,9 +108,9 @@ compare_sstrings(const SString * restrict str1,
  * smaller value than ptr2's character.
  */
 int
-s_strncmp(const SString * str1,
-          const SString * str2,
-          size_t num) ;
+compare_n_sstrings(const SString * str1,
+                   const SString * str2,
+                   size_t num) ;
 
 
 /* Locates specified character in SString.

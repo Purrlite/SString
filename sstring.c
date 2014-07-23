@@ -282,9 +282,9 @@ compare_sstrings(const SString * restrict str1,
 
 
 int
-s_strncmp(const SString * str1,
-          const SString * str2,
-          size_t num)
+compare_n_sstrings(const SString * str1,
+                   const SString * str2,
+                   size_t num)
 {
 	unsigned int i;
 
