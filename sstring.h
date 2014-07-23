@@ -103,8 +103,8 @@ compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2) ;
 
 int
-compare_sstrings2(const SString * str1,
-                  const SString * str2) ;
+compare_sstrings2(const SString * restrict str1,
+                  const SString * restrict str2) ;
 
 int
 compare_sstrings3(const SString * restrict str1,
