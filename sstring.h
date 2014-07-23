@@ -112,11 +112,6 @@ compare_n_sstrings(const SString * restrict str1,
                    const SString * restrict str2,
                    size_t num) ;
 
-int
-compare_n_sstrings2(const SString * restrict str1,
-                    const SString * restrict str2,
-                    size_t num) ;
-
 
 /* Locates specified character in SString.
  *     ptr is SString being searched, character is the character being searched

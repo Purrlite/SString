@@ -286,14 +286,6 @@ compare_n_sstrings(const SString * restrict str1,
                    const SString * restrict str2,
                    size_t num)
 {
-	return strncmp(str1->string, str2->string, num);
-}
-
-int
-compare_n_sstrings2(const SString * restrict str1,
-                    const SString * restrict str2,
-                    size_t num)
-{
 	int return_val;
 	size_t length = (str1->length > str2->length) ? str2->length : str1->length;
 	char temp;
