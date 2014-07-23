@@ -282,8 +282,8 @@ compare_sstrings(const SString * restrict str1,
 
 
 int
-compare_n_sstrings(const SString * str1,
-                   const SString * str2,
+compare_n_sstrings(const SString * restrict str1,
+                   const SString * restrict str2,
                    size_t num)
 {
 	unsigned int i;

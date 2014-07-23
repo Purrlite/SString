@@ -108,8 +108,8 @@ compare_sstrings(const SString * restrict str1,
  * smaller value than ptr2's character.
  */
 int
-compare_n_sstrings(const SString * str1,
-                   const SString * str2,
+compare_n_sstrings(const SString * restrict str1,
+                   const SString * restrict str2,
                    size_t num) ;
 
 
