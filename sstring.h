@@ -92,21 +92,17 @@ append_n_sstring(SString * restrict destination,
                  size_t num) ;
 
 
-/* Compares characters between them until the end of one of them or a first
- * differring char
+/* Compares characters until '\0' or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
- * char has higher value than ptr2's, negative if ptr1's char has smaller value
- * than ptr2's character.
+ * character has higher value than ptr2's, negative if ptr1's character has
+ * smaller value than ptr2's character.
  */
 int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2) ;
 
 
-/* Lexically compares characters in the SStrings until the end of one of the
- * SStrings, a first different character or num characters.
- *     str1 and str2 are the SStrings being compared, num is the number of
- * characters being compared.
+/* Compares characters until '\0', num chars or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
  * smaller value than ptr2's character.
