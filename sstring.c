@@ -277,7 +277,7 @@ int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {
-	unsigned int i;
+	register unsigned int i;
 	unsigned int length = (str1->length > str2->length)
 	                      ? str2->length : str1->length;
 
