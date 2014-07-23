@@ -286,16 +286,7 @@ compare_n_sstrings(const SString * restrict str1,
                    const SString * restrict str2,
                    size_t num)
 {
-	unsigned int i;
-
-	for(i = 0;  i < num  &&  i < str1->length  &&  i < str2->length;  i++) {
-		if(str1->string[i] > str2->string[i])
-			return (str1->string[i] - str2->string[i]);
-		else if(str1->string[i] < str2->string[i])
-			return (str1->string[i] - str2->string[i]);
-	}
-
-	return 0;
+	return stcncmp(str1->string, str2->string, num);
 }
 
 
