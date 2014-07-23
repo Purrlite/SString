@@ -277,30 +277,7 @@ int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {
-	register unsigned int i;
-	unsigned int length = (str1->length > str2->length)
-	                      ? str2->length : str1->length;
-
-	for(i = 0; i < length; i++)
-		if(str1->string[i] != str2->string[i])
-			return (str1->string[i] - str2->string[i]);
-
-	return 0;
-}
-
-int
-compare_sstrings2(const SString * restrict str1,
-                  const SString * restrict str2)
-{
 	return strcmp(str1->string, str2->string);
-}
-
-int
-compare_sstrings3(const SString * restrict str1,
-                  const SString * restrict str2)
-{
-	return strncmp(str1->string, str2->string,
-	               (str1->length > str2->length) ? str2->length : str1->length);
 }
 
 
