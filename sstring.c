@@ -288,6 +288,21 @@ compare_sstrings(const SString * restrict str1,
 	return 0;
 }
 
+int
+compare_sstrings2(const SString * restrict str1,
+                  const SString * restrict str2)
+{
+	return strcmp(str1->string, str2->string);
+}
+
+int
+compare_sstrings3(const SString * restrict str1,
+                  const SString * restrict str2)
+{
+	return strncmp(str1->string, str2->string,
+	               (str1->length > str2->length) ? str2->length : str1->length);
+}
+
 
 int
 s_strncmp(const SString * str1,
