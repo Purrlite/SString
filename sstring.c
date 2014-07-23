@@ -295,20 +295,20 @@ compare_n_sstrings2(const SString * restrict str1,
                     size_t num)
 {
 	int return_val;
-	size_t lenght = (str1->length > str2->length) ? str2->length : str1->length;
+	size_t length = (str1->length > str2->length) ? str2->length : str1->length;
 	const char temp;
 
-	if(num >= lenght)
+	if(num >= length)
 		return strcmp(str1->string, str2->string);
 	else
 		length = num;
 
-	temp = str1->string[lenght];
-	str1->string[lenght] = '\0';
+	temp = str1->string[length];
+	str1->string[length] = '\0';
 
 	return_val = strcmp(str1->string, str2->string);
 
-	str1->string[lenght] = temp;
+	str1->string[length] = temp;
 
 	return return_val;
 }
