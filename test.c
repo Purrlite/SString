@@ -6,6 +6,7 @@
 
 int main(void) {
 	long i;
+	int x;
 	char * str = NULL;
 	char * str2 = NULL;
 	SString s_str;
@@ -23,7 +24,7 @@ int main(void) {
 		strcpy(str, test_strings[i]);
 		strcpy(str2, test_strings[i]);
 
-		strcmp(str, str2);
+		x = strcmp(str, str2);
 
 		free(str);
 
