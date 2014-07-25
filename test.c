@@ -21,27 +21,26 @@ int main(void) {
 	for(i = 0; i < num_of_strings; i++) {
 		str = malloc(size_of_strings[i] + 1);
 		str2 = malloc(size_of_strings[i] + 1);
-		strcpy(str, test_strings[i]);
 		strcpy(str2, test_strings[i]);
 
-		x += strncmp(str, str2, size_of_strings[i]);
+		strncpy(str1, str2, test_strings[i]);
 
 		free(str);
 
 
-		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str = new_sstring(NULL, size_of_strings[i] + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		compare_n_sstrings(&s_str, &s_str2, size_of_strings[i]);
+		copy_n_sstring(&s_str, &s_str2, size_of_strings[i]);
 
 		free(s_str.string);
 		free(s_str2.string);
 
 
-		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str = new_sstring(NULL, size_of_strings[i] + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		compare_n_sstrings2(&s_str, &s_str2, size_of_strings[i]);
+		copy_n_sstring2(&s_str, &s_str2, size_of_strings[i]);
 
 		free(s_str.string);
 		free(s_str2.string);

@@ -62,6 +62,12 @@ copy_n_sstring(SString * restrict destination,
                size_t start,
                size_t num) ;
 
+int
+copy_n_sstring2(SString * restrict destination,
+                const SString * restrict source,
+                size_t start,
+                size_t num) ;
+
 
 /* Copies num characters from string source into SString destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
