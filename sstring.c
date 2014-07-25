@@ -221,6 +221,41 @@ copy_string_to_sstring(SString * restrict destination,
 
 
 int
+copy_string_to_sstring2(SString * restrict destination,
+                        char * restrict source,
+                        size_t num)
+{
+	size_t len = strlen(source);
+	size_t lenght = (num > len  ||  0 == num) ? len - 1 : num;
+	char temp;
+
+	if(NULL == destination  ||  NULL == source)
+		return -1;
+
+	if(lenght > destination->size  ||  NULL == destination->string) {
+		destination->size = lenght + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	temp = source[lenght];
+	source[lenght] = '\0';
+
+	strcpy(destination->string, source);
+
+	source[lenght] = temp;
+
+	destination->length = lenght;
+
+	return 1;
+}
+
+
+int
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
