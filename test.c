@@ -6,7 +6,6 @@
 
 int main(void) {
 	long i;
-	long x = 0;
 	char * str = NULL;
 	char * str2 = NULL;
 	SString s_str;
@@ -23,7 +22,7 @@ int main(void) {
 		str2 = malloc(size_of_strings[i] + 1);
 		strcpy(str2, test_strings[i]);
 
-		strncpy(str1, str2, test_strings[i]);
+		strncpy(str, str2, size_of_strings[i]);
 
 		free(str);
 
@@ -31,7 +30,7 @@ int main(void) {
 		s_str = new_sstring(NULL, size_of_strings[i] + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		copy_n_sstring(&s_str, &s_str2, size_of_strings[i]);
+		copy_n_sstring(&s_str, &s_str2, 0, size_of_strings[i]);
 
 		free(s_str.string);
 		free(s_str2.string);
@@ -40,7 +39,7 @@ int main(void) {
 		s_str = new_sstring(NULL, size_of_strings[i] + 1);
 		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		copy_n_sstring2(&s_str, &s_str2, size_of_strings[i]);
+		copy_n_sstring2(&s_str, &s_str2, 0, size_of_strings[i]);
 
 		free(s_str.string);
 		free(s_str2.string);
