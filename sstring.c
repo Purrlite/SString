@@ -1,6 +1,7 @@
 #include "sstring.h"
 
 #include <string.h>
+#include <stdbool.h>
 
 typedef SString (new_SStr_func)(const char * string,
                                 size_t size);
