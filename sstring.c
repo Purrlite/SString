@@ -279,6 +279,43 @@ append_n_sstring(SString * restrict destination,
 
 
 int
+append_n_sstring2(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num)
+{
+	size_t length = (num > source->length) ? source->length - 1 : num;
+	char temp;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(length + destination->length > destination->size
+		    ||  NULL == destination->string) {
+		destination->size = length + destination->length + 1;
+		if(NULL != destination->string)
+			free(destination->string);
+		destination->string = malloc(destination->size);
+
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	temp = source->string[length];
+	source->string[length] = '\0';
+
+	strcpy(&(destination->string[destination->length]), source->string);
+
+	source->string[length] = temp;
+
+	destination->length += length;
+
+	destination->string[destination->length] = '\0';
+
+	return 1;
+}
+
+
+int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {

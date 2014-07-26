@@ -91,6 +91,11 @@ append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t num) ;
 
+int
+append_n_sstring2(SString * restrict destination,
+                  const SString * restrict source,
+                  size_t num) ;
+
 
 /* Compares characters until '\0' or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
