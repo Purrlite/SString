@@ -113,12 +113,24 @@ compare_n_sstrings(const SString * restrict str1,
                    size_t num) ;
 
 
+/* Finds the x-th (place being the x) or last (if place is 0) character in str
+ *     Returns the distance of the character from the start of the string or
+ * returns -1 if it isn't in the string.
+ */
 int
 find_char_in_sstring(const SString * str,
                      char character,
                      unsigned int place) ;
 
 
+/* Checks if the characters present in chars are or aren't inside str
+ *     inverse determines if to check for existence of absence of the chars in
+ * str. If inverse is false, then existence is checked, but if inverse is true,
+ * then absence is checked.
+ *     Returns the amount of chars that are in str before finding a character
+ * that is in str that isn't inside chars. If inverse is true, then returns the
+ * amount of chars before finding a char that is present in chars.
+ */
 int
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
