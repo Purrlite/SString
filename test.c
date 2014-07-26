@@ -6,6 +6,7 @@
 
 int main(void) {
 	long i;
+	long x = 0;
 	char * str = NULL;
 	char * str2 = NULL;
 	SString s_str;
@@ -18,30 +19,43 @@ int main(void) {
 
 
 	for(i = 0; i < num_of_strings; i++) {
-		str = malloc(size_of_strings[i] * 2 + 1);
+		str = malloc(size_of_strings[i] + 1);
 		str2 = malloc(size_of_strings[i] + 1);
-		strcpy(str2, test_strings[i]);
 		strcpy(str, test_strings[i]);
+		strncpy(str2, &(str[size_of_strings[i] / 2 - 1]), 3);
 
-		strncat(str, str2, size_of_strings[i]);
+		x += (long)strchr(str, 'u');
+		x += (long)strrchr(str, 'u');
+		x += strspn(str, "ux");
+		x += strcspn(str, "ux");
+		x += (long)strpbrk(str, "ux");
 
 		free(str);
 		free(str2);
 
 
-		s_str = new_sstring(test_strings[i], size_of_strings[i] * 2 + 1);
-		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str2 = new_sstring(NULL, size_of_strings[i] + 1);
+		copy_n_sstring(&s_str, &s_str2, size_of_strings[i] / 2 - 1, 3);
 
-		append_n_sstring(&s_str, &s_str2, size_of_strings[i]);
+		s_strchr(&s_str, 'u');
+		s_strrchr(&s_str, 'u');
+		s_strspn(&s_str, &SSTRING("ux"));
+		s_strcspn(&s_str, &SSTRING("ux"));
+		s_strpbrk(&s_str, &SSTRING("ux"));
 
 		free(s_str.string);
 		free(s_str2.string);
 
 
-		s_str = new_sstring(test_strings[i], size_of_strings[i] * 2 + 1);
-		s_str2 = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
+		s_str2 = new_sstring(NULL, size_of_strings[i] + 1);
+		copy_n_sstring(&s_str, &s_str2, size_of_strings[i] / 2 - 1, 3);
 
-		append_n_sstring2(&s_str, &s_str2, size_of_strings[i]);
+		find_char_in_sstring(&s_str, 'u', 1);
+		find_char_in_sstring(&s_str, 'u', 0);
+		find_chars_in_sstring(&s_str, &SSTRING("ux"), 0);
+		find_chars_in_sstring(&s_str, &SSTRING("ux"), 1);
 
 		free(s_str.string);
 		free(s_str2.string);

@@ -113,6 +113,18 @@ compare_n_sstrings(const SString * restrict str1,
                    size_t num) ;
 
 
+int
+find_char_in_sstring(const SString * str,
+                     char character,
+                     unsigned int place) ;
+
+
+int
+find_chars_in_sstring(const SString * str,
+                      const SString * chars,
+                      bool inverse) ;
+
+
 /* Locates specified character in SString.
  *     ptr is SString being searched, character is the character being searched
  * for.
