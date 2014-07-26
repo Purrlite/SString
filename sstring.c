@@ -351,7 +351,7 @@ find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       bool inverse)
 {
-	if(inverse == FALSE)
+	if(inverse == false)
 		return strspn(str->string, chars->string);
 	else
 		return strcspn(str->string, chars->string);
