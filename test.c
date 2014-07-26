@@ -21,7 +21,7 @@ int main(void) {
 		str = malloc(size_of_strings[i] * 2 + 1);
 		str2 = malloc(size_of_strings[i] + 1);
 		strcpy(str2, test_strings[i]);
-		strcpy(str1, test_strings[i]);
+		strcpy(str, test_strings[i]);
 
 		strncat(str, str2, size_of_strings[i]);
 
