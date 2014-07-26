@@ -2,7 +2,6 @@
 #define SSTRING_H_INCLUDED
 
 #include <stdlib.h>
-#include <stdint.h>
 
 #define restrict __restrict__
 
