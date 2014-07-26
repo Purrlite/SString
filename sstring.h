@@ -3,7 +3,8 @@
 
 #include <stdlib.h>
 
-#define restrict __restrict__
+#define restrict  __restrict__
+#define bool      _Bool
 
 typedef struct SString {
 	size_t length;
