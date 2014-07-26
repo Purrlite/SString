@@ -323,7 +323,7 @@ find_char_in_sstring(const SString * str,
                      char character,
                      unsigned int place)
 {
-	register int i;
+	register unsigned int i;
 	char * found_char;
 
 	if(place == 0) {
