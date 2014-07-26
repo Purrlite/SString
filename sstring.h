@@ -72,11 +72,6 @@ copy_string_to_sstring(SString * restrict destination,
                        const char * restrict source,
                        size_t num);
 
-int
-copy_string_to_sstring2(SString * restrict destination,
-                        char * restrict source,
-                        size_t num);
-
 
 /* Appends source at the end of destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
