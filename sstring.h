@@ -163,4 +163,14 @@ s_sstrtok(SString * str,
           const SString * delimiters) ;
 
 
+SString **
+split_sstring(const SString * str,
+              const SString * deliminers) ;
+
+
+SString **
+split_sstring2(const SString * str,
+               const SString * deliminers) ;
+
+
 #endif // SSTRING_H_INCLUDED
