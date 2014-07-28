@@ -152,32 +152,6 @@ find_str_in_sstring(const SString * str,
                     size_t start) ;
 
 
-/* Splits SString into tokens (smaller Cstrings devided by one of the signs in
- * delimiters). The function is intialized by giving it string in str and
- * continues searching through the last string supplied on NULL.
- *     str is the SString being split, delimeners are the characters deviding
- * the tokens.
- *     Returns pointer to next token, which is a new string and returns NULL if
- * there isn't any more tokens.
- */
-char *
-s_strtok(SString * str,
-         const SString * delimiters) ;
-
-
-/* Splits SString into tokens (smaller SStrings devided by one of the signs in
- * delimiters). The function is intialized by giving it string in str and
- * continues searching through the last string supplied on NULL.
- *     str is the SString being split, delimeners are the characters deviding
- * the tokens.
- *     Returns pointer to next token, which is a new string and returns NULL if
- * there isn't any more tokens.
- */
-SString *
-s_sstrtok(SString * str,
-          const SString * delimiters) ;
-
-
 struct SStrings *
 split_sstring(const SString * str,
               const SString * separator) ;
