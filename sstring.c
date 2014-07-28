@@ -383,10 +383,10 @@ split_sstring(const SString * str,
 	locations = malloc(sizeof(int) * allocated_num);
 
 	locations[num_of_locations] = find_str_in_sstring(str, separator, 0);
-	num_of_locations++;
-
 	if(locations[num_of_locations] == -1)
 		return NULL;
+
+	num_of_locations++;
 
 	for(; locations[num_of_locations - 1] != -1; num_of_locations++) {
 		if(num_of_locations >= allocated_num) {
