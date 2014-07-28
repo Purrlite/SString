@@ -403,10 +403,9 @@ split_sstring(const SString * str,
 			    locations[num_of_locations - 1] + 1);
 	}
 
-	split = malloc(sizeof(struct SStrings) + (num_of_locations + 1)
-	                * sizeof(SString));
+	split = malloc(sizeof(struct SStrings) + (num_of_locations + 1) * sizeof(SString));
 
-	split->length = num_of_locations;
+	split->length = num_of_locations + 1;
 
 	split->sstrings[0] = (SString){0};
 	copy_n_sstring(&(split->sstrings[0]), str, 0, locations[0]);
