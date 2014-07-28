@@ -178,7 +178,7 @@ s_sstrtok(SString * str,
           const SString * delimiters) ;
 
 
-struct SStrings
+struct SStrings *
 split_sstring(const SString * str,
               const SString * separator) ;
 

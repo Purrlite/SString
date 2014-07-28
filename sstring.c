@@ -370,11 +370,11 @@ find_str_in_sstring(const SString * str,
 }
 
 
-struct SStrings
+struct SStrings *
 split_sstring(const SString * str,
               const SString * separator)
 {
-	struct SStrings split;
+	struct SStrings * split;
 	int * locations;  // locations of separators
 	int allocated_num = 8;  // allocated number of locations
 	int num_of_locations = 0;
@@ -386,7 +386,7 @@ split_sstring(const SString * str,
 	num_of_locations++;
 
 	if(locations[num_of_locations] == -1)
-		return (SString){0};
+		return NULL;
 
 	for(; locations[num_of_locations - 1] != -1; num_of_locations++) {
 		if(num_of_locations >= allocated_num) {
@@ -398,16 +398,17 @@ split_sstring(const SString * str,
 			    locations[num_of_locations - 1] + 1);
 	}
 
-	split = malloc(sizeof(SStrings) + (num_of_locations + 1) * sizeof(SString));
+	split = malloc(sizeof(struct SStrings) + (num_of_locations + 1)
+	                * sizeof(SString));
 
-	split.length = num_of_locations;
+	split->length = num_of_locations;
 
-	split.sstrings[0] = (SString){0};
-	copy_n_sstring(&(split.sstrings[0]), str, 0, locations[0]);
+	split->sstrings[0] = (SString){0};
+	copy_n_sstring(&(split->sstrings[0]), str, 0, locations[0]);
 
 	for(i = 1; i <= num_of_locations; i++) {
-		split.sstrings[i] = (SString){0};
-		copy_n_sstring(&(split.sstrings[i]), str, locations[i - 1], locations[i]);
+		split->sstrings[i] = (SString){0};
+		copy_n_sstring(&(split->sstrings[i]), str, locations[i - 1], locations[i]);
 	}
 
 	free(locations);
