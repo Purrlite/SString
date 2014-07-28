@@ -400,7 +400,7 @@ split_sstring(const SString * str,
 		}
 
 		locations[num_of_locations] = find_str_in_sstring(str, separator,
-			    locations[num_of_locations - 1] + 1);
+			    locations[num_of_locations - 1] + separator->length);
 	}
 
 	split = malloc(sizeof(struct SStrings) + (num_of_locations + 1) * sizeof(SString));
