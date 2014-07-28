@@ -120,13 +120,10 @@ free_sstring(SString * str)
 	if(str == NULL)
 		return ;
 
-	if(str->string != NULL) {
+	if(str->string != NULL)
 		free(str->string);
-		str->string = NULL;
-	}
 
-	str->length = 0;
-	str->size = 0;
+	free(str);
 }
 
 
