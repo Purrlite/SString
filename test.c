@@ -9,7 +9,6 @@ int main(void) {
 	char * str = NULL;
 	char * str2 = NULL;
 	SString s_str;
-	SString ** s_strs;
 	const char * test_strings[] = {
 #include "lorem_ipsum.txt"
 	};
@@ -21,8 +20,7 @@ int main(void) {
 		str = malloc(size_of_strings[i] + 1);
 		strcpy(str, test_strings[i]);
 
-		strtok(str, ",.");
-		while(strtok(NULL, ",.") != NULL);
+		strstr(str, "th");
 
 		free(str);
 		free(str2);
@@ -30,14 +28,7 @@ int main(void) {
 
 		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		split_sstring(&s_str, &SSTRING(",."));
-
-		free(s_str.string);
-
-
-		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
-
-		split_sstring2(&s_str, &SSTRING(",."));
+		find_str_in_sstring(s_str, "th");
 
 		free(s_str.string);
 	}
