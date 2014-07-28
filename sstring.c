@@ -383,7 +383,7 @@ split_sstring(const SString * str,
 	int * locations;  // locations of separators
 	int allocated_num = 8;  // allocated number of locations
 	int num_of_locations = 0;
-	int i;
+	unsigned int i;
 
 	locations = malloc(sizeof(int) * allocated_num);
 
