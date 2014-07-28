@@ -20,7 +20,7 @@ int main(void) {
 		str = malloc(size_of_strings[i] + 1);
 		strcpy(str, test_strings[i]);
 
-		strstr(str, "th");
+		str2 = strstr(str, "th");
 
 		free(str);
 		free(str2);
