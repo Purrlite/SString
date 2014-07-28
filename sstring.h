@@ -152,6 +152,10 @@ find_str_in_sstring(const SString * str,
                     size_t start) ;
 
 
+/* Splits strings into smaller ones devided by separator. Doesn't remove any
+ * extra whitespace from them or anything else.
+ *     Returns the split strings.
+ */
 struct SStrings *
 split_sstring(const SString * str,
               const SString * separator) ;
