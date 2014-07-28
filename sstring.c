@@ -370,11 +370,11 @@ find_str_in_sstring(const SString * str,
 }
 
 
-SStrings
+struct SStrings
 split_sstring(const SString * str,
               const SString * separator)
 {
-	SStrings split;
+	struct SStrings split;
 
 
 
