@@ -356,6 +356,20 @@ find_chars_in_sstring(const SString * str,
 }
 
 
+int
+find_str_in_sstring(const SString * str,
+                    const SString * sub_str,
+                    size_t start)
+{
+	char * return_val = strstr(&(str->string[start]), sub_str);
+
+	if(return_val == NULL)
+		return -1;
+	else
+		return (int)(str->string - return_val);
+}
+
+
 SStrings
 split_sstring(const SString * str,
               const SString * separator)

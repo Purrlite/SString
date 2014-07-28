@@ -142,6 +142,16 @@ find_chars_in_sstring(const SString * str,
                       bool inverse) ;
 
 
+/* Finds substring sub_str in str, starting from start amount of chars.
+ *     Returns number of characters before sub_str up to the beginning of str.
+ * (it ignores start)
+ */
+int
+find_str_in_sstring(const SString * str,
+                    const SString * sub_str,
+                    size_t start) ;
+
+
 /* Splits SString into tokens (smaller Cstrings devided by one of the signs in
  * delimiters). The function is intialized by giving it string in str and
  * continues searching through the last string supplied on NULL.
