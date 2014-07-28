@@ -13,6 +13,11 @@ typedef struct SString {
 } SString;
 
 
+struct SStrings {
+	size_t length;
+	SString sstrings[];
+};
+
 // Static allocation of a SString
 #define SSTRING(str) (SString){ sizeof(str)-1 , sizeof(str) , str }
 
