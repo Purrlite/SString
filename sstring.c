@@ -361,7 +361,7 @@ find_str_in_sstring(const SString * str,
                     const SString * sub_str,
                     size_t start)
 {
-	char * return_val = strstr(&(str->string[start]), sub_str);
+	char * return_val = strstr(&(str->string[start]), sub_str->string);
 
 	if(return_val == NULL)
 		return -1;
