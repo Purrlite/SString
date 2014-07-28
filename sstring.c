@@ -375,8 +375,36 @@ split_sstring(const SString * str,
               const SString * separator)
 {
 	struct SStrings split;
+	int * locations;  // locations of separators
+	int allocated_num = 8;  // allocated number of locations
+	int num_of_locations = 0;
+	int i;
 
+	locations = malloc(sizeof(int) * allocated_num);
 
+	locations[num_of_locations] = find_str_in_sstring(str, separator, 0);
+	num_of_locations++;
+
+	if(locations[num_of_locations] == -1)
+		return (SString){0};
+
+	for(; locations[num_of_locations - 1] != -1; num_of_locations++) {
+		if(num_of_locations >= allocated_num) {
+			allocated_num *= 2;
+			locations = realloc(locations, sizeof(int) * allocated_num);
+		}
+
+		locations[num_of_locations] = find_str_in_sstring(str, separator,
+			    locations[num_of_locations - 1] + 1);
+	}
+
+	split = malloc(sizeof(SStrings) + (num_of_locations + 1) * sizeof(SString));
+
+	split.length = num_of_locations;
+
+	copy_n_sstring(&(split.sstrings[i]), str, 0, locations[0]);
+	for(i = 1; i <= num_of_locations; i++)
+		copy_n_sstring(&(split.sstrings[i]), str, locations[i - 1], locations[i]);
 
 	return split;
 }
