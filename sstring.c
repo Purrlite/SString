@@ -356,79 +356,13 @@ find_chars_in_sstring(const SString * str,
 }
 
 
-SString **
+SStrings
 split_sstring(const SString * str,
-              const SString * deliminers)
+              const SString * separator)
 {
-	SString ** split;
-	register unsigned int i;
-	register unsigned int j;
-	unsigned int num_of_splits = 0;
-	unsigned int split_num = 0;
-	unsigned int split_chars = 0;
-
-	for(i = 0; i < str->length; i++)
-		for(j = 0; j < deliminers->length; j++)
-			if(str->string[i] == deliminers->string[j])
-				num_of_splits++;
-
-	if(num_of_splits == 0)
-		return NULL;
-
-	split = malloc(sizeof(SString *) * (num_of_splits + 1));
-	for(i = 0; i <= num_of_splits; i++)
-		split[i] = malloc(sizeof(SString));
-
-	for(i = 0; i < str->length; i++)
-		for(j = 0; j < deliminers->length; j++)
-			if(str->string[i] == deliminers->string[j]) {
-				split[split_num]->string = malloc(i - split_chars);
-				copy_n_sstring(split[split_num], str, split_chars,
-				               i - split_chars - 1);
-
-				split_num++;
-				split_chars = i;
-			}
-
-	split[split_num] = NULL;
-
-	return split;
-}
+	SStrings split;
 
 
-SString **
-split_sstring2(const SString * str,
-               const SString * deliminers)
-{
-	SString ** split;
-	char * temp;
-	register unsigned int i;
-	register unsigned int j;
-	unsigned int num_of_splits = 0;
-
-	for(i = 0; i < str->length; i++)
-		for(j = 0; j < deliminers->length; j++)
-			if(str->string[i] == deliminers->string[j])
-				num_of_splits++;
-
-	if(num_of_splits == 0)
-		return NULL;
-
-	split = malloc(sizeof(SString *) * (num_of_splits + 1));
-	for(i = 0; i <= num_of_splits; i++) {
-		split[i] = malloc(sizeof(SString));
-		split[i]->string = NULL;
-	}
-
-	temp = malloc(str->length + 1);
-	strcpy(temp, str->string);
-
-	*split[0] = new_sstring(strtok(temp, deliminers->string), 0);
-
-	for(i = 1; i < num_of_splits; i++)
-		*split[i] = new_sstring(strtok(NULL, deliminers->string), 0);
-
-	free(temp);
 
 	return split;
 }
