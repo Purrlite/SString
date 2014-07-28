@@ -28,7 +28,7 @@ int main(void) {
 
 		s_str = new_sstring(test_strings[i], size_of_strings[i] + 1);
 
-		find_str_in_sstring(s_str, "th");
+		find_str_in_sstring(&s_str, &SSTRING("th"), 0);
 
 		free(s_str.string);
 	}
