@@ -410,6 +410,8 @@ split_sstring(const SString * str,
 		copy_n_sstring(&(split.sstrings[i]), str, locations[i - 1], locations[i]);
 	}
 
+	free(locations);
+
 	return split;
 }
 
