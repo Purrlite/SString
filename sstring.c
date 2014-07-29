@@ -102,7 +102,7 @@ new_sstring(const char * string,
 }
 
 
-inline void
+static inline void
 empty_sstring(SString * str)
 {
 	if(str == NULL)
@@ -114,7 +114,7 @@ empty_sstring(SString * str)
 }
 
 
-inline void
+static inline void
 free_sstring(SString * str)
 {
 	if(str == NULL)
@@ -127,7 +127,7 @@ free_sstring(SString * str)
 }
 
 
-inline void
+static inline void
 free_sstrings(struct SStrings * strs)
 {
 	size_t i;

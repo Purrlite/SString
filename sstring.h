@@ -38,19 +38,19 @@ new_sstring(const char * restrict string,
 
 /* Empties a SString, but doesn't free any memory.
  */
-inline void
+static inline void
 empty_sstring(SString * str) ;
 
 
 /* Frees the memory allocated for SString.
  */
-inline void
+static inline void
 free_sstring(SString * str) ;
 
 
 /* Frees the memory allocated for structure SStrings and the strings inside it
  */
-inline void
+static inline void
 free_sstrings(struct SStrings * strs) ;
 
 
