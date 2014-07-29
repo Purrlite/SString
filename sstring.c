@@ -127,6 +127,22 @@ free_sstring(SString * str)
 }
 
 
+inline void
+free_sstrings(struct SStrings * strs)
+{
+	size_t i;
+
+	if(strs == NULL)
+		return ;
+
+	for(i = 0; i < strs->length; i++)
+		if(strs->sstrings[i].string != NULL)
+			free(strs->sstrings[i].string);
+
+	free(strs);
+}
+
+
 int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
