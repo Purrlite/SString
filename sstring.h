@@ -103,6 +103,16 @@ append_n_sstring(SString * restrict destination,
                  size_t num) ;
 
 
+/* Inserts source into destination starting from start.
+ *     Returns 1 on success or ixits with -1 if any of the arguments is NULL
+ * or source's string is NULL or with -2 if allocating memory fails.
+ */
+int
+insert_sstring(SString * restrict destination,
+               const SString * restrict source,
+               size_t start) ;
+
+
 /* Compares characters until '\0' or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
