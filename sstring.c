@@ -152,10 +152,11 @@ copy_sstring(SString * restrict destination,
 
 	if(source->length >= destination->size  ||  NULL == destination->string) {
 		destination->size = source->length + 1;
+
 		if(NULL != destination->string)
 			free(destination->string);
-		destination->string = malloc(destination->size);
 
+		destination->string = malloc(destination->size);
 		if(NULL == destination->string)
 			return -2;
 	}
@@ -183,10 +184,11 @@ copy_n_sstring(SString * restrict destination,
 
 	if(length > destination->size  ||  NULL == destination->string) {
 		destination->size = length + 1;
+
 		if(NULL != destination->string)
 			free(destination->string);
-		destination->string = malloc(destination->size);
 
+		destination->string = malloc(destination->size);
 		if(NULL == destination->string)
 			return -2;
 	}
@@ -217,10 +219,11 @@ copy_string_to_sstring(SString * restrict destination,
 
 	if(lenght > destination->size  ||  NULL == destination->string) {
 		destination->size = lenght + 1;
+
 		if(NULL != destination->string)
 			free(destination->string);
-		destination->string = malloc(destination->size);
 
+		destination->string = malloc(destination->size);
 		if(NULL == destination->string)
 			return -2;
 	}
@@ -244,10 +247,11 @@ append_sstring(SString * restrict destination,
 	if(source->length + destination->length > destination->size
 		    ||  NULL == destination->string) {
 		destination->size = source->length + destination->length + 1;
+
 		if(NULL != destination->string)
 			free(destination->string);
-		destination->string = malloc(destination->size);
 
+		destination->string = malloc(destination->size);
 		if(NULL == destination->string)
 			return -2;
 	}
@@ -276,10 +280,11 @@ append_n_sstring(SString * restrict destination,
 	if(length + destination->length > destination->size
 		    ||  NULL == destination->string) {
 		destination->size = length + destination->length + 1;
+
 		if(NULL != destination->string)
 			free(destination->string);
-		destination->string = malloc(destination->size);
 
+		destination->string = malloc(destination->size);
 		if(NULL == destination->string)
 			return -2;
 	}
