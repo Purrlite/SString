@@ -328,7 +328,10 @@ insert_sstring(SString * restrict destination,
 
 	temp = new_sstring(&(destination->string[start]), 0);
 
-	copy_n_sstring(destination, source, start, source->length);
+	destination->string[start] = '\0';
+	destination->length = start;
+
+	append_sstring(destination, source);
 	append_sstring(destination, &temp);
 
 	free(temp.string);
