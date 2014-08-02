@@ -104,14 +104,14 @@ append_n_sstring(SString * restrict destination,
                  size_t num) ;
 
 
-/* Inserts source into destination starting from start.
+/* Inserts source into destination starting from insert_start.
  *     Returns 1 on success or ixits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
 int
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
-               size_t start) ;
+               size_t insert_start) ;
 
 
 /* Inserts num chars from source starting from source_start into destination

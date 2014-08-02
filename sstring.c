@@ -267,17 +267,17 @@ append_n_sstring(SString * restrict destination,
 int
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
-               size_t start)
+               size_t insert_start)
 {
 	SString temp;
 
 	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + source->length + 1)
 
-	temp = new_sstring(&(destination->string[start]), 0);
+	temp = new_sstring(&(destination->string[insert_start]), 0);
 
-	destination->string[start] = '\0';
-	destination->length = start;
+	destination->string[insert_start] = '\0';
+	destination->length = insert_start;
 
 	append_sstring(destination, source);
 	append_sstring(destination, &temp);
