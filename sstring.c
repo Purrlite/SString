@@ -431,7 +431,8 @@ split_sstring(const SString * str,
 	int num_of_locations = 0;
 	unsigned int i;
 
-	CHECK_NULL(NULL, str, separator,  ||  NULL == str->string  ||  NULL == separator->string)
+	CHECK_NULL(NULL, str, separator,  ||  NULL == str->string
+	            ||  NULL == separator->string)
 
 	locations = malloc(sizeof(int) * allocated_num);
 
