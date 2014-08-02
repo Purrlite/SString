@@ -269,9 +269,10 @@ append_sstring(SString * restrict destination,
 int
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
+                 size_t start,
                  size_t num)
 {
-	size_t length = (num > source->length) ? source->length - 1 : num;
+	size_t length = (start + num > source->length) ? source->length - start : num;
 	char temp;
 
 	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
@@ -289,12 +290,12 @@ append_n_sstring(SString * restrict destination,
 			return -2;
 	}
 
-	temp = source->string[length];
-	source->string[length] = '\0';
+	temp = source->string[start + length];
+	source->string[start + length] = '\0';
 
-	strcpy(&(destination->string[destination->length]), source->string);
+	strcpy(&(destination->string[destination->length]), &(source->string[start]));
 
-	source->string[length] = temp;
+	source->string[start + length] = temp;
 
 	destination->length += length;
 

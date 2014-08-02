@@ -93,13 +93,14 @@ append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
 
-/* Appends n characters from source at the end of destination.
+/* Appends n chars from source, starting from start, at the end of destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
 int
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
+                 size_t start,
                  size_t num) ;
 
 
