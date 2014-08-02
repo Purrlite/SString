@@ -141,18 +141,20 @@ free_sstring(SString ** str)
 
 
 inline void
-free_sstrings(struct SStrings * strs)
+free_sstrings(struct SStrings ** strs)
 {
 	size_t i;
 
-	if(strs == NULL)
+	if(strs == NULL  ||  *strs == NULL)
 		return ;
 
-	for(i = 0; i < strs->length; i++)
-		if(strs->sstrings[i].string != NULL)
-			free(strs->sstrings[i].string);
+	for(i = 0; i < (*strs)->length; i++)
+		if((*strs)->sstrings[i].string != NULL)
+			free((*strs)->sstrings[i].string);
 
-	free(strs);
+	free(*strs);
+
+	*strs = NULL;
 }
 
 

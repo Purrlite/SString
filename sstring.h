@@ -51,7 +51,7 @@ free_sstring(SString ** str) ;
 /* Frees the memory allocated for structure SStrings and the strings inside it
  */
 void
-free_sstrings(struct SStrings * strs) ;
+free_sstrings(struct SStrings ** strs) ;
 
 
 /* Copies string from source into destination
