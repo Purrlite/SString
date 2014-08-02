@@ -342,6 +342,46 @@ insert_sstring(SString * restrict destination,
 
 
 int
+insert_n_sstring(SString * restrict destination,
+                 const SString * restrict source,
+                 size_t insert_start,
+                 size_t source_start,
+                 size_t num)
+{
+	SString temp;
+	size_t length = (source_start + num > source->length)
+	                ? source->length - source_start : num;
+
+	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
+		return -1;
+
+	if(destination->length + length > destination->size
+		    ||  NULL == source->string) {
+		destination->size = destination->length + length + 1;
+
+		if(NULL != destination->string)
+			free(destination->string);
+
+		destination->string = malloc(destination->size);
+		if(NULL == destination->string)
+			return -2;
+	}
+
+	temp = new_sstring(&(destination->string[insert_start]), 0);
+
+	destination->string[insert_start] = '\0';
+	destination->length = insert_start;
+
+	append_n_sstring(destination, source, source_start, length);
+	append_sstring(destination, &temp);
+
+	free(temp.string);
+
+	return 1;
+}
+
+
+int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {
