@@ -341,7 +341,8 @@ compare_n_sstrings(const SString * restrict str1,
 {
 	int return_val;
 	size_t length;
-	char temp;
+	char temp1;
+	char temp2;
 
 	CHECK_NULL(0, str1, str2,  ||  NULL == str1->string  ||  NULL == str2->string
 	            ||  num == 0)
@@ -353,12 +354,15 @@ compare_n_sstrings(const SString * restrict str1,
 	else
 		length = num;
 
-	temp = str1->string[length];
+	temp1 = str1->string[length];
+	temp2 = str2->string[length];
 	str1->string[length] = '\0';
+	str2->string[length] = '\0';
 
 	return_val = strcmp(str1->string, str2->string);
 
-	str1->string[length] = temp;
+	str1->string[length] = temp1;
+	str2->string[length] = temp2;
 
 	return return_val;
 }
