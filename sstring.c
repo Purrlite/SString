@@ -14,7 +14,6 @@ NULL_array_0_size(const char * string,
 	return (SString){ 0, 0, NULL };
 }
 
-
 static SString
 NULL_array_non0_size(const char * string,
                      size_t size)
@@ -29,7 +28,6 @@ NULL_array_non0_size(const char * string,
 
 	return s_str;
 }
-
 
 static SString
 nonNULL_array_0_size(const char * string,
@@ -46,7 +44,6 @@ nonNULL_array_0_size(const char * string,
 
 	return s_str;
 }
-
 
 static SString
 nonNULL_array_non0_size(const char * string,
@@ -67,7 +64,6 @@ nonNULL_array_non0_size(const char * string,
 
 	return s_str;
 }
-
 
 static new_SStr_func *
 get_new_SS_func(const char * string,
@@ -90,7 +86,6 @@ get_new_SS_func(const char * string,
 			return nonNULL_array_non0_size;
 		}
 }
-
 
 SString
 new_sstring(const char * string,
