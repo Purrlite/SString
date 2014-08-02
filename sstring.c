@@ -3,9 +3,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define CHECK_NULL(dest, sour, additional)  \
-	if(NULL == dest  ||  NULL == sour  additional)  \
-		return -1;
+#define CHECK_NULL(ret, str1, str2, additional)  \
+	if(NULL == str1  ||  NULL == str2  additional)  \
+		return ret;
 
 #define CHECK_FREE_SPACE_IN_SSTRING(dest, len)  \
 	if((len) > dest->size  ||  NULL == dest->string) {  \
@@ -158,7 +158,7 @@ int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
-	CHECK_NULL(destination, source,  ||  NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, source->length + 1)
 
 	strcpy(destination->string, source->string);
@@ -178,7 +178,7 @@ copy_n_sstring(SString * restrict destination,
 	size_t length = (start + num > source->length) ? source->length - start : num;
 	char temp;
 
-	CHECK_NULL(destination, source,  ||  NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, length + 1)
 
 	temp = source->string[start + length];
@@ -202,7 +202,7 @@ copy_string_to_sstring(SString * restrict destination,
 	size_t len = strlen(source);
 	size_t lenght = (num > len  ||  0 == num) ? len - 1 : num;
 
-	CHECK_NULL(destination, source, )
+	CHECK_NULL(-1, destination, source, )
 	CHECK_FREE_SPACE_IN_SSTRING(destination, lenght + 1)
 
 	strncpy(destination->string, source, lenght);
@@ -218,7 +218,7 @@ int
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
-	CHECK_NULL(destination, source, || NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, source->length + destination->length + 1)
 
 	strcpy(&(destination->string[destination->length]), source->string);
@@ -240,7 +240,7 @@ append_n_sstring(SString * restrict destination,
 	size_t length = (start + num > source->length) ? source->length - start : num;
 	char temp;
 
-	CHECK_NULL(destination, source, || NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, length + destination->length + 1)
 
 	temp = source->string[start + length];
@@ -265,7 +265,7 @@ insert_sstring(SString * restrict destination,
 {
 	SString temp;
 
-	CHECK_NULL(destination, source, || == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + source->length + 1)
 
 	temp = new_sstring(&(destination->string[start]), 0);
@@ -293,7 +293,7 @@ insert_n_sstring(SString * restrict destination,
 	size_t length = (source_start + num > source->length)
 	                ? source->length - source_start : num;
 
-	CHECK_NULL(destination, source, || NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
 	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + length + 1)
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
@@ -314,6 +314,8 @@ int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {
+	CHECK_NULL(0, str1, str2,  ||  NULL == str1->string  ||  NULL == str2->string)
+
 	return strcmp(str1->string, str2->string);
 }
 
@@ -326,6 +328,8 @@ compare_n_sstrings(const SString * restrict str1,
 	int return_val;
 	size_t length = (str1->length > str2->length) ? str2->length : str1->length;
 	char temp;
+
+	CHECK_NULL(0, str1, str2,  ||  NULL == str1->string  ||  NULL == str2->string)
 
 	if(num >= length)
 		return strcmp(str1->string, str2->string);
@@ -351,11 +355,13 @@ find_char_in_sstring(const SString * str,
 	register unsigned int i;
 	char * found_char;
 
+	CHECK_NULL(-1, str, str->string, )
+
 	if(place == 0) {
 		found_char = strrchr(str->string, (int)character);
 
 		if(found_char == NULL)
-			return -1;
+			return -2;
 	} else {
 		found_char = str->string;
 
@@ -363,7 +369,7 @@ find_char_in_sstring(const SString * str,
 			found_char = strchr(&(str->string[str->string - found_char]),
 			                    (int)character);
 			if(found_char == NULL)
-				return -1;
+				return -2;
 		}
 	}
 
@@ -376,6 +382,8 @@ find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       bool inverse)
 {
+	CHECK_NULL(-1, str, chars,  ||  NULL == str->string  ||  NULL == chars->string)
+
 	if(inverse == false)
 		return strspn(str->string, chars->string);
 	else
@@ -389,6 +397,8 @@ find_str_in_sstring(const SString * str,
                     size_t start)
 {
 	char * return_val;
+
+	CHECK_NULL(-1, str, sub_str,  ||  str == str->string  ||  NULL == sub_str->string)
 
 	if(start >= str->length)
 		return -1;
@@ -411,6 +421,8 @@ split_sstring(const SString * str,
 	int allocated_num = 8;  // allocated number of locations
 	int num_of_locations = 0;
 	unsigned int i;
+
+	CHECK_NULL(NULL, str, separator,  ||  NULL == str->string  ||  NULL == separator->string)
 
 	locations = malloc(sizeof(int) * allocated_num);
 

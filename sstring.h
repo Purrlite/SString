@@ -130,7 +130,8 @@ insert_n_sstring(SString * restrict destination,
 /* Compares characters until '\0' or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
- * smaller value than ptr2's character.
+ * smaller value than ptr2's character. Also returns 0 if either of the
+ * arguments or their string is NULL.
  */
 int
 compare_sstrings(const SString * restrict str1,
@@ -140,7 +141,8 @@ compare_sstrings(const SString * restrict str1,
 /* Compares characters until '\0', num chars or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
- * smaller value than ptr2's character.
+ * smaller value than ptr2's character. Also returns 0 if either of the
+ * arguments or their string is NULL.
  */
 int
 compare_n_sstrings(const SString * restrict str1,
@@ -150,7 +152,8 @@ compare_n_sstrings(const SString * restrict str1,
 
 /* Finds the x-th (place being the x) or last (if place is 0) character in str
  *     Returns the distance of the character from the start of the string or
- * returns -1 if it isn't in the string.
+ * returns -2 if it isn't in the string or exits with -1 if str or string in it
+ * is NULL.
  */
 int
 find_char_in_sstring(const SString * str,
@@ -164,7 +167,8 @@ find_char_in_sstring(const SString * str,
  * then absence is checked.
  *     Returns the amount of chars that are in str before finding a character
  * that is in str that isn't inside chars. If inverse is true, then returns the
- * amount of chars before finding a char that is present in chars.
+ * amount of chars before finding a char that is present in chars. Or exits with
+ * -1 if either of the arguments or their string is NULL.
  */
 int
 find_chars_in_sstring(const SString * str,
@@ -174,7 +178,8 @@ find_chars_in_sstring(const SString * str,
 
 /* Finds substring sub_str in str, starting from start amount of chars.
  *     Returns number of characters before sub_str up to the beginning of str.
- * (it ignores start)
+ * (it ignores start) or exits with -1 if either of the arguments or their
+ * string is NULL.
  */
 int
 find_str_in_sstring(const SString * str,
@@ -184,7 +189,8 @@ find_str_in_sstring(const SString * str,
 
 /* Splits strings into smaller ones devided by separator. Doesn't remove any
  * extra whitespace from them or anything else.
- *     Returns the split strings.
+ *     Returns the split strings or NULL if separator isn't found or if either
+ * of the arguments or their string is NULL.
  */
 struct SStrings *
 split_sstring(const SString * str,
