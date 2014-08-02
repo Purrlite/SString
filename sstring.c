@@ -126,15 +126,17 @@ empty_sstring(SString * str)
 
 
 inline void
-free_sstring(SString * str)
+free_sstring(SString ** str)
 {
-	if(str == NULL)
+	if(str == NULL  ||  NULL == *str)
 		return ;
 
-	if(str->string != NULL)
-		free(str->string);
+	if(*str->string != NULL)
+		free(*str->string);
 
-	free(str);
+	free(*str);
+
+	*str = NULL;
 }
 
 
