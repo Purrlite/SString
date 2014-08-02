@@ -19,7 +19,7 @@ struct SStrings {
 };
 
 // Static allocation of a SString
-#define SSTRING(str) (SString){ sizeof(str)-1 , sizeof(str) , str }
+#define SSTRING(str) ((SString){ sizeof(str)-1 , sizeof(str) , str })
 
 
 /* Creates a SString with characters from a C-string either fully or up to
