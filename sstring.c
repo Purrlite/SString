@@ -409,10 +409,8 @@ find_str_in_sstring(const SString * str,
 {
 	char * return_val;
 
-	CHECK_NULL(-1, str, sub_str,  ||  str == str->string  ||  NULL == sub_str->string)
-
-	if(start >= str->length)
-		return -1;
+	CHECK_NULL(-1, str, sub_str,  ||  str == str->string  ||  NULL == sub_str->string
+	            ||  start >= str->length)
 
 	return_val = strstr(&(str->string[start]), sub_str->string);
 
