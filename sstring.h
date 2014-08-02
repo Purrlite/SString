@@ -178,8 +178,8 @@ find_chars_in_sstring(const SString * str,
 
 /* Finds substring sub_str in str, starting from start amount of chars.
  *     Returns number of characters leading up to the sub_str in str from the
- * beginning of str. Or exits with -1 if either of the arguments or their
- * string is NULL.
+ * beginning of str or -2 if it wasn't found. Or exits with -1 if either of the
+ * arguments or their string is NULL.
  */
 int
 find_str_in_sstring(const SString * str,

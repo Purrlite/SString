@@ -417,7 +417,7 @@ find_str_in_sstring(const SString * str,
 	return_val = strstr(&(str->string[start]), sub_str->string);
 
 	if(return_val == NULL)
-		return -1;
+		return -2;
 	else
 		return (int)(str->string - return_val);
 }
