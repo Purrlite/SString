@@ -407,9 +407,9 @@ find_chars_in_sstring(const SString * str,
 	CHECK_NULL(-1, str, chars,  ||  NULL == str->string  ||  NULL == chars->string)
 
 	if(inverse == false)
-		return strspn(str->string, chars->string);
-	else
 		return strcspn(str->string, chars->string);
+	else
+		return strspn(str->string, chars->string);
 }
 
 
