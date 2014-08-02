@@ -42,10 +42,11 @@ void
 empty_sstring(SString * str) ;
 
 
-/* Frees the memory allocated for SString.
+/* Frees the memory allocated for the string inside SString and sets everything
+ * to 0, but doesn't free str itself.
  */
 void
-free_sstring(SString ** str) ;
+free_sstring(SString * str) ;
 
 
 /* Frees the memory allocated for structure SStrings and the strings inside it
