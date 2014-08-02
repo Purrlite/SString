@@ -175,10 +175,13 @@ copy_n_sstring(SString * restrict destination,
                size_t start,
                size_t num)
 {
-	size_t length = (start + num > source->length) ? source->length - start : num;
+	size_t length;
 	char temp;
 
 	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
+
+	length = (start + num > source->length) ? source->length - start : num;
+
 	CHECK_FREE_SPACE_IN_SSTRING(destination, length + 1)
 
 	temp = source->string[start + length];
@@ -199,10 +202,14 @@ copy_string_to_sstring(SString * restrict destination,
                        const char * restrict source,
                        size_t num)
 {
-	size_t len = strlen(source);
-	size_t lenght = (num > len  ||  0 == num) ? len - 1 : num;
+	size_t len;
+	size_t lenght;
 
 	CHECK_NULL(-1, destination, source, )
+
+	len = strlen(source);
+	lenght = (num > len  ||  0 == num) ? len - 1 : num;
+
 	CHECK_FREE_SPACE_IN_SSTRING(destination, lenght + 1)
 
 	strncpy(destination->string, source, lenght);
@@ -235,10 +242,13 @@ append_n_sstring(SString * restrict destination,
                  size_t start,
                  size_t num)
 {
-	size_t length = (start + num > source->length) ? source->length - start : num;
+	size_t length;
 	char temp;
 
 	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
+
+	length = (start + num > source->length) ? source->length - start : num;
+
 	CHECK_FREE_SPACE_IN_SSTRING(destination, length + destination->length + 1)
 
 	temp = source->string[start + length];
@@ -286,10 +296,13 @@ insert_n_sstring(SString * restrict destination,
                  size_t num)
 {
 	SString temp;
-	size_t length = (source_start + num > source->length)
-	                ? source->length - source_start : num;
+	size_t length;
 
 	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
+
+	length = (source_start + num > source->length)
+	         ? source->length - source_start : num;
+
 	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + length + 1)
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
@@ -322,10 +335,12 @@ compare_n_sstrings(const SString * restrict str1,
                    size_t num)
 {
 	int return_val;
-	size_t length = (str1->length > str2->length) ? str2->length : str1->length;
+	size_t length;
 	char temp;
 
 	CHECK_NULL(0, str1, str2,  ||  NULL == str1->string  ||  NULL == str2->string)
+
+	length = (str1->length > str2->length) ? str2->length : str1->length;
 
 	if(num >= length)
 		return strcmp(str1->string, str2->string);
