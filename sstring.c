@@ -131,8 +131,8 @@ free_sstring(SString ** str)
 	if(str == NULL  ||  NULL == *str)
 		return ;
 
-	if(*str->string != NULL)
-		free(*str->string);
+	if((*str)->string != NULL)
+		free((*str)->string);
 
 	free(*str);
 
