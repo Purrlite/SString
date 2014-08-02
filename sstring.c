@@ -211,7 +211,7 @@ copy_string_to_sstring(SString * restrict destination,
 	CHECK_NULL(-1, destination, source, )
 
 	len = strlen(source);
-	lenght = (num > len  ||  0 == num) ? len - 1 : num;
+	lenght = (num > len  ||  0 == num) ? len : num;
 
 	CHECK_FREE_SPACE_IN_SSTRING(destination, lenght + 1)
 
