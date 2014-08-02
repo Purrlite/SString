@@ -178,9 +178,11 @@ copy_n_sstring(SString * restrict destination,
 	size_t length;
 	char temp;
 
-	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string
+	            ||  start >= source->length)
 
-	length = (start + num > source->length) ? source->length - start : num;
+	length = (start + num > source->length  ||  num == 0)
+	         ? source->length - start : num;
 
 	CHECK_FREE_SPACE_IN_SSTRING(destination, length + 1)
 
@@ -245,9 +247,11 @@ append_n_sstring(SString * restrict destination,
 	size_t length;
 	char temp;
 
-	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string
+	            ||  start >= source->length)
 
-	length = (start + num > source->length) ? source->length - start : num;
+	length = (start + num > source->length  ||  num == 0)
+	         ? source->length - start : num;
 
 	CHECK_FREE_SPACE_IN_SSTRING(destination, length + destination->length + 1)
 
@@ -298,9 +302,10 @@ insert_n_sstring(SString * restrict destination,
 	SString temp;
 	size_t length;
 
-	CHECK_NULL(-1, destination, source,  ||  NULL == source->string)
+	CHECK_NULL(-1, destination, source,  ||  NULL == source->string
+	            ||  source_start >= source->length)
 
-	length = (source_start + num > source->length)
+	length = (source_start + num > source->length  ||  num == 0)
 	         ? source->length - source_start : num;
 
 	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + length + 1)
@@ -338,7 +343,8 @@ compare_n_sstrings(const SString * restrict str1,
 	size_t length;
 	char temp;
 
-	CHECK_NULL(0, str1, str2,  ||  NULL == str1->string  ||  NULL == str2->string)
+	CHECK_NULL(0, str1, str2,  ||  NULL == str1->string  ||  NULL == str2->string
+	            ||  num == 0)
 
 	length = (str1->length > str2->length) ? str2->length : str1->length;
 

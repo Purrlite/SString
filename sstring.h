@@ -64,8 +64,10 @@ copy_sstring(SString * restrict destination,
 
 
 /* Copies num characters from source starting at start into destination.
+ *     If num is 0, then copies up to the end of source.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or with -2 if allocating memory fails.
+ * or source's string is NULL or if start is bigger or equal to source->length,
+ * or with -2 if allocating memory fails.
  */
 int
 copy_n_sstring(SString * restrict destination,
@@ -94,8 +96,10 @@ append_sstring(SString * restrict destination,
 
 
 /* Appends n characters from source starting from start to destination.
+ *     If num is 0, then appends all chars starting from start to the end.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or with -2 if allocating memory fails.
+ * or source's string is NULL or if start is bigger or equal to source->length,
+ * or with -2 if allocating memory fails.
  */
 int
 append_n_sstring(SString * restrict destination,
@@ -116,8 +120,10 @@ insert_sstring(SString * restrict destination,
 
 /* Inserts num chars from source starting from source_start into destination
  * starting from insert_start.
+ *     If num is 0, then it inserts source from source_start to the end.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or with -2 if allocating memory fails.
+ * or source's string is NULL if source_start is bigger or equal to source's
+ * length, or with -2 if allocating memory fails.
  */
 int
 insert_n_sstring(SString * restrict destination,
@@ -142,7 +148,7 @@ compare_sstrings(const SString * restrict str1,
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has
  * smaller value than ptr2's character. Also returns 0 if either of the
- * arguments or their string is NULL.
+ * arguments or their string is NULL or num is 0.
  */
 int
 compare_n_sstrings(const SString * restrict str1,
