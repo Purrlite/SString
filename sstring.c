@@ -3,6 +3,22 @@
 #include <string.h>
 #include <stdbool.h>
 
+#define CHECK_NULL(dest, sour, additional)  \
+	if(NULL == dest  ||  NULL == sour  additional)  \
+		return -1;
+
+#define CHECK_FREE_SPACE_IN_SSTRING(dest, len)  \
+	if((len) > dest->size  ||  NULL == dest->string) {  \
+		dest->size = (len);  \
+\
+		if(NULL != dest->string)  \
+			free(dest->string);  \
+\
+		dest->string = malloc(dest->size);  \
+		if(NULL == dest->string)  \
+			return -2;  \
+	}
+
 typedef SString (new_SStr_func)(const char * string,
                                 size_t size);
 
@@ -142,19 +158,8 @@ int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return -1;
-
-	if(source->length >= destination->size  ||  NULL == destination->string) {
-		destination->size = source->length + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source,  ||  NULL == source->string)
+	CHECK_FREE_SPACE_IN_SSTRING(destination, source->length + 1)
 
 	strcpy(destination->string, source->string);
 
@@ -173,20 +178,8 @@ copy_n_sstring(SString * restrict destination,
 	size_t length = (start + num > source->length) ? source->length - start : num;
 	char temp;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string
-		    ||  0 == num  ||  start >= source->length)
-		return -1;
-
-	if(length > destination->size  ||  NULL == destination->string) {
-		destination->size = length + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source,  ||  NULL == source->string)
+	CHECK_FREE_SPACE_IN_SSTRING(destination, length + 1)
 
 	temp = source->string[start + length];
 	source->string[start + length] = '\0';
@@ -209,19 +202,8 @@ copy_string_to_sstring(SString * restrict destination,
 	size_t len = strlen(source);
 	size_t lenght = (num > len  ||  0 == num) ? len - 1 : num;
 
-	if(NULL == destination  ||  NULL == source)
-		return -1;
-
-	if(lenght > destination->size  ||  NULL == destination->string) {
-		destination->size = lenght + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source, )
+	CHECK_FREE_SPACE_IN_SSTRING(destination, lenght + 1)
 
 	strncpy(destination->string, source, lenght);
 	destination->string[lenght] = '\0';
@@ -236,20 +218,8 @@ int
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return -1;
-
-	if(source->length + destination->length > destination->size
-		    ||  NULL == destination->string) {
-		destination->size = source->length + destination->length + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source, || NULL == source->string)
+	CHECK_FREE_SPACE_IN_SSTRING(destination, source->length + destination->length + 1)
 
 	strcpy(&(destination->string[destination->length]), source->string);
 
@@ -270,20 +240,8 @@ append_n_sstring(SString * restrict destination,
 	size_t length = (start + num > source->length) ? source->length - start : num;
 	char temp;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return -1;
-
-	if(length + destination->length > destination->size
-		    ||  NULL == destination->string) {
-		destination->size = length + destination->length + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source, || NULL == source->string)
+	CHECK_FREE_SPACE_IN_SSTRING(destination, length + destination->length + 1)
 
 	temp = source->string[start + length];
 	source->string[start + length] = '\0';
@@ -307,20 +265,8 @@ insert_sstring(SString * restrict destination,
 {
 	SString temp;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return -1;
-
-	if(destination->length + source->length > destination->size
-		    ||  NULL == source->string) {
-		destination->size = destination->length + source->length + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source, || == source->string)
+	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + source->length + 1)
 
 	temp = new_sstring(&(destination->string[start]), 0);
 
@@ -347,20 +293,8 @@ insert_n_sstring(SString * restrict destination,
 	size_t length = (source_start + num > source->length)
 	                ? source->length - source_start : num;
 
-	if(NULL == destination  ||  NULL == source  ||  NULL == source->string)
-		return -1;
-
-	if(destination->length + length > destination->size
-		    ||  NULL == source->string) {
-		destination->size = destination->length + length + 1;
-
-		if(NULL != destination->string)
-			free(destination->string);
-
-		destination->string = malloc(destination->size);
-		if(NULL == destination->string)
-			return -2;
-	}
+	CHECK_NULL(destination, source, || NULL == source->string)
+	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + length + 1)
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
 
@@ -512,3 +446,6 @@ split_sstring(const SString * str,
 
 	return split;
 }
+
+#undef CHECK_NULL
+#undef CHECK_FREE_SPACE_IN_SSTRING
