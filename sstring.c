@@ -395,7 +395,7 @@ find_char_in_sstring(const SString * str,
 		}
 	}
 
-	return (int)(str->string - found_char);
+	return (int)(found_char - str->string);
 }
 
 
@@ -428,7 +428,7 @@ find_str_in_sstring(const SString * str,
 	if(return_val == NULL)
 		return -2;
 	else
-		return (int)(str->string - return_val);
+		return (int)(return_val - str->string);
 }
 
 
