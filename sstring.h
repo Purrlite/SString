@@ -63,7 +63,7 @@ copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
 
-/* Copies num characters from source starting at start to destination.
+/* Copies num characters from source starting at start into destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
@@ -84,7 +84,7 @@ copy_string_to_sstring(SString * restrict destination,
                        size_t num);
 
 
-/* Appends source at the end of destination.
+/* Appends source to destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
@@ -93,7 +93,7 @@ append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
 
-/* Appends n chars from source, starting from start, at the end of destination.
+/* Appends n characters from source starting from start to destination.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
