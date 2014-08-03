@@ -168,18 +168,18 @@ find_char_in_sstring(const SString * str,
                      unsigned int place) ;
 
 
-/* Checks if the characters present in chars are or aren't inside str
- *     inverse determines if to check for existence of absence of the chars in
- * str. If inverse is false, then existence is checked, but if inverse is true,
- * then absence is checked.
- *     Returns the amount of chars that are in str before finding a character
- * that is in str that isn't inside chars. If inverse is true, then returns the
- * amount of chars before finding a char that is present in chars. Or exits with
- * -1 if either of the arguments or their string is NULL.
+/* Finds the first occurance of a char from chars inside str starting from start
+ * or if inverse is true, then finds the first occurance of a char that isn't
+ * in chars that is located in str starting from start.
+ *     Returns the number of chars before such character or -2 if it's not found.
+ * Counting starts from the actual start of the string in str, not from start.
+ * It also exits with -1 if any of the arguments or their string is NULL or if
+ * start is bigger than str's length.
  */
 int
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
+                      size_t start,
                       bool inverse) ;
 
 

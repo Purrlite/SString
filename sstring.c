@@ -402,14 +402,29 @@ find_char_in_sstring(const SString * str,
 int
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
+                      size_t start,
                       bool inverse)
 {
-	CHECK_NULL(-1, str, chars,  ||  NULL == str->string  ||  NULL == chars->string)
+	int ret_value;
+	char * found_char;
+
+	CHECK_NULL(-1, str, chars,  ||  NULL == str->string  ||  NULL == chars->string,
+	            ||  start >= str->length)
 
 	if(inverse == false)
-		return strcspn(str->string, chars->string);
+		ret_value = strcspn(&(str->string[start]), chars->string);
 	else
-		return strspn(str->string, chars->string);
+		ret_value = strspn(&(str->string[start]), chars->string);
+
+	if(ret_value != str->length - 1)
+		return ret_value;
+
+	found_char = strchr(chars, str->string[str->length - 1]);
+
+	if(inverse == false)
+		return (found_char == NULL) ? -2 : str->length - 1;
+	else
+		return (found_char != NULL) ? -2 : str->length - 1;
 }
 
 
