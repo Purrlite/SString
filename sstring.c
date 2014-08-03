@@ -375,7 +375,7 @@ find_chars_in_sstring(const SString * str,
                       size_t start,
                       bool inverse)
 {
-	int ret_value;
+	size_t ret_value;
 	char * found_char;
 
 	CHECK_NULL(-1, str, chars,  ||  NULL == str->string  ||  NULL == chars->string
