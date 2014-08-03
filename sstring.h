@@ -18,7 +18,9 @@ struct SStrings {
 	SString sstrings[];
 };
 
-// Static allocation of a SString
+/* Static allocation of a SString.
+ * Don't use with anything else than "str".
+ */
 #define SSTRING(str) ((SString){ sizeof(str)-1 , sizeof(str) , str })
 
 
