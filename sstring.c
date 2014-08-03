@@ -440,7 +440,7 @@ split_sstring(const SString * str,
 
 	for(; locations[num_of_locations - 1] != -1; num_of_locations++) {
 		if(num_of_locations >= allocated_num) {
-			allocated_num *= 2;
+			allocated_num += 8;
 			locations = realloc(locations, sizeof(int) * allocated_num);
 		}
 
