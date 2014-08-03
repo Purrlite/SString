@@ -386,7 +386,7 @@ find_chars_in_sstring(const SString * str,
 	else
 		ret_value = strspn(&(str->string[start]), chars->string);
 
-	if(ret_value != str->length - 1)
+	if(ret_value != str->length)
 		return ret_value;
 
 	found_char = strchr(chars->string, str->string[str->length - 1]);
