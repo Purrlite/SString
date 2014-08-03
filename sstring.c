@@ -369,7 +369,7 @@ compare_n_sstrings(const SString * restrict str1,
 }
 
 
-int
+long
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       size_t start,
@@ -398,7 +398,7 @@ find_chars_in_sstring(const SString * str,
 }
 
 
-int
+long
 find_str_in_sstring(const SString * str,
                     const SString * sub_str,
                     size_t start)
