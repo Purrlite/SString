@@ -389,7 +389,7 @@ find_chars_in_sstring(const SString * str,
 	if(ret_value != str->length - 1)
 		return ret_value;
 
-	found_char = strchr(chars, str->string[str->length - 1]);
+	found_char = strchr(chars->string, str->string[str->length - 1]);
 
 	if(inverse == false)
 		return (found_char == NULL) ? -2 : str->length - 1;
