@@ -370,36 +370,6 @@ compare_n_sstrings(const SString * restrict str1,
 
 
 int
-find_char_in_sstring(const SString * str,
-                     char character,
-                     unsigned int place)
-{
-	register unsigned int i;
-	char * found_char;
-
-	CHECK_NULL(-1, str, str->string, )
-
-	if(place == 0) {
-		found_char = strrchr(str->string, (int)character);
-
-		if(found_char == NULL)
-			return -2;
-	} else {
-		found_char = str->string;
-
-		for(i = 0; i < place; i++) {
-			found_char = strchr(&(str->string[str->string - found_char]),
-			                    (int)character);
-			if(found_char == NULL)
-				return -2;
-		}
-	}
-
-	return (int)(found_char - str->string);
-}
-
-
-int
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       size_t start,

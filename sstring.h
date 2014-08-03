@@ -157,17 +157,6 @@ compare_n_sstrings(const SString * restrict str1,
                    size_t num) ;
 
 
-/* Finds the x-th (place being the x) or last (if place is 0) character in str
- *     Returns the distance of the character from the start of the string or
- * returns -2 if it isn't in the string or exits with -1 if str or string in it
- * is NULL.
- */
-int
-find_char_in_sstring(const SString * str,
-                     char character,
-                     unsigned int place) ;
-
-
 /* Finds the first occurance of a char from chars inside str starting from start
  * or if inverse is true, then finds the first occurance of a char that isn't
  * in chars that is located in str starting from start.
