@@ -15,20 +15,20 @@
 			return -2;  \
 	}
 
-typedef SString (new_SStr_func)(const char * string,
-                                size_t size);
+typedef SString (new_SString_func)(const char * string,
+                                   size_t size);
 
 
 static SString
-NULL_array_0_size(const char * string,
-                  size_t size)
+NULL_string_0_size(const char * string,
+                   size_t size)
 {
 	return (SString){ 0, 0, NULL };
 }
 
 static SString
-NULL_array_non0_size(const char * string,
-                     size_t size)
+NULL_string_non0_size(const char * string,
+                      size_t size)
 {
 	SString str = (SString){ 0, size, NULL };
 
@@ -42,8 +42,8 @@ NULL_array_non0_size(const char * string,
 }
 
 static SString
-nonNULL_array_0_size(const char * string,
-                     size_t size)
+nonNULL_string_0_size(const char * string,
+                      size_t size)
 {
 	size_t length = strlen(string);
 	SString str = (SString){ length, length + 1, NULL };
@@ -58,8 +58,8 @@ nonNULL_array_0_size(const char * string,
 }
 
 static SString
-nonNULL_array_non0_size(const char * string,
-                        size_t size)
+nonNULL_string_non0_size(const char * string,
+                         size_t size)
 {
 	size_t length = strlen(string);
 	SString str = (SString){
@@ -77,25 +77,25 @@ nonNULL_array_non0_size(const char * string,
 	return str;
 }
 
-static new_SStr_func *
-get_new_SS_func(const char * string,
-                size_t size)
+static new_SString_func *
+get_new_SString_func(const char * string,
+                     size_t size)
 {
 	if(NULL == string)
 		switch(size) {
 		case 0:
-			return NULL_array_0_size;
+			return NULL_string_0_size;
 
 		default:
-			return NULL_array_non0_size;
+			return NULL_string_non0_size;
 		}
 	else
 		switch(size) {
 		case 0:
-			return nonNULL_array_0_size;
+			return nonNULL_string_0_size;
 
 		default:
-			return nonNULL_array_non0_size;
+			return nonNULL_string_non0_size;
 		}
 }
 
@@ -103,8 +103,8 @@ SString
 new_sstring(const char * string,
             size_t size)
 {
-	new_SStr_func * new_SS_func = get_new_SS_func(string, size);
-	return (new_SS_func)(string, size);
+	new_SString_func * new_func = get_new_SString_func(string, size);
+	return (new_func)(string, size);
 }
 
 
