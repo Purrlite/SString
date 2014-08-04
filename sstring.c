@@ -432,7 +432,7 @@ split_sstring(const SString * str,
 	int * locations;  // locations of separators
 	int allocated_num = 8;  // allocated number of locations
 	int num_of_locations = 0;
-	unsigned int i;
+	size_t i;
 
 	if(str == NULL  ||  separator == NULL  ||  NULL == str->string
 		    ||  NULL == separator->string)
