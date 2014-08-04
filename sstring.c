@@ -30,15 +30,15 @@ static SString
 NULL_array_non0_size(const char * string,
                      size_t size)
 {
-	SString s_str = (SString){ 0, size, NULL };
+	SString str = (SString){ 0, size, NULL };
 
-	s_str.string = malloc(s_str.size);
-	if(NULL == s_str.string)
+	str.string = malloc(str.size);
+	if(NULL == str.string)
 		return (SString){0};
 
-	s_str.string[0] = '\0';
+	str.string[0] = '\0';
 
-	return s_str;
+	return str;
 }
 
 static SString
@@ -46,15 +46,15 @@ nonNULL_array_0_size(const char * string,
                      size_t size)
 {
 	size_t length = strlen(string);
-	SString s_str = (SString){ length, length + 1, NULL };
+	SString str = (SString){ length, length + 1, NULL };
 
-	s_str.string = malloc(s_str.size);
-	if(NULL == s_str.string)
+	str.string = malloc(str.size);
+	if(NULL == str.string)
 		return (SString){0};
 
-	strcpy(s_str.string, string);
+	strcpy(str.string, string);
 
-	return s_str;
+	return str;
 }
 
 static SString
@@ -62,19 +62,19 @@ nonNULL_array_non0_size(const char * string,
                         size_t size)
 {
 	size_t length = strlen(string);
-	SString s_str = (SString){
+	SString str = (SString){
 		.size = size,
 		.length = (length > size) ? size - 1 : length
 	};
 
-	s_str.string = malloc(s_str.size);
-	if(NULL == s_str.string)
+	str.string = malloc(str.size);
+	if(NULL == str.string)
 		return (SString){0};
 
-	strncpy(s_str.string, string, s_str.length);
-	s_str.string[s_str.length] = '\0';
+	strncpy(str.string, string, str.length);
+	str.string[str.length] = '\0';
 
-	return s_str;
+	return str;
 }
 
 static new_SStr_func *
@@ -104,8 +104,7 @@ new_sstring(const char * string,
             size_t size)
 {
 	new_SStr_func * new_SS_func = get_new_SS_func(string, size);
-
-	return((new_SS_func)(string, size));
+	return (new_SS_func)(string, size);
 }
 
 
