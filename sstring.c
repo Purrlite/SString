@@ -467,7 +467,8 @@ split_sstring(const SString * str,
 	copy_n_sstring(&(split->sstrings[0]), str, 0, locations[0]);
 	for(i = 1; i < split->length - 1; i++)
 		copy_n_sstring(&(split->sstrings[i]), str,
-		               locations[i - 1] + separator->length, locations[i]);
+		               locations[i - 1] + separator->length,
+		               locations[i] - locations[i - 1] - separator->length);
 	copy_n_sstring(&(split->sstrings[i]), str,
 	               locations[i - 1] + separator->length, 0);
 
