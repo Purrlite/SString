@@ -3,15 +3,15 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define CHECK_FREE_SPACE_IN_SSTRING(dest, len)  \
-	if((len) > dest->size  ||  NULL == dest->string) {  \
-		dest->size = (len);  \
+#define CHECK_FREE_SPACE_IN_SSTRING(str, space)  \
+	if((space) > str->size  ||  NULL == str->string) {  \
+		str->size = (space);  \
 \
-		if(NULL != dest->string)  \
-			free(dest->string);  \
+		if(NULL != str->string)  \
+			free(str->string);  \
 \
-		dest->string = malloc(dest->size);  \
-		if(NULL == dest->string)  \
+		str->string = malloc(str->size);  \
+		if(NULL == str->string)  \
 			return -2;  \
 	}
 
