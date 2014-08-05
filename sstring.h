@@ -187,8 +187,9 @@ find_str_in_sstring(const SString * str,
 
 /* Splits strings into smaller ones devided by separator. Doesn't remove any
  * extra whitespace from them or anything else.
- *     Returns the split strings or NULL if separator isn't found or if either
- * of the arguments or their string is NULL.
+ *     Returns the split strings or the source string inside struct SStrings
+ * if no separator was found or NULL if either of the arguments or their string
+ * is NULL or function fails allocating memory.
  */
 struct SStrings *
 split_sstring(const SString * str,

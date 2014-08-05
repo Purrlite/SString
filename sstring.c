@@ -444,10 +444,12 @@ split_sstring(const SString * str,
 		return NULL;
 
 	locations[num_of_locations] = find_str_in_sstring(str, separator, 0);
-	if(locations[num_of_locations] == -1  ||  locations[num_of_locations] == -2) {
+	if(locations[num_of_locations] == -1) {
 		split = NULL;
-		goto no_separator_found;
+		goto bad_allocation;
 	}
+	if(locations[num_of_locations] == -2)  // No separator found
+		locations[num_of_locations] = str->length;
 
 	do {
 		 num_of_locations++;
@@ -497,7 +499,6 @@ split_sstring(const SString * str,
 
 	split->length = actual_num_of_strings;
 
-no_separator_found:
 bad_allocation:
 	free(locations);
 
