@@ -429,7 +429,7 @@ split_sstring(const SString * str,
               const SString * separator)
 {
 	struct SStrings * split;
-	int * locations;  // locations of separators
+	int * locations;  // locations of separators relative to start of str
 	int allocated_num = 8;  // allocated number of locations
 	int num_of_locations = 0;
 	int actual_num_of_strings;
