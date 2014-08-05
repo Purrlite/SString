@@ -440,6 +440,8 @@ split_sstring(const SString * str,
 		return NULL;
 
 	locations = malloc(sizeof(int) * allocated_num);
+	if(locations == NULL)
+		return NULL;
 
 	locations[num_of_locations] = find_str_in_sstring(str, separator, 0);
 	if(locations[num_of_locations] == -1  ||  locations[num_of_locations] == -2) {
@@ -460,6 +462,9 @@ split_sstring(const SString * str,
 	} while(locations[num_of_locations] != -1  ||  locations[num_of_locations] == -2);
 
 	split = malloc(sizeof(struct SStrings) + num_of_locations * sizeof(SString));
+	if(split == NULL)
+		goto bad_allocation;
+
 	split->length = num_of_locations;
 
 	actual_num_of_strings = num_of_locations;
@@ -487,9 +492,13 @@ split_sstring(const SString * str,
 
 	split = realloc(split, sizeof(struct SStrings) + actual_num_of_strings
 	                * sizeof(SString));
+	if(split == NULL)
+		goto bad_allocation;
+
 	split->length = actual_num_of_strings;
 
 no_separator_found:
+bad_allocation:
 	free(locations);
 
 	return split;
