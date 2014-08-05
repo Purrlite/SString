@@ -481,8 +481,8 @@ split_sstring(const SString * str,
 			actual_num_of_strings--;
 	}
 
-	if(-1 == copy_n_sstring(&(split->sstrings[i]), str,
-	                        locations[i - 1] + separator->length, 0))
+	if(split->length > 1  && -1 == copy_n_sstring(&(split->sstrings[i]), str,
+		    locations[i - 1] + separator->length, 0))
 		actual_num_of_strings--;
 
 	split = realloc(split, sizeof(struct SStrings) + actual_num_of_strings
