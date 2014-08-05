@@ -156,6 +156,9 @@ connect_sstrings(const struct SStrings * strs)
 	size_t i;
 	SString str = (SString){0};
 
+	if(strs == NULL  ||  strs->length == 0)
+		return (SString){0};
+
 	for(i = 0; i < strs->length; i++)
 		append_sstring(&str, &(strs->sstrings[i]));
 

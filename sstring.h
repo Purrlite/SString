@@ -58,7 +58,8 @@ free_sstrings(struct SStrings ** strs) ;
 
 
 /* Connects all the SStrings in strs together into a new SString.
- *     Returns the new SString.
+ *     Returns the new SString or empty SString if strs is NULL or has no
+ * strings in it.
  */
 SString
 connect_sstrings(const struct SStrings * strs) ;
