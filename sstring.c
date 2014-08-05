@@ -151,7 +151,8 @@ free_sstrings(struct SStrings ** strs)
 
 
 inline SString
-connect_sstrings(const struct SStrings * strs)
+connect_sstrings(const struct SStrings * strs,
+                 const SString * connector)
 {
 	size_t i;
 	SString str = (SString){0};
@@ -159,8 +160,10 @@ connect_sstrings(const struct SStrings * strs)
 	if(strs == NULL  ||  strs->length == 0)
 		return (SString){0};
 
-	for(i = 0; i < strs->length; i++)
+	for(i = 0; i < strs->length; i++) {
 		append_sstring(&str, &(strs->sstrings[i]));
+		append_sstring(&str, connector);
+	}
 
 	return str;
 }

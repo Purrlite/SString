@@ -57,12 +57,15 @@ void
 free_sstrings(struct SStrings ** strs) ;
 
 
-/* Connects all the SStrings in strs together into a new SString.
+/* Connects all the SStrings in strs together with connector between each of
+ * them into a new SString.
+ *     If there is no connector, then it will just connect them together.
  *     Returns the new SString or empty SString if strs is NULL or has no
  * strings in it.
  */
 SString
-connect_sstrings(const struct SStrings * strs) ;
+connect_sstrings(const struct SStrings * strs,
+                 const SString * connector) ;
 
 
 /* Copies string from source into destination
