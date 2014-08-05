@@ -150,6 +150,19 @@ free_sstrings(struct SStrings ** strs)
 }
 
 
+inline SString
+connect_sstrings(const struct SStrings * strs)
+{
+	size_t i;
+	SString str = (SString){0};
+
+	for(i = 0; i < strs->length; i++)
+		append_sstring(&str, &(strs->sstrings[i]));
+
+	return str;
+}
+
+
 int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)

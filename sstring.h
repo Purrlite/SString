@@ -57,6 +57,13 @@ void
 free_sstrings(struct SStrings ** strs) ;
 
 
+/* Connects all the SStrings in strs together into a new SString.
+ *     Returns the new SString.
+ */
+SString
+connect_sstrings(const struct SStrings * strs) ;
+
+
 /* Copies string from source into destination
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or destination's string is NULL or with -2 if allocating memory fails.
