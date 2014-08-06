@@ -4,17 +4,25 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-#define CHECK_FREE_SPACE_IN_SSTRING(str, space)  \
-	if((space) > str->size  ||  NULL == str->string) {  \
-		str->size = (space);  \
-\
-		if(NULL != str->string)  \
-			free(str->string);  \
-\
-		str->string = malloc(str->size);  \
-		if(NULL == str->string)  \
-			return -2;  \
+static void
+ensure_necessary_size(SString * str,
+                      size_t size,
+                      bool to_realloc)
+{
+	if(str->size > size)
+		return ;
+
+	if(to_realloc == true) {
+		realloc(str->string, str->size);
 	}
+	if(to_realloc == false) {
+		if(str->string != NULL)
+			free(str->string);
+
+		malloc(str->string);
+	}
+}
+
 
 typedef SString (new_SString_func)(const char * string,
                                    size_t size);
@@ -230,7 +238,9 @@ copy_sstring(SString * restrict destination,
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string)
 		return -1;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, source->length + 1)
+	ensure_necessary_size(destination, source->length + 1, false);
+	if(destination == NULL)
+		return -2;
 
 	strcpy(destination->string, source->string);
 
@@ -256,7 +266,9 @@ copy_n_sstring(SString * restrict destination,
 	length = (start + num > source->length  ||  num == 0)
 	         ? source->length - start : num;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, length + 1)
+	ensure_necessary_size(destination, length + 1, false);
+	if(destination == NULL)
+		return -2;
 
 	temp = source->string[start + length];
 	source->string[start + length] = '\0';
@@ -285,7 +297,9 @@ copy_string_to_sstring(SString * restrict destination,
 	len = strlen(source);
 	lenght = (num > len  ||  0 == num) ? len : num;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, lenght + 1)
+	ensure_necessary_size(destination, lenght + 1, false);
+	if(destination == NULL)
+		return -2;
 
 	strncpy(destination->string, source, lenght);
 	destination->string[lenght] = '\0';
@@ -303,7 +317,9 @@ append_sstring(SString * restrict destination,
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string)
 		return -1;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, source->length + destination->length + 1)
+	ensure_necessary_size(destination, source->length + destination->length + 1, true);
+	if(destination == NULL)
+		return -2;
 
 	strcpy(&(destination->string[destination->length]), source->string);
 
@@ -329,7 +345,9 @@ append_n_sstring(SString * restrict destination,
 	length = (start + num > source->length  ||  num == 0)
 	         ? source->length - start : num;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, length + destination->length + 1)
+	ensure_necessary_size(destination, length + destination->length + 1, true);
+	if(destination == NULL)
+		return -2;
 
 	temp = source->string[start + length];
 	source->string[start + length] = '\0';
@@ -354,7 +372,9 @@ insert_sstring(SString * restrict destination,
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string)
 		return -1;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + source->length + 1)
+	ensure_necessary_size(destination, destination->length + source->length + 1, true);
+	if(destination == NULL)
+		return -2;
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
 
@@ -387,7 +407,9 @@ insert_n_sstring(SString * restrict destination,
 	length = (source_start + num > source->length  ||  num == 0)
 	         ? source->length - source_start : num;
 
-	CHECK_FREE_SPACE_IN_SSTRING(destination, destination->length + length + 1)
+	ensure_necessary_size(destination, destination->length + length + 1, true);
+	if(destination == NULL)
+		return -2;
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
 
@@ -577,5 +599,3 @@ bad_allocation:
 
 	return split;
 }
-
-#undef CHECK_FREE_SPACE_IN_SSTRING
