@@ -158,7 +158,8 @@ connect_sstrings(const struct SStrings * strs,
 	size_t i;
 	SString str = (SString){0};
 
-	if(strs == NULL  ||  strs->length == 0)
+	if(strs == NULL  ||  strs->length == 0  ||  connector == NULL
+		    ||  connector->string == NULL)
 		return (SString){0};
 
 	for(i = 0; i < strs->length - 1; i++) {
