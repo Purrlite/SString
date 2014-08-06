@@ -68,6 +68,20 @@ connect_sstrings(const struct SStrings * strs,
                  const SString * connector) ;
 
 
+/* Converts all chars in str to lower case and returns new SString containing them.
+ *     Returns the new SString or empty SString if str it's string is NULL.
+ */
+SString
+to_lower_sstring(const SString * str) ;
+
+
+/* Converts all chars in str to upper case and returns new SString containing them.
+ *     Returns the new SString or empty SString if str it's string is NULL.
+ */
+SString
+to_upper_sstring(const SString * str) ;
+
+
 /* Copies string from source into destination
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or destination's string is NULL or with -2 if allocating memory fails.

@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #define CHECK_FREE_SPACE_IN_SSTRING(str, space)  \
 	if((space) > str->size  ||  NULL == str->string) {  \
@@ -167,6 +168,57 @@ connect_sstrings(const struct SStrings * strs,
 	append_sstring(&str, &(strs->sstrings[i]));
 
 	return str;
+}
+
+
+static SString
+to_X_sstring(const SString * str,
+             bool to_lower)
+{
+	long location = 0;
+	long previous_location = 0;
+	SString new_str = (SString){0};
+	SString Xcase = (to_lower == true) ? SSTRING("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	                : SSTRING("abcdefghijklmnopqrstuvwxyz");
+	int (* to_X_case)(int) = (to_lower == true) ? tolower : toupper;
+
+	for(;;) {
+		location = find_chars_in_sstring(str, &Xcase, location, 0);
+
+		if(location == -1  ||  -2 == location)
+			break;
+
+		append_n_sstring(&new_str, str, previous_location,
+		                 location - previous_location);
+		new_str.string[location] = (to_X_case)(str->string[location]);
+		new_str.length++;
+
+		previous_location = location + 1;
+	}
+
+	append_n_sstring(&new_str, str, previous_location, 0);
+
+	return new_str;
+}
+
+
+SString
+to_lower_sstring(const SString * str)
+{
+	if(str == NULL  ||  str->string == NULL)
+		return (SString){0};
+
+	return to_X_sstring(str, true);
+}
+
+
+SString
+to_upper_sstring(const SString * str)
+{
+	if(str == NULL  ||  str->string == NULL)
+		return (SString){0};
+
+	return to_X_sstring(str, false);
 }
 
 
