@@ -25,8 +25,8 @@ struct SStrings {
  *     If string is NULL, then it just allocates memory as long as size isn't 0.
  * Otherwise it just sets the variables members of the struct. If string isn't
  * NULL and size is 0, then it will only allocate as much memory as it needs to
- * hold the string including '/0'.
- *     Returns pointer to the initialized SString or NULL on failure.
+ * hold the string including '\0'.
+ * Returns an empty (all values zerod/nulled) SString on failure
  */
 SString
 new_sstring(const char * restrict string,
