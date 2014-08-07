@@ -33,12 +33,6 @@ new_sstring(const char * restrict string,
             size_t size) ;
 
 
-/* Empties a SString, but doesn't free any memory.
- */
-void
-empty_sstring(SString * str) ;
-
-
 /* Frees the memory allocated for the string inside SString and sets everything
  * to 0, but doesn't free str itself.
  */
