@@ -14,8 +14,7 @@ ensure_necessary_size(SString * str,
 
 	if(to_realloc == true) {
 		realloc(str->string, str->size);
-	}
-	if(to_realloc == false) {
+	} else {
 		if(str->string != NULL)
 			free(str->string);
 
