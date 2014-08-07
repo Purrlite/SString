@@ -33,8 +33,7 @@ new_sstring(const char * restrict string,
             size_t size) ;
 
 
-/* Frees the memory allocated for the string inside SString and sets everything
- * to 0, but doesn't free str itself.
+/* Frees the memory allocated for the SString and the string in it.
  */
 void
 free_sstring(SString * str) ;
