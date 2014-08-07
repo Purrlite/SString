@@ -12,13 +12,15 @@ ensure_necessary_size(SString * str,
 	if(str->size > size)
 		return ;
 
+	str->size = size;
+
 	if(to_realloc == true) {
-		realloc(str->string, str->size);
+		str->string = realloc(str->string, str->size);
 	} else {
 		if(str->string != NULL)
 			free(str->string);
 
-		malloc(str->string);
+		str->string = malloc(str->size);
 	}
 }
 
