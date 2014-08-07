@@ -18,11 +18,6 @@ struct SStrings {
 	SString sstrings[];
 };
 
-/* Static allocation of a SString.
- * Don't use with anything else than "str".
- */
-#define SSTRING(str) ((SString){ sizeof(str)-1 , sizeof(str) , str })
-
 
 /* Creates a SString with characters from a C-string either fully or up to
  * size - 1 if it's smaller than the whole string and allocates size amount of
