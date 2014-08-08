@@ -189,8 +189,10 @@ to_X_sstring(const SString * str,
 		if(location == -1  ||  -2 == location)
 			break;
 
-		append_n_sstring(&new_str, str, previous_location,
-		                 location - previous_location);
+		if(location != previous_location)
+			append_n_sstring(&new_str, str, previous_location,
+		                     location - previous_location);
+
 		new_str.string[location] = (to_X_case)(str->string[location]);
 		new_str.length++;
 
