@@ -196,7 +196,8 @@ to_X_sstring(const SString * str,
 		new_str.string[location] = (to_X_case)(str->string[location]);
 		new_str.length++;
 
-		previous_location = location + 1;
+		location++;
+		previous_location = location;
 	}
 
 	append_n_sstring(&new_str, str, previous_location, 0);
