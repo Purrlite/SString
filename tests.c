@@ -47,7 +47,7 @@ bool test_to_lower_sstring_helper(const char* input, const char* output)
 		if(strcmp(output,lowerstring.string))
 			return true;
 	} else {
-		if(lowerstring != NULL)
+		if(lowerstring.string != NULL)
 			return true;
 	}
 
@@ -81,7 +81,7 @@ bool test_to_upper_sstring_helper(const char* input, const char* output)
 		if(strcmp(output,upperstring.string))
 			return true;
 	} else {
-		if(lowerstring != NULL)
+		if(upperstring.string != NULL)
 			return true;
 	}
 
