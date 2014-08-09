@@ -23,9 +23,9 @@ struct SStrings {
  * size - 1 if it's smaller than the whole string and allocates size amount of
  * characters for SString's string.
  *     If string is NULL, then it just allocates memory as long as size isn't 0.
- * Otherwise it just sets the variables members of the struct. If string isn't
- * NULL and size is 0, then it will only allocate as much memory as it needs to
- * hold the string including '\0'.
+ * If size is 0, then it zeroes the struct. If string isn't NULL and size is 0,
+ * then it will only allocate as much memory as it needs to hold the string
+ * including '\0'.
  *     Returns the new SString or an empty (all values zeroed) one on failure.
  */
 SString
