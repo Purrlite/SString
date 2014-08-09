@@ -562,7 +562,7 @@ split_sstring(const SString * str,
 	actual_num_of_strings = num_of_locations;
 
 	for(i = 0; i < split->length; i++)
-		split->sstrings[0] = (SString){0};
+		split->sstrings[i] = (SString){0};
 
 	if(locations[0] != 0)
 		copy_n_sstring(&(split->sstrings[0]), str, 0, locations[0]);
