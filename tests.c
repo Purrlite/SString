@@ -96,12 +96,20 @@ bool test_all_sstring_functions()
 	int allocation_failcode = test_sstring_allocation();
 	if(allocation_failcode)
 		printf("failed allocation test with: %i \r\n", allocation_failcode);
+	else
+		printf("allocation tests succeeded");
+
 	int to_lower_failcode = test_to_lower_sstring();
 	if(to_lower_failcode) 
 		printf("failed to_lower test with: %i \r\n", to_lower_failcode);
+	else
+		printf("to lower tests succeeded");
+
 	int to_upper_failcode = test_to_upper_sstring();
 	if(to_upper_failcode) 
 		printf("failed to_upper test with: %i \r\n", to_upper_failcode);
+	else
+		printf("to upper tests succeeded");
 
 	return (!allocation_failcode && !to_lower_failcode && !to_upper_failcode);
 }
