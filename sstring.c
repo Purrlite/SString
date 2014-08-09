@@ -178,7 +178,7 @@ to_X_sstring(const SString * str,
 {
 	long location = 0;
 	long previous_location = 0;
-	SString new_str = new_sstring(NULL,str->size);
+	SString new_str = new_sstring(NULL,str->length + 1);
 	SString Xcase = (to_lower == true) ? new_sstring("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0)
 	                : new_sstring("abcdefghijklmnopqrstuvwxyz", 0);
 	int (* to_X_case)(int) = (to_lower == true) ? tolower : toupper;
