@@ -42,8 +42,16 @@ bool test_to_lower_sstring_helper(const char* input, const char* output)
 {
 	SString test = new_sstring(input,0);
 	SString lowerstring = to_lower_sstring(&test);
-	if(strcmp(output,lowerstring.string))
-		return true;
+
+	if(input != NULL) {
+		if(strcmp(output,lowerstring.string))
+			return true;
+	} else {
+		if(lowerstring != NULL)
+			return true;
+	}
+
+
 	free_sstring(&test);
 	free_sstring(&lowerstring);
 	return false;
@@ -57,7 +65,7 @@ int test_to_lower_sstring()
 		return -2;
 	if(test_to_lower_sstring_helper("testing","testing"))
 		return -3;
-	if(test_to_lower_sstring_helper(NULL,""))
+	if(test_to_lower_sstring_helper(NULL,NULL))
 		return -4;
 	if(test_to_lower_sstring_helper("",""))
 		return -5;
@@ -68,8 +76,15 @@ bool test_to_upper_sstring_helper(const char* input, const char* output)
 {
 	SString test = new_sstring(input,0);
 	SString upperstring = to_upper_sstring(&test);
-	if(strcmp(output,upperstring.string))
-		return true;
+
+	if(input != NULL) {
+		if(strcmp(output,upperstring.string))
+			return true;
+	} else {
+		if(lowerstring != NULL)
+			return true;
+	}
+
 	free_sstring(&test);
 	free_sstring(&upperstring);
 	return false;
@@ -83,7 +98,7 @@ int test_to_upper_sstring()
 		return -2;
 	if(test_to_upper_sstring_helper("testing","TESTING"))
 		return -3;
-	if(test_to_upper_sstring_helper(NULL,""))
+	if(test_to_upper_sstring_helper(NULL,NULL))
 		return -4;
 	if(test_to_upper_sstring_helper("",""))
 		return -5;
