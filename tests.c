@@ -43,7 +43,7 @@ bool test_to_lower_sstring_helper(const char* input, const char* output)
 	SString test = new_sstring(input,0);
 	SString lowerstring = to_lower_sstring(&test);
 
-	if(input != NULL) {
+	if(output != NULL) {
 		if(strcmp(output,lowerstring.string))
 			return true;
 	} else {
@@ -77,7 +77,7 @@ bool test_to_upper_sstring_helper(const char* input, const char* output)
 	SString test = new_sstring(input,0);
 	SString upperstring = to_upper_sstring(&test);
 
-	if(input != NULL) {
+	if(output != NULL) {
 		if(strcmp(output,upperstring.string))
 			return true;
 	} else {
@@ -112,19 +112,19 @@ bool test_all_sstring_functions()
 	if(allocation_failcode)
 		printf("failed allocation test with: %i \r\n", allocation_failcode);
 	else
-		printf("allocation tests succeeded \n");
+		printf("allocation tests succeeded \r\n");
 
 	int to_lower_failcode = test_to_lower_sstring();
 	if(to_lower_failcode)
 		printf("failed to_lower test with: %i \r\n", to_lower_failcode);
 	else
-		printf("to lower tests succeeded \n");
+		printf("to lower tests succeeded \r\n");
 
 	int to_upper_failcode = test_to_upper_sstring();
 	if(to_upper_failcode)
 		printf("failed to_upper test with: %i \r\n", to_upper_failcode);
 	else
-		printf("to upper tests succeeded \n");
+		printf("to upper tests succeeded \r\n");
 
 	return (!allocation_failcode && !to_lower_failcode && !to_upper_failcode);
 }
