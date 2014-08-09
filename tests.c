@@ -28,10 +28,10 @@ test_sstring_allocation(void)
 	if(test.size != 2 || test.length != 0 || test.string == NULL || test.string[0] != '\0')
 		return -4;
 	free_sstring(&test);
-	
+
 	char* temp2 = "another longer test string";
 	test = new_sstring(temp2,10);
-	if(test.size != 10 || test.length != 9 || test.string == NULL || strncmp(test.string,temp2,10))
+	if(test.size != 10 || test.length != 9 || test.string == NULL || strncmp(test.string,temp2,9))
 		return -5;
 	free_sstring(&test);
 
