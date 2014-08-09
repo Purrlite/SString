@@ -7,14 +7,14 @@
 #include "stdio.h"
 
 
-int 
+int
 test_sstring_allocation(void)
 {
 	SString test = (SString){0,0,0};
 	test = new_sstring(NULL,0);
 	if(test.size != 0 || test.length != 0 || test.string != NULL)
 		return -1;
-	
+
 	char* temp = "something";
 	test = new_sstring(temp,0);
 	if(test.size != strlen(temp)+1 || test.length != strlen(temp) || test.string == NULL || strcmp(test.string,temp))
@@ -115,13 +115,13 @@ bool test_all_sstring_functions()
 		printf("allocation tests succeeded \n");
 
 	int to_lower_failcode = test_to_lower_sstring();
-	if(to_lower_failcode) 
+	if(to_lower_failcode)
 		printf("failed to_lower test with: %i \r\n", to_lower_failcode);
 	else
 		printf("to lower tests succeeded \n");
 
 	int to_upper_failcode = test_to_upper_sstring();
-	if(to_upper_failcode) 
+	if(to_upper_failcode)
 		printf("failed to_upper test with: %i \r\n", to_upper_failcode);
 	else
 		printf("to upper tests succeeded \n");
