@@ -71,8 +71,10 @@ to_upper_sstring(const SString * str) ;
 
 
 /* Copies string from source into destination
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit source's string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or destination's string is NULL or with -2 if allocating memory fails.
+ * or source's string is NULL or with -2 if allocating memory fails.
  */
 int
 copy_sstring(SString * restrict destination,
@@ -81,6 +83,8 @@ copy_sstring(SString * restrict destination,
 
 /* Copies num characters from source starting at start into destination.
  *     If num is 0, then copies up to the end of source.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or if start is bigger or equal to source->length,
  * or with -2 if allocating memory fails.
@@ -93,6 +97,8 @@ copy_n_sstring(SString * restrict destination,
 
 
 /* Copies num characters from string source into SString destination.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or with -2 if allocating memory fails.
  */
@@ -103,6 +109,8 @@ copy_string_to_sstring(SString * restrict destination,
 
 
 /* Appends source to destination.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
@@ -113,6 +121,8 @@ append_sstring(SString * restrict destination,
 
 /* Appends n characters from source starting from start to destination.
  *     If num is 0, then appends all chars starting from start to the end.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or if start is bigger or equal to source->length,
  * or with -2 if allocating memory fails.
@@ -125,6 +135,8 @@ append_n_sstring(SString * restrict destination,
 
 
 /* Inserts source into destination starting from insert_start.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
@@ -137,6 +149,8 @@ insert_sstring(SString * restrict destination,
 /* Inserts num chars from source starting from source_start into destination
  * starting from insert_start.
  *     If num is 0, then it inserts source from source_start to the end.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL if source_start is bigger or equal to source's
  * length, or with -2 if allocating memory fails.
