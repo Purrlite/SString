@@ -481,9 +481,9 @@ find_chars_in_sstring(const SString * str,
 		return -1;
 
 	if(inverse == false)
-		ret_value = strcspn(&(str->string[start]), chars->string);
+		ret_value = strcspn(&(str->string[start]), chars->string) + start;
 	else
-		ret_value = strspn(&(str->string[start]), chars->string);
+		ret_value = strspn(&(str->string[start]), chars->string) + start;
 
 	if(ret_value != str->length)
 		return ret_value;
