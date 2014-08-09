@@ -227,4 +227,16 @@ split_sstring(const SString * str,
               const SString * separator) ;
 
 
+/* Splits strings from struct SString into smaller ones devided by separator.
+ * Doesn't remove any extra whitespace from them or do anything else.
+ *     Returns the split strings or the source string inside struct SStrings
+ * if no separator was found or NULL if either of the arguments or their string
+ * is NULL or function fails allocating memory or if there are no SStrings in
+ * strs.
+ */
+struct SStrings *
+split_sstrings(const struct SStrings * strs,
+               const SString * separator) ;
+
+
 #endif // SSTRING_H_INCLUDED

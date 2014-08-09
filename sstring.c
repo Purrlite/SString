@@ -594,3 +594,23 @@ bad_allocation:
 
 	return split;
 }
+
+
+struct SStrings *
+split_sstrings(const struct SStrings * strs,
+               const SString * separator)
+{
+	SString temp;
+	struct SStrings * ret_value;
+
+	if(strs == NULL  ||  separator == NULL  ||  separator->string == NULL
+		    ||  strs->length == 0)
+		return NULL;
+
+	temp = connect_sstrings(strs, separator);
+	ret_value = split_sstring(&temp, separator);
+
+	free(temp.string);
+
+	return ret_value;
+}
