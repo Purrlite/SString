@@ -105,6 +105,40 @@ int test_to_upper_sstring()
 	return 0;
 }
 
+bool test_copy_sstring_helper(const char* string)
+{
+	SString output = (SString){0,0,0};
+	SString input = new_sstring(string,0);
+	if(copy_sstring(&output,&input) == -1)
+		return true;
+	if(strcmp(output.string,string))
+		return true;
+	free_sstring(&output);
+	free_sstring(&input);
+	return false;
+}
+
+int test_copy_sstring()
+{
+	SString temp;
+	if(copy_sstring(NULL,NULL) != -1)
+		return -1;
+	if(copy_sstring(&temp, NULL) != -1)
+		return -2;
+	if(test_copy_sstring_helper(""))
+		return -3;
+	if(test_copy_sstring_helper("test"))
+		return -4;
+	temp = new_sstring(NULL,100);
+	const char* inputStr = "some short string";
+	SString input = new_sstring(inputStr,0);
+	if(copy_sstring(&temp,&input) == -1 || strcmp(temp.string,inputStr) || temp.size != 100 || temp.length != strlen(inputStr))
+		return -5;
+	
+	free_sstring(&temp);
+	free_sstring(&input);		
+	return 0;
+}
 
 bool test_all_sstring_functions()
 {
@@ -126,5 +160,11 @@ bool test_all_sstring_functions()
 	else
 		printf("to upper tests succeeded \n");
 
-	return (!allocation_failcode && !to_lower_failcode && !to_upper_failcode);
+	int copy_failcode = test_copy_sstring();
+	if(copy_failcode)
+		printf("failed copy test with: %i \n", copy_failcode);
+	else
+		printf("copy test succeeded \n");
+
+	return (!allocation_failcode && !to_lower_failcode && !to_upper_failcode && !copy_failcode);
 }
