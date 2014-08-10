@@ -522,8 +522,8 @@ split_sstring(const SString * str,
 	int * locations;  // locations of separators relative to start of str
 	int allocated_num = 8;  // allocated number of locations
 	int num_of_locations = 0;
-	int actual_num_of_strings;
 	size_t i;
+	size_t split_index = 0;
 
 	if(str == NULL  ||  separator == NULL  ||  NULL == str->string
 		    ||  NULL == separator->string)
@@ -538,8 +538,10 @@ split_sstring(const SString * str,
 		split = NULL;
 		goto bad_allocation;
 	}
-	if(locations[num_of_locations] == -2)  // No separator found
+	if(locations[num_of_locations] == -2)  {
 		locations[num_of_locations] = str->length;
+		goto no_separator_found;
+	}
 
 	do {
 		 num_of_locations++;
@@ -553,41 +555,45 @@ split_sstring(const SString * str,
 			    locations[num_of_locations - 1] + separator->length);
 	} while(locations[num_of_locations] > -1);
 
-	split = malloc(sizeof(struct SStrings) + num_of_locations * sizeof(SString));
+no_separator_found:
+
+	split = malloc(sizeof(struct SStrings) + (num_of_locations + 1) * sizeof(SString));
 	if(split == NULL)
 		goto bad_allocation;
 
-	split->length = num_of_locations;
-
-	actual_num_of_strings = num_of_locations;
+	split->length = num_of_locations + 1;
 
 	for(i = 0; i < split->length; i++)
 		split->sstrings[i] = (SString){0};
 
-	if(locations[0] != 0)
-		copy_n_sstring(&(split->sstrings[0]), str, 0, locations[0]);
-	else
-		actual_num_of_strings--;
-
-	for(i = 1; i < split->length - 1; i++) {
-		if(locations[i] != locations[i - 1] + separator->length)
-			copy_n_sstring(&(split->sstrings[i]), str,
-			               locations[i - 1] + separator->length,
-			               locations[i] - locations[i - 1] - separator->length);
-		else
-			actual_num_of_strings--;
+	if(locations[0] != 0) {
+		copy_n_sstring(&(split->sstrings[split_index]), str, 0, locations[0]);
+		split_index++;
 	}
 
-	if(split->length > 1  && -1 == copy_n_sstring(&(split->sstrings[i]), str,
-		    locations[i - 1] + separator->length, 0))
-		actual_num_of_strings--;
+	for(i = 1; i < split->length - 1; i++) {
+		if(locations[i] != locations[i - 1] + separator->length) {
+			copy_n_sstring(&(split->sstrings[split_index]), str,
+			               locations[i - 1] + separator->length,
+			               locations[i] - locations[i - 1] - separator->length);
+			split_index++;
+		}
+	}
 
-	split = realloc(split, sizeof(struct SStrings) + actual_num_of_strings
-	                * sizeof(SString));
-	if(split == NULL)
-		goto bad_allocation;
+	if((split->length > 1  ||  locations[0] == 0)
+		    &&  locations[i - 1] + separator->length != str->length) {
+		copy_n_sstring(&(split->sstrings[split_index]), str,
+		               locations[i - 1] + separator->length, 0);
+		split_index++;
+	}
 
-	split->length = actual_num_of_strings;
+	if(split_index < split->length) {
+		split = realloc(split, sizeof(struct SStrings) + split_index * sizeof(SString));
+		if(split == NULL)
+			goto bad_allocation;
+
+		split->length = split_index;
+	}
 
 bad_allocation:
 	free(locations);
