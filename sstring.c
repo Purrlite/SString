@@ -551,7 +551,7 @@ split_sstring(const SString * str,
 
 		locations[num_of_locations] = find_str_in_sstring(str, separator,
 			    locations[num_of_locations - 1] + separator->length);
-	} while(locations[num_of_locations] != -1  &&  locations[num_of_locations] != -2);
+	} while(locations[num_of_locations] > -1);
 
 	split = malloc(sizeof(struct SStrings) + num_of_locations * sizeof(SString));
 	if(split == NULL)
