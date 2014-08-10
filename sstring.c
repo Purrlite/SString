@@ -230,18 +230,7 @@ int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
-	if(destination == NULL  ||  source == NULL  ||  NULL == source->string)
-		return -1;
-
-	ensure_necessary_size(destination, source->length + 1, false);
-	if(destination == NULL)
-		return -2;
-
-	strcpy(destination->string, source->string);
-
-	destination->length = source->length;
-
-	return 1;
+	return copy_n_sstring(destination, source, 0, 0);
 }
 
 
@@ -309,18 +298,7 @@ int
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
-	if(destination == NULL  ||  source == NULL  ||  NULL == source->string)
-		return -1;
-
-	ensure_necessary_size(destination, source->length + destination->length + 1, true);
-	if(destination == NULL)
-		return -2;
-
-	strcpy(&(destination->string[destination->length]), source->string);
-
-	destination->length += source->length;
-
-	return 1;
+	return append_n_sstring(destination, source, 0, 0);
 }
 
 
@@ -362,26 +340,7 @@ insert_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t insert_start)
 {
-	SString temp;
-
-	if(destination == NULL  ||  source == NULL  ||  NULL == source->string)
-		return -1;
-
-	ensure_necessary_size(destination, destination->length + source->length + 1, true);
-	if(destination == NULL)
-		return -2;
-
-	temp = new_sstring(&(destination->string[insert_start]), 0);
-
-	destination->string[insert_start] = '\0';
-	destination->length = insert_start;
-
-	append_sstring(destination, source);
-	append_sstring(destination, &temp);
-
-	free(temp.string);
-
-	return 1;
+	return insert_n_sstring(destination, source, insert_start, 0, 0);
 }
 
 
