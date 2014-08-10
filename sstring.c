@@ -514,6 +514,52 @@ find_str_in_sstring(const SString * str,
 }
 
 
+static int
+copy_split_strings(struct SStrings * strs,
+                   const SString * str,
+                   int * separators,
+                   int num_of_separators,
+                   int len_of_separator) {
+	int index = 0;
+	int ret_value;
+	size_t i;
+
+	if(separators[0] != 0) {
+		ret_value = copy_n_sstring(&(strs->sstrings[index]), str,
+		                           0, separators[0]);
+		if(ret_value < 0)
+			return ret_value;
+
+		index++;
+	}
+
+	for(i = 1; i < num_of_separators - 1; i++) {
+		if(separators[i] != separators[i - 1] + len_of_separator) {
+			ret_value = copy_n_sstring(&(strs->sstrings[index]), str,
+			                           separators[i - 1] + len_of_separator,
+			                           separators[i] - separators[i - 1]
+			                            - len_of_separator);
+			if(ret_value < 0)
+				return ret_value;
+
+			index++;
+		}
+	}
+
+	if((strs->length > 1  ||  separators[0] == 0)
+		    &&  separators[i - 1] + len_of_separator != str->length) {
+		ret_value = copy_n_sstring(&(strs->sstrings[index]), str,
+		                           separators[i - 1] + len_of_separator, 0);
+		if(ret_value < 0)
+			return ret_value;
+
+		index++;
+	}
+
+	return index;
+}
+
+
 struct SStrings *
 split_sstring(const SString * str,
               const SString * separator)
@@ -566,25 +612,15 @@ no_separator_found:
 	for(i = 0; i < split->length; i++)
 		split->sstrings[i] = (SString){0};
 
-	if(locations[0] != 0) {
-		copy_n_sstring(&(split->sstrings[split_index]), str, 0, locations[0]);
-		split_index++;
-	}
+	split_index = copy_split_strings(split, str, locations, num_of_locations,
+	                                 separator->length);
+	if(split_index < 0) {
+		for(i = 0; split->sstrings[i].length != 0; i++)
+			free(split->sstrings[i].string);
+		free(split);
 
-	for(i = 1; i < split->length - 1; i++) {
-		if(locations[i] != locations[i - 1] + separator->length) {
-			copy_n_sstring(&(split->sstrings[split_index]), str,
-			               locations[i - 1] + separator->length,
-			               locations[i] - locations[i - 1] - separator->length);
-			split_index++;
-		}
-	}
-
-	if((split->length > 1  ||  locations[0] == 0)
-		    &&  locations[i - 1] + separator->length != str->length) {
-		copy_n_sstring(&(split->sstrings[split_index]), str,
-		               locations[i - 1] + separator->length, 0);
-		split_index++;
+		split = NULL;
+		goto bad_allocation;
 	}
 
 	if(split_index < split->length) {
