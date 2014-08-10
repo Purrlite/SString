@@ -518,8 +518,8 @@ static int
 copy_split_strings(struct SStrings * strs,
                    const SString * str,
                    int * separators,
-                   int num_of_separators,
-                   int len_of_separator) {
+                   unsigned int num_of_separators,
+                   size_t len_of_separator) {
 	int index = 0;
 	int ret_value;
 	size_t i;
@@ -566,8 +566,8 @@ split_sstring(const SString * str,
 {
 	struct SStrings * split;
 	int * locations;  // locations of separators relative to start of str
-	int allocated_num = 8;  // allocated number of locations
-	int num_of_locations = 0;
+	unsigned int allocated_num = 8;  // allocated number of locations
+	unsigned int num_of_locations = 0;
 	int split_index = 0;
 	size_t i;
 
