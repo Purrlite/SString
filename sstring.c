@@ -518,7 +518,6 @@ static int
 copy_split_strings(struct SStrings * strs,
                    const SString * str,
                    int * separators,
-                   unsigned int num_of_separators,
                    size_t len_of_separator) {
 	int index = 0;
 	int ret_value;
@@ -533,7 +532,7 @@ copy_split_strings(struct SStrings * strs,
 		index++;
 	}
 
-	for(i = 1; i < num_of_separators - 1; i++) {
+	for(i = 1; i < strs->length - 1; i++) {
 		if(separators[i] != separators[i - 1] + len_of_separator) {
 			ret_value = copy_n_sstring(&(strs->sstrings[index]), str,
 			                           separators[i - 1] + len_of_separator,
@@ -612,8 +611,7 @@ no_separator_found:
 	for(i = 0; i < split->length; i++)
 		split->sstrings[i] = (SString){0};
 
-	split_index = copy_split_strings(split, str, locations, num_of_locations,
-	                                 separator->length);
+	split_index = copy_split_strings(split, str, locations, separator->length);
 	if(split_index < 0) {
 		for(i = 0; split->sstrings[i].length != 0; i++)
 			free(split->sstrings[i].string);
