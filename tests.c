@@ -140,31 +140,22 @@ int test_copy_sstring()
 	return 0;
 }
 
+bool test_helper(int (*testFunc)(void),char* name)
+{
+	int test_failcode = testFunc();
+	if(test_failcode)
+		printf("failed %s test with: %i \n", name,  test_failcode);
+	else
+		printf("%s tests succeeded \n", name);
+	return !test_failcode;
+}
+
 bool test_all_sstring_functions()
 {
-	int allocation_failcode = test_sstring_allocation();
-	if(allocation_failcode)
-		printf("failed allocation test with: %i \n", allocation_failcode);
-	else
-		printf("allocation tests succeeded \n");
+	bool allocation_success = test_helper(test_sstring_allocation, "allocation");
+	bool to_lower_success = test_helper(test_to_lower_sstring, "to lower");
+	bool to_upper_success = test_helper(test_to_upper_sstring,"to upper");
+	bool copy_success = test_helper(test_copy_sstring,"copy");
 
-	int to_lower_failcode = test_to_lower_sstring();
-	if(to_lower_failcode)
-		printf("failed to_lower test with: %i \n", to_lower_failcode);
-	else
-		printf("to lower tests succeeded \n");
-
-	int to_upper_failcode = test_to_upper_sstring();
-	if(to_upper_failcode)
-		printf("failed to_upper test with: %i \n", to_upper_failcode);
-	else
-		printf("to upper tests succeeded \n");
-
-	int copy_failcode = test_copy_sstring();
-	if(copy_failcode)
-		printf("failed copy test with: %i \n", copy_failcode);
-	else
-		printf("copy test succeeded \n");
-
-	return (!allocation_failcode && !to_lower_failcode && !to_upper_failcode && !copy_failcode);
+	return allocation_success && to_lower_success && to_upper_success && copy_success;
 }
