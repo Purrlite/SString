@@ -107,9 +107,9 @@ copy_n_sstring(SString * restrict destination,
  * or with -2 if allocating memory fails.
  */
 int
-copy_string_to_sstring(SString * restrict destination,
-                       const char * restrict source,
-                       size_t num);
+copy_str_to_sstring(SString * restrict destination,
+                    const char * restrict source,
+                    size_t num);
 
 
 /* Appends source to destination.

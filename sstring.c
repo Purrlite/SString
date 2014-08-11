@@ -267,9 +267,9 @@ copy_n_sstring(SString * restrict destination,
 
 
 int
-copy_string_to_sstring(SString * restrict destination,
-                       const char * restrict source,
-                       size_t num)
+copy_str_to_sstring(SString * restrict destination,
+                    const char * restrict source,
+                    size_t num)
 {
 	size_t len;
 	size_t lenght;
