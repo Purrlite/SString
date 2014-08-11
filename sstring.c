@@ -252,7 +252,7 @@ copy_n_sstring(SString * restrict destination,
 	if(destination == NULL)
 		return -2;
 
-	strncpy(destination->string, &(source->string[start]), lenght);
+	strncpy(destination->string, &(source->string[start]), length);
 	destination->string[length] = '\0';
 
 	destination->length = length;
