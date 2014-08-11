@@ -142,7 +142,8 @@ append_n_sstring(SString * restrict destination,
  *     If destination's string is NULL or not big enough, then it allocates
  * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or with -2 if allocating memory fails.
+ * or source's string is NULL or if insert_start is bigger than destination's
+ * length, or with -2 if allocating memory fails.
  */
 int
 insert_sstring(SString * restrict destination,
@@ -157,7 +158,8 @@ insert_sstring(SString * restrict destination,
  * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL if source_start is bigger or equal to source's
- * length, or with -2 if allocating memory fails.
+ * lengthor if insert_start is bigger than destination's length, or with -2 if
+ * allocating memory fails.
  */
 int
 insert_n_sstring(SString * restrict destination,

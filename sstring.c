@@ -354,7 +354,8 @@ insert_n_sstring(SString * restrict destination,
 	size_t length;
 
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
-		    ||  source_start >= source->length)
+		    ||  source_start >= source->length
+		    ||  insert_start > destination->length)
 		return -1;
 
 	length = (source_start + num > source->length  ||  num == 0)
