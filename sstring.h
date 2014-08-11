@@ -137,6 +137,18 @@ append_n_sstring(SString * restrict destination,
                  size_t start,
                  size_t num) ;
 
+/* Appends num characters from source to destination.
+ *     If num is 0, then appends all chars starting from start to the end.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL or
+ * source's string is NULL, or with -2 if memory allocation fails.
+ */
+int
+append_str_to_sstring(SString * restrict destination,
+                      const char * restrict source,
+                      size_t num) ;
+
 
 /* Inserts source into destination starting from insert_start.
  *     If destination's string is NULL or not big enough, then it allocates
@@ -167,6 +179,21 @@ insert_n_sstring(SString * restrict destination,
                  size_t insert_start,
                  size_t source_start,
                  size_t num) ;
+
+
+/* Inserts num chars from source into destination starting at insert_start.
+ *     If num is 0, then it inserts source from source_start to the end.
+ *     If destination's string is NULL or not big enough, then it allocates
+ * enough memory to fit the string in there.
+ *     Returns 1 on success or exits with -1 if any of the arguments is NULL or
+ * source's string is NULL or if insert_start is bigger than destination's
+ * lenght, or with -2 if memory allocation fails.
+ */
+int
+insert_str_to_sstring(SString * restrict destination,
+                      const char * restrict source,
+                      size_t insert_start,
+                      size_t num) ;
 
 
 /* Compares characters until '\0' or a first differring character.
