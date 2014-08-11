@@ -243,7 +243,7 @@ copy_n_sstring(SString * restrict destination,
 	char temp;
 
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
-		    ||  start >= source->length)
+		    ||  start > source->length)
 		return -1;
 
 	length = (start + num > source->length  ||  num == 0)

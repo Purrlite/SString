@@ -90,7 +90,7 @@ copy_sstring(SString * restrict destination,
  *     If destination's string is NULL or not big enough, then it allocates
  * enough memory to fit the string in there.
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or if start is bigger or equal to source->length,
+ * or source's string is NULL or if start is bigger than source->length,
  * or with -2 if allocating memory fails.
  */
 int
