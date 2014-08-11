@@ -240,7 +240,6 @@ copy_n_sstring(SString * restrict destination,
                size_t num)
 {
 	size_t length;
-	char temp;
 
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
 		    ||  start > source->length)
@@ -253,12 +252,8 @@ copy_n_sstring(SString * restrict destination,
 	if(destination == NULL)
 		return -2;
 
-	temp = source->string[start + length];
-	source->string[start + length] = '\0';
-
-	strcpy(destination->string, &(source->string[start]));
-
-	source->string[start + length] = temp;
+	strncpy(destination->string, &(source->string[start]), lenght);
+	destination->string[length] = '\0';
 
 	destination->length = length;
 
@@ -308,7 +303,6 @@ append_n_sstring(SString * restrict destination,
                  size_t num)
 {
 	size_t length;
-	char temp;
 
 	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
 		    ||  start >= source->length)
@@ -321,12 +315,9 @@ append_n_sstring(SString * restrict destination,
 	if(destination == NULL)
 		return -2;
 
-	temp = source->string[start + length];
-	source->string[start + length] = '\0';
-
-	strcpy(&(destination->string[destination->length]), &(source->string[start]));
-
-	source->string[start + length] = temp;
+	strncpy(&(destination->string[destination->length]), &(source->string[start]),
+	        length);
+	destination->string[length] = '\0';
 
 	destination->length += length;
 
@@ -367,11 +358,11 @@ insert_n_sstring(SString * restrict destination,
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
 
-	destination->string[insert_start] = '\0';
-	destination->length = insert_start;
+	strncpy(&(destination->string[insert_start]), &(source->string[source_start]),
+	        length);
+	strcpy(&(destination->string[insert_start + length]), temp.string);
 
-	append_n_sstring(destination, source, source_start, length);
-	append_sstring(destination, &temp);
+	destination->length += length;
 
 	free(temp.string);
 
