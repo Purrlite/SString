@@ -267,24 +267,13 @@ copy_str_to_sstring(SString * restrict destination,
                     size_t num)
 {
 	size_t len;
-	size_t lenght;
 
-	if(destination == NULL  ||  source == NULL)
+	if(source == NULL)
 		return -1;
 
 	len = strlen(source);
-	lenght = (num > len  ||  0 == num) ? len : num;
 
-	ensure_necessary_size(destination, lenght + 1, false);
-	if(destination == NULL)
-		return -2;
-
-	strncpy(destination->string, source, lenght);
-	destination->string[lenght] = '\0';
-
-	destination->length = lenght;
-
-	return 1;
+	return copy_n_sstring(destination, &(SString){ len, len + 1, source }, 0, num);
 }
 
 
@@ -332,20 +321,13 @@ append_str_to_sstring(SString * restrict destination,
                       size_t num)
 {
 	size_t len;
-	size_t length;
 
-	if(destination == NULL  ||  source == NULL  ||  destination->string == NULL)
+	if(source == NULL)
 		return -1;
 
 	len = strlen(source);
-	length = (num > len  ||  num == 0) ? len : num;
 
-	ensure_necessary_size(destination, length + destination->length + 1, true);
-	if(destination == NULL)
-		return -2;
-
-	strncpy(&(destination->string[destination->length]), source, num);
-
+	return append_n_sstring(destination, &(SString){ len, len + 1, source }, 0, num);
 }
 
 
@@ -400,31 +382,15 @@ insert_str_to_sstring(SString * restrict destination,
                       size_t insert_start,
                       size_t num)
 {
-	SString temp;
 	size_t len;
-	size_t length;
 
-	if(destination == NULL  ||  source == NULL  ||  destination->string == NULL
-		    || insert_start > destination->length)
+	if(source == NULL)
 		return -1;
 
 	len = strlen(source);
-	length = (num > len  ||  num == 0) ? len : num;
 
-	ensure_necessary_size(destination, length + destination->length + 1, true);
-	if(destination == NULL)
-		return -2;
-
-	temp = new_sstring(&(destination->string[insert_start]), 0);
-
-	strncpy(&(destination->string[insert_start]), source, length);
-	strcpy(&(destination->string[insert_start + length]), temp.string);
-
-	destination->length += length;
-
-	free(temp.string);
-
-	return 1;
+	return insert_n_sstring(destination, &(SString){ len, len + 1, source },
+	                        insert_start, 0, num);
 }
 
 
