@@ -404,13 +404,18 @@ remove_sstring(SString * str,
 	if(str == NULL  ||  str->string == NULL  ||  start >= str->length)
 		return -1;
 
-	str->string[start] = '\0';
-	str->length = start;
-
-	if(start + num <= str->length  &&  num != 0) {
+	if(start + num > str->length  ||  num == 0) {
+		str->string[start] = '\0';
+		str->length = start;
+	} else {
 		temp = new_sstring(&(str->string[start + num]), 0);
 
+		str->string[start] = '\0';
+		str->length = start;
+
 		append_sstring(str, &temp);
+
+		free(temp.string);
 	}
 
 	return 1;
