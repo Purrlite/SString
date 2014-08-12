@@ -409,6 +409,8 @@ remove_sstring(SString * str,
 		str->length = start;
 	} else {
 		temp = new_sstring(&(str->string[start + num]), 0);
+		if(temp.string == NULL)
+			return -2;
 
 		str->string[start] = '\0';
 		str->length = start;

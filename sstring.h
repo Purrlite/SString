@@ -198,7 +198,8 @@ insert_str_to_sstring(SString * restrict destination,
 
 /* Removes chars in str starting from start up to num chars.
  *     If num is 0, then it removes all characters starting from start.
- *     Returns 1 on success or exits with -1 if str or its string is NULL.
+ *     Returns 1 on success or exits with -1 if str or its string is NULL, or
+ * with -2 if memory allocation fails.
  */
 int
 remove_sstring(SString * str,
