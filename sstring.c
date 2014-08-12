@@ -123,7 +123,7 @@ sub_sstring(const SString * str,
             size_t start,
             size_t num)
 {
-	size_t length
+	size_t length;
 
 	if(str == NULL  ||  str->string == NULL  ||  start > str->length)
 		return (SString){0};
