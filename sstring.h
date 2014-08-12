@@ -196,6 +196,16 @@ insert_str_to_sstring(SString * restrict destination,
                       size_t num) ;
 
 
+/* Removes chars in str starting from start up to num chars.
+ *     If num is 0, then it removes all characters starting from start.
+ *     Returns 1 on success or exits with -1 if str or its string is NULL.
+ */
+int
+remove_sstring(SString * str,
+               size_t start,
+               size_t num) ;
+
+
 /* Compares characters until '\0' or a first differring character.
  *     Returns either 0 if there is no difference, positive number if ptr1's
  * character has higher value than ptr2's, negative if ptr1's character has

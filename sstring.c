@@ -395,6 +395,29 @@ insert_str_to_sstring(SString * restrict destination,
 
 
 int
+remove_sstring(SString * str,
+               size_t start,
+               size_t num)
+{
+	SString temp;
+
+	if(str == NULL  ||  str->string == NULL  ||  start >= str->length)
+		return -1;
+
+	str->string[start] = '\0';
+	str->length = start;
+
+	if(start + num <= str->length  &&  num != 0) {
+		temp = new_sstring(&(str->string[start + num]), 0);
+
+		append_sstring(str, &temp);
+	}
+
+	return 1;
+}
+
+
+int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {
