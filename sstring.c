@@ -317,9 +317,10 @@ append_n_sstring(SString * restrict destination,
 
 	strncpy(&(destination->string[destination->length]), &(source->string[start]),
 	        length);
-	destination->string[length] = '\0';
 
 	destination->length += length;
+
+	destination->string[destination->length] = '\0';
 
 	return 1;
 }
