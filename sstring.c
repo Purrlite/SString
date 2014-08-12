@@ -118,6 +118,23 @@ new_sstring(const char * string,
 }
 
 
+SString
+sub_sstring(const SString * str,
+            size_t start,
+            size_t num)
+{
+	size_t length
+
+	if(str == NULL  ||  str->string == NULL  ||  start > str->length)
+		return (SString){0};
+
+	length = (start + num > str->length  ||  num == 0)
+	         ? str->length - start : num;
+
+	return new_sstring(&(str->string[start]), length + 1);
+}
+
+
 inline void
 free_sstring(SString * str)
 {

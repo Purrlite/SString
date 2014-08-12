@@ -37,6 +37,16 @@ new_sstring(const char * restrict string,
             size_t size) ;
 
 
+/* Creates a new SString made out of part of the original SString.
+ *     Returns the new SString or an empty string if str or its string is NULL,
+ * if start is bigger than str's length or if memory allocation fails.
+ */
+SString
+sub_sstring(const SString * str,
+            size_t start,
+            size_t num) ;
+
+
 /* Frees the memory allocated for the SString and the string in it.
  */
 void
