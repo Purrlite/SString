@@ -226,6 +226,41 @@ to_upper_sstring(const SString * str)
 
 
 int
+trim_sstring(SString * str)
+{
+	SString temp;
+	size_t i;
+	size_t location = 0; // location of a char that isn't space or tab
+
+	if(str == NULL  ||  str->string == NULL)
+		return -1;
+
+	for(i = str->length; i > 0; i--)
+		if(isblank(str->string[i]) == false) {
+			location = i;
+			break;
+		}
+
+	if(location == 0)
+		return 0;
+
+	if(location != str->length)
+		remove_sstring(str, location, 0);
+
+	temp = new_sstring(" \t", 0);
+
+	location = find_chars_in_sstring(str, &temp, 0, true);
+
+	if(location != 0)
+		remove_sstring(str, 0, location);
+
+	free(temp.string);
+
+	return 1;
+}
+
+
+int
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {

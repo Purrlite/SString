@@ -74,6 +74,14 @@ SString
 to_upper_sstring(const SString * str) ;
 
 
+/* Removes leading and trailing spaces and tabs from SString.
+ *     Returns 1 on success, 0 if there is no char that isn't a space or tab
+ * or exits with -1 if str or its string is NULL.
+ */
+int
+trim_sstring(SString * str) ;
+
+
 /* Copies string from source into destination
  *     If destination's string is NULL or not big enough, then it allocates
  * enough memory to fit source's string in there.
