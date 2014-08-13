@@ -17,10 +17,6 @@ struct SStrings {
 	SString sstrings[];
 };
 
-/* Note that empty SString means its string will be NULL and all other members
- * will be 0.
- */
-
 
 /* Creates a SString with characters from a C-string either fully or up to
  * size - 1 if it's smaller than the whole string and allocates size amount of
