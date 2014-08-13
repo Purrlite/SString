@@ -3,9 +3,6 @@
 
 #include <stdlib.h>
 
-#define restrict  __restrict__
-#define bool      _Bool
-
 typedef struct SString {
 	size_t length;
 	size_t size;
@@ -260,7 +257,7 @@ long
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       size_t start,
-                      bool inverse) ;
+                      _Bool inverse) ;
 
 
 /* Finds substring sub_str in str, starting from start amount of chars.

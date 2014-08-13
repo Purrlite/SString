@@ -527,7 +527,7 @@ long
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       size_t start,
-                      bool inverse)
+                      _Bool inverse)
 {
 	size_t ret_value;
 	char * found_char;
