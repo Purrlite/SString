@@ -9,7 +9,9 @@ typedef struct SString {
 	char * string;
 } SString;
 
-
+/* Mainly intended as an easier way to make SString arrays.
+ * Not intended for extensive use.
+ */
 struct SStrings {
 	size_t length;
 	SString sstrings[];
