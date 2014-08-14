@@ -61,9 +61,9 @@ print_error_sstring(enum errors_SString error_num,
 }
 
 
-typedef SString (new_SString_func)(const char * string,
-                                   size_t size,
-                                   enum errors_SString * error);
+typedef SString (new_SString_func)(const char * ,
+                                   size_t ,
+                                   enum errors_SString *);
 
 
 static SString
