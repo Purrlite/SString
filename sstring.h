@@ -40,186 +40,199 @@ enum {
 	NOTHING_TO_TRIM_SS = 0,
 };
 
-/* Prints error message about last error into stderr along with message unless
- * it's NULL, then it ignores it.
+/* Note: passing NULL to functions that have error as their argument other than
+ * print_error_sstring() will make the function function as normal except you
+ * won't have a way to tell what error occured inside it.
  */
+
+
 void
 print_error_sstring(enum errors_SString error,
                     const char * message) ;
-
-
-/* Creates a SString with characters from a C-string either fully or up to
- * size - 1 if it's smaller than the whole string and allocates size amount of
- * characters for SString's string.
- *     If string is NULL, then it just allocates memory as long as size isn't 0.
- * If size is 0, then it zeroes the struct. If string isn't NULL and size is 0,
- * then it will only allocate as much memory as it needs to hold the string
- * including '\0'.
- *     Returns the new SString or an empty (all values zeroed) one on failure.
+/**
+ * Prints error message to stderr.
  */
+
+
 SString
 new_sstring(const char * restrict string,
             size_t size,
             enum errors_SString * error) ;
-
-
-/* Creates a new SString made out of part of the original SString.
- *     Returns the new SString or an empty string if str or its string is NULL,
- * if start is bigger than str's length or if memory allocation fails.
+/**
+ * Creates a new SString.
+ *
+ * Returns: new SString     on success
+ *          zeroed SString  on error
+ *
+ * Error values: NO_ERROR_SS   if no error occurs
+ *               NO_MEMORY_SS  if allocating memory fails
+ *
+ * NOTE: If size is 0, then exactly the amount of bytes needed for the new
+ *   string will be allocated.
+ *       If size is smaller than string's length then it will only copy size-1
+ *   chars into the new string.
  */
+
+
 SString
 sub_sstring(const SString * str,
             size_t start,
             size_t num,
             enum errors_SString * error) ;
-
-
-/* Frees the memory allocated for the SString and the string in it.
+/**
+ * Returns a new SString created chosen part of the original one.
+ *
+ * Returns: new SString     on success
+ *          zeroed SString  on error
+ *
+ * Error values: NO_ERROR_SS       if no error occurs
+ *               NO_MEMORY_SS      if allocating memory fails
+ *               NULL_ARGUMENT_SS  if str or str->string is NULL
+ *               BAD_ARGUMENT_SS   if start > str->length
+ *
+ * NOTE: If size is 0, then it will create a new SString from start to the end.
  */
+
+
 enum errors_SString
 free_sstring(SString * str) ;
-
-
-/* Frees the memory allocated for structure SStrings and the strings inside it
+/**
+ * Frees SString.
+ *
+ * Returns: SUCCESS_SS        on success
+ *          NULL_ARGUMENT_SS  if str or str->string is NULL
+ *
+ * NOTE: Doesn't free SString itself as it never gets dynamically allocated
+ *   inside the library, so if you dynamically allocated it yourself, then
+ *   you have to use additional free() to free it.
  */
+
+
 enum errors_SString
 free_sstrings(struct SStrings ** strs) ;
-
-
-/* Connects all the SStrings in strs together with connector between each of
- * them into a new SString.
- *     If there is no connector, then it will just connect them together.
- *     Returns the new SString or empty SString if strs is NULL or has no
- * strings in it.
+/**
+ * Frees struct SString and sets it's pointer to NULL.
+ *
+ * Returns: SUCCESS_SS        on success
+ *          NULL_ARGUMENT_SS  if strs or *strs is NULL
  */
+
+
 SString
 connect_sstrings(const struct SStrings * strs,
                  const SString * connector,
                  enum errors_SString * error) ;
-
-
-/* Converts all chars in str to lower case and returns new SString containing them.
- *     Returns the new SString or empty SString if str it's string is NULL.
+/**
+ * Connects SStrings together into a single SString.
+ *
+ * Returns: the resulting SString  on success
+ *          zeroed SString         on error
+ *
+ * Error values: NO_ERROR_SS       if no error occurs
+ *               NULL_ARGUMENT_SS  if strs is NULL
+ *               BAD_ARGUMENT_SS   if strs->length is 0
+ *
+ * NOTE: When NULL gets passed in as connector, it will simply not put anything
+ *   between the connected SStrings.
  */
+
+
 SString
 to_lower_sstring(const SString * str,
                  enum errors_SString * error) ;
 
-
-/* Converts all chars in str to upper case and returns new SString containing them.
- *     Returns the new SString or empty SString if str it's string is NULL.
- */
 SString
 to_upper_sstring(const SString * str,
                  enum errors_SString * error) ;
-
-
-/* Removes leading and trailing spaces and tabs from SString.
- *     Returns 1 on success, or exits with -1 if str or its string is NULL.
+/**
+ * Returns a new SString with all chars in it changed to upper/lower versions.
+ *
+ * Returns: the resulting SString  on success
+ *          zeroed SString         on error
+ *
+ * Error values: NO_ERROR_SS       if no error occurs
+ *               NULL_ARGUMENT_SS  if str or str->string is NULL
  */
+
+
 enum errors_SString
 trim_sstring(SString * str) ;
-
-
-/* Copies string from source into destination
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit source's string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or with -2 if allocating memory fails.
+/**
+ * Removes leading and trailing spaces and tabs.
+ *
+ * Returns: SUCCESS_SS          on success
+ *          NULL_ARGUMENT_SS    if str or str->string is NULL
+ *          NOTHING_TO_TRIM_SS  if it doesn't find non-space, non-tab char in str
+ *
+ * NOTE: If the whole string is made of spaces or tabs, then it won't trim
+ *   anything.
  */
+
+
 enum errors_SString
 copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
-
-/* Copies num characters from source starting at start into destination.
- *     If num is 0, then copies up to the end of source.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or if start is bigger than source->length,
- * or with -2 if allocating memory fails.
- */
 enum errors_SString
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
                size_t num) ;
 
-
-/* Copies num characters from string source into SString destination.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or with -2 if allocating memory fails.
- */
 enum errors_SString
 copy_str_to_sstring(SString * restrict destination,
                     const char * restrict source,
                     size_t num);
-
-
-/* Appends source to destination.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or with -2 if allocating memory fails.
+/**
+ * Copies string from source to destination.
+ *
+ * Returns: SUCCESS_SS        on success
+ *          NULL_ARGUMENT_SS  if destination, source or source->string is NULL
+ *          BAD_ARGUMENT_SS   if start > source->length
+ *          NO_MEMORY_SS      if allocating memory fails
+ *
+ * NOTE: If num is 0 or start + num > source->length then it will copy all chars
+ *   from source (starting from start if there is one).
+ *       If destination's string is NULL or not big enough to contain source's
+ *   string, then a big enough size will be allocated for it.
  */
+
+
 enum errors_SString
 append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
-
-/* Appends n characters from source starting from start to destination.
- *     If num is 0, then appends all chars starting from start to the end.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or if start is bigger or equal to source->length,
- * or with -2 if allocating memory fails.
- */
 enum errors_SString
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t start,
                  size_t num) ;
 
-/* Appends num characters from source to destination.
- *     If num is 0, then appends all chars starting from start to the end.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL or
- * source's string is NULL, or with -2 if memory allocation fails.
- */
 enum errors_SString
 append_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t num) ;
-
-
-/* Inserts source into destination starting from insert_start.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL or if insert_start is bigger than destination's
- * length, or with -2 if allocating memory fails.
+/**
+ * Appends string from source to destination.
+ *
+ * Returns: SUCCESS_SS        on success
+ *          NULL_ARGUMENT_SS  if destination, source or source->string is NULL
+ *          BAD_ARGUMENT_SS   if start >= source->length
+ *          NO_MEMORY_SS      if allocating memory fails
+ *
+ * NOTE: If num is 0 or start + num > source->length then it will append all
+ *   chars from source (starting from start if there is one).
+ *       If destination's string is NULL or not big enough to contain source's
+ *   string and the current string in destination, then a big enough size will
+ *   be allocated for it.
  */
+
+
 enum errors_SString
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t insert_start) ;
 
-
-/* Inserts num chars from source starting from source_start into destination
- * starting from insert_start.
- *     If num is 0, then it inserts source from source_start to the end.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL
- * or source's string is NULL if source_start is bigger or equal to source's
- * lengthor if insert_start is bigger than destination's length, or with -2 if
- * allocating memory fails.
- */
 enum errors_SString
 insert_n_sstring(SString * restrict destination,
                  const SString * restrict source,
@@ -227,105 +240,119 @@ insert_n_sstring(SString * restrict destination,
                  size_t source_start,
                  size_t num) ;
 
-
-/* Inserts num chars from source into destination starting at insert_start.
- *     If num is 0, then it inserts source from source_start to the end.
- *     If destination's string is NULL or not big enough, then it allocates
- * enough memory to fit the string in there.
- *     Returns 1 on success or exits with -1 if any of the arguments is NULL or
- * source's string is NULL or if insert_start is bigger than destination's
- * lenght, or with -2 if memory allocation fails.
- */
 enum errors_SString
 insert_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t insert_start,
                       size_t num) ;
-
-
-/* Removes chars in str starting from start up to num chars.
- *     If num is 0, then it removes all characters starting from start.
- *     Returns 1 on success or exits with -1 if str or its string is NULL, or
- * with -2 if memory allocation fails.
+/**
+ * Inserts string from source into destination.
+ *
+ * Returns: SUCCESS_SS        on success
+ *          NULL_ARGUMENT_SS  if destination, source or source->string is NULL
+ *          BAD_ARGUMENT_SS   if source_start >= source->length
+ *                               or insert_start > destination->length
+ *          NO_MEMORY_SS      if allocating memory fails
+ *
+ * NOTE: If num is 0 or start + num > source->length then it will insert all
+ *   chars from source (starting from source_start if there is one).
+ *       If destination's string is NULL or not big enough to contain source's
+ *   string and the current string in destination, then a big enough size will
+ *   be allocated for it.
  */
+
+
 enum errors_SString
 remove_sstring(SString * str,
                size_t start,
                size_t num) ;
-
-
-/* Compares characters until '\0' or a first differring character.
- *     Returns either 0 if there is no difference, positive number if ptr1's
- * character has higher value than ptr2's, negative if ptr1's character has
- * smaller value than ptr2's character. Also returns 0 if either of the
- * arguments or their string is NULL.
+/**
+ * Removes/Deletes string from str.
+ *
+ * Returns: SUCCESS_SS        on success
+ *          NULL_ARGUMENT_SS  if str or str->string is NULL
+ *          BAD_ARGUMENT_SS   if start >= start->length
+ *          NO_MEMORY_SS      if allocating memory fails
+ *
+ * NOTE: If num is 0 or start + num > source->length then everything gets removed
  */
+
+
 int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2) ;
 
-
-/* Compares characters until '\0', num chars or a first differring character.
- *     Returns either 0 if there is no difference, positive number if ptr1's
- * character has higher value than ptr2's, negative if ptr1's character has
- * smaller value than ptr2's character. Also returns 0 if either of the
- * arguments or their string is NULL or num is 0.
- */
 int
 compare_n_sstrings(const SString * restrict str1,
                    const SString * restrict str2,
                    size_t num) ;
-
-
-/* Finds the first occurance of a char from chars inside str starting from start
- * or if inverse is true, then finds the first occurance of a char that isn't
- * in chars that is located in str starting from start.
- *     Returns the number of chars before such character or -2 if it's not found.
- * Counting starts from the actual start of the string in str, not from start.
- * It also exits with -1 if any of the arguments or their string is NULL or if
- * start is bigger than str's length.
+/**
+ * Compares 2 strings together.
+ *
+ * Returns: NO_DIFFERENCE            if there is no difference between both strings
+ *          FIRST_STRs_CHAR_BIGGER   if first differing char has a bigger value
+ *                                     in str1 than str2
+ *          SECOND_STRs_CHAR_BIGGER  if first differing char has a bigger value
+ *                                     in str2 than str1
+ *          NULL_ARGUMENT_SS         if str1 or str2 or any of their strings is NULL
+ *          BAD_ARGUMENT_SS          if num is 0
  */
+
+
 long
 find_chars_in_sstring(const SString * str,
                       const SString * chars,
                       size_t start,
                       _Bool inverse) ;
-
-
-/* Finds substring sub_str in str, starting from start amount of chars.
- *     Returns number of characters leading up to the sub_str in str from the
- * beginning of str or -2 if it wasn't found. Or exits with -1 if either of the
- * arguments or their string is NULL.
+/**
+ * Searches str for any of the characters in chars, starting to search from start.
+ *
+ * If inverse is non-0, then it will look for any character NOT in chars.
+ *
+ * Returns: >= 0              on success (distance of the found character from
+ *                               the actual start of str)
+ *          NOT_FOUND_SS      if no chars from chars were found in str.
+ *          NULL_ARGUMENT_SS  if str, chars or any of their strings is NULL
+ *          BAD_ARGUMENT_SS   if start >= str->length
  */
+
+
 long
 find_str_in_sstring(const SString * str,
                     const SString * sub_str,
                     size_t start) ;
-
-
-/* Splits strings into smaller ones devided by separator. Doesn't remove any
- * extra whitespace from them or anything else.
- *     Returns the split strings or the source string inside struct SStrings
- * if no separator was found or NULL if either of the arguments or their string
- * is NULL or function fails allocating memory.
+/**
+ * Searches str for a string sub_str, starting to search from start.
+ *
+ * Returns: >= 0              on success (distance of the first character from
+ *                               the actual start of str)
+ *          NOT_FOUND_SS      if the string from sub_str is not found in str
+ *          NULL_ARGUMENT_SS  if str, sub_str or any of their strings is NULL
+ *          BAD_ARGUMENT_SS   if start >= str->length
  */
+
+
 struct SStrings *
 split_sstring(const SString * str,
               const SString * separator,
               enum errors_SString * error) ;
 
-
-/* Splits strings from struct SString into smaller ones devided by separator.
- * Doesn't remove any extra whitespace from them or do anything else.
- *     Returns the split strings or the source string inside struct SStrings
- * if no separator was found or NULL if either of the arguments or their string
- * is NULL or function fails allocating memory or if there are no SStrings in
- * strs.
- */
 struct SStrings *
 split_sstrings(const struct SStrings * strs,
                const SString * separator,
                enum errors_SString * error) ;
+/**
+ * Splits string according to the separator.
+ *
+ * Returns: The resulting struct SStrings *  on success
+ *          NULL                             on error
+ *
+ * Error values: NO_ERROR_SS       if no error occurs
+ *               NULL_ARGUMENT_SS  if str, separator or any of their strings is NULL
+ *               BAD_ARGUMENT_SS   if str or separator is 0 chars long
+ *                                    or if strs has no SStrings in it
+ *               NO_MEMORY_SS      if memory allocation fails
+ */
 
 
 #endif // SSTRING_H_INCLUDED
