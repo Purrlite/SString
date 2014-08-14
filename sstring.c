@@ -283,7 +283,7 @@ to_X_sstring(const SString * str,
 {
 	long location = 0;
 	long previous_location = 0;
-	SString new_str = new_sstring(NULL,str->length + 1, NULL);
+	SString new_str = new_sstring(NULL, str->length + 1, NULL);
 	SString Xcase = (to_lower == true)
 	                ? new_sstring("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0, NULL)
 	                : new_sstring("abcdefghijklmnopqrstuvwxyz", 0, NULL);
