@@ -1,8 +1,11 @@
 #include "sstring.h"
 
 #include <string.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h>
+
+static enum errors_SString errors_sstring;
 
 static void
 ensure_necessary_size(SString * str,
@@ -25,6 +28,54 @@ ensure_necessary_size(SString * str,
 }
 
 
+enum errors_SString
+get_last_error_sstring(void)
+{
+	return errors_sstring;
+}
+
+
+void
+clear_error_sstring(void)
+{
+	errors_sstring = NO_ERROR_SS;
+}
+
+
+void
+print_error_sstring(const char * message)
+{
+	char * error;
+
+	switch(errors_sstring) {
+	case NO_ERROR_SS:
+		error = "No error";
+		break;
+
+	case NULL_ARGUMENT_SS:
+		error = "One of the arguments was a NULL pointer";
+		break;
+
+	case BAD_ARGUMENT_SS:
+		error = "Invalid argument";
+		break;
+
+	case NO_MEMORY_SS:
+		error = "Not enough memory";
+		break;
+
+	default:
+		error = "Unknown error";
+		break;
+	}
+
+	if(message == NULL)
+		fprintf(stderr, "%s\n", error);
+	else
+		fprintf(stderr, "%s %s\n", message, error);
+}
+
+
 typedef SString (new_SString_func)(const char * string,
                                    size_t size);
 
@@ -43,8 +94,10 @@ NULL_string_non0_size(const char * string,
 	SString str = (SString){ 0, size, NULL };
 
 	str.string = malloc(str.size);
-	if(NULL == str.string)
+	if(NULL == str.string) {
+		errors_sstring = NO_MEMORY_SS;
 		return (SString){0};
+	}
 
 	str.string[0] = '\0';
 
@@ -59,8 +112,10 @@ nonNULL_string_0_size(const char * string,
 	SString str = (SString){ length, length + 1, NULL };
 
 	str.string = malloc(str.size);
-	if(NULL == str.string)
+	if(NULL == str.string) {
+		errors_sstring = NO_MEMORY_SS;
 		return (SString){0};
+	}
 
 	strcpy(str.string, string);
 
@@ -78,8 +133,10 @@ nonNULL_string_non0_size(const char * string,
 	};
 
 	str.string = malloc(str.size);
-	if(NULL == str.string)
+	if(NULL == str.string) {
+		errors_sstring = NO_MEMORY_SS;
 		return (SString){0};
+	}
 
 	strncpy(str.string, string, str.length);
 	str.string[str.length] = '\0';
@@ -125,8 +182,15 @@ sub_sstring(const SString * str,
 {
 	size_t length;
 
-	if(str == NULL  ||  str->string == NULL  ||  start > str->length)
+	if(str == NULL  ||  str->string == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return (SString){0};
+	}
+
+	if(start > str->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return (SString){0};
+	}
 
 	length = (start + num > str->length  ||  num == 0)
 	         ? str->length - start : num;
@@ -138,8 +202,10 @@ sub_sstring(const SString * str,
 inline void
 free_sstring(SString * str)
 {
-	if(str == NULL)
+	if(str == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return ;
+	}
 
 	if(str->string != NULL)
 		free(str->string);
@@ -155,8 +221,10 @@ free_sstrings(struct SStrings ** strs)
 {
 	size_t i;
 
-	if(strs == NULL  ||  *strs == NULL)
+	if(strs == NULL  ||  *strs == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return ;
+	}
 
 	for(i = 0; i < (*strs)->length; i++)
 		if((*strs)->sstrings[i].string != NULL)
@@ -175,8 +243,15 @@ connect_sstrings(const struct SStrings * strs,
 	size_t i;
 	SString str = (SString){0};
 
-	if(strs == NULL  ||  strs->length == 0)
+	if(strs == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return (SString){0};
+	}
+
+	if(strs->length == 0) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return (SString){0};
+	}
 
 	for(i = 0; i < strs->length - 1; i++) {
 		append_sstring(&str, &(strs->sstrings[i]));
@@ -225,8 +300,10 @@ to_X_sstring(const SString * str,
 SString
 to_lower_sstring(const SString * str)
 {
-	if(str == NULL  ||  str->string == NULL)
+	if(str == NULL  ||  str->string == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return (SString){0};
+	}
 
 	return to_X_sstring(str, true);
 }
@@ -235,8 +312,10 @@ to_lower_sstring(const SString * str)
 SString
 to_upper_sstring(const SString * str)
 {
-	if(str == NULL  ||  str->string == NULL)
+	if(str == NULL  ||  str->string == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return (SString){0};
+	}
 
 	return to_X_sstring(str, false);
 }
@@ -249,8 +328,10 @@ trim_sstring(SString * str)
 	size_t i;
 	size_t location = 0; // location of a char that isn't space or tab
 
-	if(str == NULL  ||  str->string == NULL)
-		return -1;
+	if(str == NULL  ||  str->string == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
 
 	for(i = str->length; i > 0; i--)
 		if(isblank(str->string[i]) == false) {
@@ -293,16 +374,24 @@ copy_n_sstring(SString * restrict destination,
 {
 	size_t length;
 
-	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
-		    ||  start > source->length)
-		return -1;
+	if(destination == NULL  ||  source == NULL  ||  NULL == source->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(start > source->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	length = (start + num > source->length  ||  num == 0)
 	         ? source->length - start : num;
 
 	ensure_necessary_size(destination, length + 1, false);
-	if(destination == NULL)
-		return -2;
+	if(destination == NULL) {
+		errors_sstring = NO_MEMORY_SS;
+		return NO_MEMORY_SS;
+	}
 
 	strncpy(destination->string, &(source->string[start]), length);
 	destination->string[length] = '\0';
@@ -320,8 +409,10 @@ copy_str_to_sstring(SString * restrict destination,
 {
 	size_t len;
 
-	if(source == NULL)
-		return -1;
+	if(source == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
 
 	len = strlen(source);
 
@@ -345,16 +436,24 @@ append_n_sstring(SString * restrict destination,
 {
 	size_t length;
 
-	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
-		    ||  start >= source->length)
-		return -1;
+	if(destination == NULL  ||  source == NULL  ||  NULL == source->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(start >= source->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	length = (start + num > source->length  ||  num == 0)
 	         ? source->length - start : num;
 
 	ensure_necessary_size(destination, length + destination->length + 1, true);
-	if(destination == NULL)
-		return -2;
+	if(destination == NULL) {
+		errors_sstring = NO_MEMORY_SS;
+		return NO_MEMORY_SS;
+	}
 
 	strncpy(&(destination->string[destination->length]), &(source->string[start]),
 	        length);
@@ -374,8 +473,10 @@ append_str_to_sstring(SString * restrict destination,
 {
 	size_t len;
 
-	if(source == NULL)
-		return -1;
+	if(source == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
 
 	len = strlen(source);
 
@@ -402,17 +503,24 @@ insert_n_sstring(SString * restrict destination,
 	SString temp;
 	size_t length;
 
-	if(destination == NULL  ||  source == NULL  ||  NULL == source->string
-		    ||  source_start >= source->length
-		    ||  insert_start > destination->length)
-		return -1;
+	if(destination == NULL  ||  source == NULL  ||  NULL == source->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(source_start >= source->length  ||  insert_start > destination->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	length = (source_start + num > source->length  ||  num == 0)
 	         ? source->length - source_start : num;
 
 	ensure_necessary_size(destination, destination->length + length + 1, true);
-	if(destination == NULL)
-		return -2;
+	if(destination == NULL) {
+		errors_sstring = NO_MEMORY_SS;
+		return NO_MEMORY_SS;
+	}
 
 	temp = new_sstring(&(destination->string[insert_start]), 0);
 
@@ -436,8 +544,10 @@ insert_str_to_sstring(SString * restrict destination,
 {
 	size_t len;
 
-	if(source == NULL)
-		return -1;
+	if(source == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
 
 	len = strlen(source);
 
@@ -453,16 +563,25 @@ remove_sstring(SString * str,
 {
 	SString temp;
 
-	if(str == NULL  ||  str->string == NULL  ||  start >= str->length)
-		return -1;
+	if(str == NULL  ||  str->string == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(start >= str->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	if(start + num > str->length  ||  num == 0) {
 		str->string[start] = '\0';
 		str->length = start;
 	} else {
 		temp = new_sstring(&(str->string[start + num]), 0);
-		if(temp.string == NULL)
-			return -2;
+		if(temp.string == NULL) {
+			errors_sstring = NO_MEMORY_SS;
+			return NO_MEMORY_SS;
+		}
 
 		str->string[start] = '\0';
 		str->length = start;
@@ -480,11 +599,22 @@ int
 compare_sstrings(const SString * restrict str1,
                  const SString * restrict str2)
 {
-	if(str1 == NULL  ||  str2 == NULL  ||  NULL == str1->string
-		    ||  NULL == str2->string)
-		return 0;
+	int return_value;
 
-	return strcmp(str1->string, str2->string);
+	if(str1 == NULL  ||  str2 == NULL  ||  NULL == str1->string
+	        ||  NULL == str2->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	return_value = strcmp(str1->string, str2->string);
+
+	if(return_value == 0)
+		return NO_DIFFERENCE;
+	else if(return_value > 0)
+		return FIRST_STRs_CHAR_BIGGER;
+	else
+		return SECOND_STRs_CHAR_BIGGER;
 }
 
 
@@ -493,20 +623,28 @@ compare_n_sstrings(const SString * restrict str1,
                    const SString * restrict str2,
                    size_t num)
 {
-	int return_val;
+	int return_value;
 	size_t length;
 	char temp1;
 	char temp2;
 
 	if(str1 == NULL  ||  str2 == NULL  ||  NULL == str1->string
-		    ||  NULL == str2->string  ||  num == 0)
-		return 0;
+	        ||  NULL == str2->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(num == 0) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	length = (str1->length > str2->length) ? str2->length : str1->length;
 
-	if(num >= length)
-		return strcmp(str1->string, str2->string);
-	else
+	if(num >= length) {
+		return_value = strcmp(str1->string, str2->string);
+		goto got_return_value;
+	} else
 		length = num;
 
 	temp1 = str1->string[length];
@@ -514,12 +652,18 @@ compare_n_sstrings(const SString * restrict str1,
 	str1->string[length] = '\0';
 	str2->string[length] = '\0';
 
-	return_val = strcmp(str1->string, str2->string);
+	return_value = strcmp(str1->string, str2->string);
 
 	str1->string[length] = temp1;
 	str2->string[length] = temp2;
 
-	return return_val;
+got_return_value:
+	if(return_value == 0)
+		return NO_DIFFERENCE;
+	else if(return_value > 0)
+		return FIRST_STRs_CHAR_BIGGER;
+	else
+		return SECOND_STRs_CHAR_BIGGER;
 }
 
 
@@ -533,8 +677,15 @@ find_chars_in_sstring(const SString * str,
 	char * found_char;
 
 	if(str == NULL  ||  chars == NULL  ||  NULL == str->string
-		    ||  NULL == chars->string  ||  start >= str->length)
-		return -1;
+	        ||  NULL == chars->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(start >= str->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	if(inverse == false)
 		ret_value = strcspn(&(str->string[start]), chars->string) + start;
@@ -547,9 +698,9 @@ find_chars_in_sstring(const SString * str,
 	found_char = strchr(chars->string, str->string[str->length - 1]);
 
 	if(inverse == false)
-		return (found_char == NULL) ? -2 : str->length - 1;
+		return (found_char == NULL) ? NOT_FOUND_SS : str->length - 1;
 	else
-		return (found_char != NULL) ? -2 : str->length - 1;
+		return (found_char != NULL) ? NOT_FOUND_SS : str->length - 1;
 }
 
 
@@ -561,12 +712,19 @@ find_str_in_sstring(const SString * str,
 	char * return_val;
 
 	if(str == NULL  ||  sub_str == NULL  ||  NULL == str->string
-		    ||  NULL == sub_str->string  ||  start >= str->length)
-		return -1;
+	        ||  NULL == sub_str->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
+		return NULL_ARGUMENT_SS;
+	}
+
+	if(start >= str->length) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return BAD_ARGUMENT_SS;
+	}
 
 	return_val = strstr(&(str->string[start]), sub_str->string);
 
-	return (return_val == NULL) ? -2 : (int)(return_val - str->string);
+	return (return_val == NULL) ? NOT_FOUND_SS : (int)(return_val - str->string);
 }
 
 
@@ -627,21 +785,26 @@ split_sstring(const SString * str,
 	size_t i;
 
 	if(str == NULL  ||  separator == NULL  ||  NULL == str->string
-		    ||  NULL == separator->string)
+	        ||  NULL == separator->string) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL;
+	}
 
 	locations = malloc(sizeof(int) * allocated_num);
-	if(locations == NULL)
+	if(locations == NULL) {
+		errors_sstring = NO_MEMORY_SS;
 		return NULL;
+	}
 
 	locations[num_of_locations] = find_str_in_sstring(str, separator, 0);
-	if(locations[num_of_locations] == -1) {
-		split = NULL;
-		goto bad_allocation;
-	}
-	if(locations[num_of_locations] == -2)  {
+	if(locations[num_of_locations] == NOT_FOUND_SS) {
 		locations[num_of_locations] = str->length;
 		goto no_separator_found;
+	}
+	if(locations[num_of_locations] < 0) {
+		errors_sstring = locations[num_of_locations];
+		split = NULL;
+		goto bad_allocation;
 	}
 
 	do {
@@ -654,13 +817,15 @@ split_sstring(const SString * str,
 
 		locations[num_of_locations] = find_str_in_sstring(str, separator,
 			    locations[num_of_locations - 1] + separator->length);
-	} while(locations[num_of_locations] > -1);
+	} while(locations[num_of_locations] >= 0);
 
 no_separator_found:
 
 	split = malloc(sizeof(struct SStrings) + (num_of_locations + 1) * sizeof(SString));
-	if(split == NULL)
+	if(split == NULL) {
+		errors_sstring = NO_MEMORY_SS;
 		goto bad_allocation;
+	}
 
 	split->length = num_of_locations + 1;
 
@@ -673,14 +838,17 @@ no_separator_found:
 			free(split->sstrings[i].string);
 		free(split);
 
+		errors_sstring = split_index;
 		split = NULL;
 		goto bad_allocation;
 	}
 
 	if(split_index < split->length) {
 		split = realloc(split, sizeof(struct SStrings) + split_index * sizeof(SString));
-		if(split == NULL)
+		if(split == NULL) {
+			errors_sstring = NO_MEMORY_SS;
 			goto bad_allocation;
+		}
 
 		split->length = split_index;
 	}
@@ -699,9 +867,15 @@ split_sstrings(const struct SStrings * strs,
 	SString temp;
 	struct SStrings * ret_value;
 
-	if(strs == NULL  ||  separator == NULL  ||  separator->string == NULL
-		    ||  strs->length == 0)
+	if(strs == NULL  ||  separator == NULL  ||  separator->string == NULL) {
+		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL;
+	}
+
+	if(strs->length == 0) {
+		errors_sstring = BAD_ARGUMENT_SS;
+		return NULL;
+	}
 
 	temp = connect_sstrings(strs, separator);
 	ret_value = split_sstring(&temp, separator);

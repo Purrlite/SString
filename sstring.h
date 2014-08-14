@@ -18,6 +18,44 @@ struct SStrings {
 };
 
 
+enum errors_SString {
+	NO_ERROR_SS = 0,  // Only returned by
+	NULL_ARGUMENT_SS = -1,
+	BAD_ARGUMENT_SS = -2,
+	NO_MEMORY_SS = -3,
+};
+
+// Special return values
+enum {
+	// For searching SStrings:
+	NOT_FOUND_SS = -10,
+
+	// For comparing SStrings:
+	NO_DIFFERENCE = 0,
+	FIRST_STRs_CHAR_BIGGER = 2,  // 1st string's char is bigger
+	SECOND_STRs_CHAR_BIGGER = 1, // 2nd string's char is bigger
+};
+
+
+/* Returns last set error.
+ */
+enum errors_SString
+get_last_error_sstring(void) ;
+
+
+/* Resets/clears internal error indicator.
+ */
+void
+clear_error_sstring(void) ;
+
+
+/* Prints error message about last error into stderr along with message unless
+ * it's NULL, then it ignores it.
+ */
+void
+print_error_sstring(const char * message) ;
+
+
 /* Creates a SString with characters from a C-string either fully or up to
  * size - 1 if it's smaller than the whole string and allocates size amount of
  * characters for SString's string.
