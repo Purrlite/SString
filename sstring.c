@@ -259,7 +259,7 @@ trim_sstring(SString * str)
 		}
 
 	if(location == 0)
-		return 0;
+		return 1;
 
 	if(location != str->length)
 		remove_sstring(str, location, 0);
