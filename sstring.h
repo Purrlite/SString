@@ -19,7 +19,7 @@ struct SStrings {
 
 
 enum errors_SString {
-	NO_ERROR_SS = 0,  // Only returned by
+	NO_ERROR_SS = 0,
 	NULL_ARGUMENT_SS = -1,
 	BAD_ARGUMENT_SS = -2,
 	NO_MEMORY_SS = -3,
@@ -37,23 +37,12 @@ enum {
 };
 
 
-/* Returns last set error.
- */
-enum errors_SString
-get_last_error_sstring(void) ;
-
-
-/* Resets/clears internal error indicator.
- */
-void
-clear_error_sstring(void) ;
-
-
 /* Prints error message about last error into stderr along with message unless
  * it's NULL, then it ignores it.
  */
 void
-print_error_sstring(const char * message) ;
+print_error_sstring(enum errors_SString error,
+                    const char * message) ;
 
 
 /* Creates a SString with characters from a C-string either fully or up to
@@ -67,7 +56,8 @@ print_error_sstring(const char * message) ;
  */
 SString
 new_sstring(const char * restrict string,
-            size_t size) ;
+            size_t size,
+            enum errors_SString * error) ;
 
 
 /* Creates a new SString made out of part of the original SString.
@@ -77,18 +67,19 @@ new_sstring(const char * restrict string,
 SString
 sub_sstring(const SString * str,
             size_t start,
-            size_t num) ;
+            size_t num,
+            enum errors_SString * error) ;
 
 
 /* Frees the memory allocated for the SString and the string in it.
  */
-void
+enum errors_SString
 free_sstring(SString * str) ;
 
 
 /* Frees the memory allocated for structure SStrings and the strings inside it
  */
-void
+enum errors_SString
 free_sstrings(struct SStrings ** strs) ;
 
 
@@ -100,21 +91,24 @@ free_sstrings(struct SStrings ** strs) ;
  */
 SString
 connect_sstrings(const struct SStrings * strs,
-                 const SString * connector) ;
+                 const SString * connector,
+                 enum errors_SString * error) ;
 
 
 /* Converts all chars in str to lower case and returns new SString containing them.
  *     Returns the new SString or empty SString if str it's string is NULL.
  */
 SString
-to_lower_sstring(const SString * str) ;
+to_lower_sstring(const SString * str,
+                 enum errors_SString * error) ;
 
 
 /* Converts all chars in str to upper case and returns new SString containing them.
  *     Returns the new SString or empty SString if str it's string is NULL.
  */
 SString
-to_upper_sstring(const SString * str) ;
+to_upper_sstring(const SString * str,
+                 enum errors_SString * error) ;
 
 
 /* Removes leading and trailing spaces and tabs from SString.
@@ -314,7 +308,8 @@ find_str_in_sstring(const SString * str,
  */
 struct SStrings *
 split_sstring(const SString * str,
-              const SString * separator) ;
+              const SString * separator,
+              enum errors_SString * error) ;
 
 
 /* Splits strings from struct SString into smaller ones devided by separator.
@@ -326,7 +321,8 @@ split_sstring(const SString * str,
  */
 struct SStrings *
 split_sstrings(const struct SStrings * strs,
-               const SString * separator) ;
+               const SString * separator,
+               enum errors_SString * error) ;
 
 
 #endif // SSTRING_H_INCLUDED
