@@ -843,6 +843,8 @@ no_separator_found:
 		split->length = split_index;
 	}
 
+	*error = NO_ERROR_SS;
+
 bad_allocation:
 	free(locations);
 
