@@ -325,6 +325,8 @@ to_lower_sstring(const SString * str,
 		return (SString){0};
 	}
 
+	*error = NO_ERROR_SS;
+
 	return to_X_sstring(str, true);
 }
 
@@ -342,6 +344,8 @@ to_upper_sstring(const SString * str,
 		*error = NULL_ARGUMENT_SS;
 		return (SString){0};
 	}
+
+	*error = NO_ERROR_SS;
 
 	return to_X_sstring(str, false);
 }
