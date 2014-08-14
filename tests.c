@@ -11,12 +11,12 @@ int
 test_sstring_allocation(void)
 {
 	SString test = (SString){0,0,0};
-	test = new_sstring(NULL,0);
+	test = new_sstring(NULL,0, NULL);
 	if(test.size != 0 || test.length != 0 || test.string != NULL)
 		return -1;
 
 	char* temp = "something";
-	test = new_sstring(temp,0);
+	test = new_sstring(temp,0, NULL);
 	if(test.size != strlen(temp)+1 || test.length != strlen(temp) || test.string == NULL || strcmp(test.string,temp))
 		return -2;
 
@@ -24,13 +24,13 @@ test_sstring_allocation(void)
 	if(test.size != 0 || test.length != 0 || test.string != NULL)
 		return -3;
 
-	test = new_sstring(NULL,2);
+	test = new_sstring(NULL,2, NULL);
 	if(test.size != 2 || test.length != 0 || test.string == NULL || test.string[0] != '\0')
 		return -4;
 	free_sstring(&test);
 
 	char* temp2 = "another longer test string";
-	test = new_sstring(temp2,10);
+	test = new_sstring(temp2,10, NULL);
 	if(test.size != 10 || test.length != 9 || test.string == NULL || strncmp(test.string,temp2,9))
 		return -5;
 	free_sstring(&test);
@@ -40,8 +40,8 @@ test_sstring_allocation(void)
 
 bool test_to_lower_sstring_helper(const char* input, const char* output)
 {
-	SString test = new_sstring(input,0);
-	SString lowerstring = to_lower_sstring(&test);
+	SString test = new_sstring(input,0, NULL);
+	SString lowerstring = to_lower_sstring(&test, NULL);
 
 	if(output != NULL) {
 		if(strcmp(output,lowerstring.string))
@@ -74,8 +74,8 @@ int test_to_lower_sstring()
 
 bool test_to_upper_sstring_helper(const char* input, const char* output)
 {
-	SString test = new_sstring(input,0);
-	SString upperstring = to_upper_sstring(&test);
+	SString test = new_sstring(input,0, NULL);
+	SString upperstring = to_upper_sstring(&test, NULL);
 
 	if(output != NULL) {
 		if(strcmp(output,upperstring.string))
@@ -108,7 +108,7 @@ int test_to_upper_sstring()
 bool test_copy_sstring_helper(const char* string)
 {
 	SString output = (SString){0,0,0};
-	SString input = new_sstring(string,0);
+	SString input = new_sstring(string,0, NULL);
 	if(copy_sstring(&output,&input) == NULL_ARGUMENT_SS)
 		return true;
 	if(strcmp(output.string,string))
@@ -129,9 +129,9 @@ int test_copy_sstring()
 		return -3;
 	if(test_copy_sstring_helper("test"))
 		return -4;
-	temp = new_sstring(NULL,100);
+	temp = new_sstring(NULL,100, NULL);
 	const char* inputStr = "some short string";
-	SString input = new_sstring(inputStr,0);
+	SString input = new_sstring(inputStr,0, NULL);
 	if(copy_sstring(&temp,&input) == NULL_ARGUMENT_SS || strcmp(temp.string,inputStr) || temp.size != 100 || temp.length != strlen(inputStr))
 		return -5;
 
