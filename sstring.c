@@ -724,7 +724,7 @@ find_str_in_sstring(const SString * str,
 
 	return_val = strstr(&(str->string[start]), sub_str->string);
 
-	return (return_val == NULL) ? NOT_FOUND_SS : (int)(return_val - str->string);
+	return (return_val == NULL) ? NOT_FOUND_SS : (long)(return_val - str->string);
 }
 
 
