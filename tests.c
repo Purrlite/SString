@@ -109,7 +109,7 @@ bool test_copy_sstring_helper(const char* string)
 {
 	SString output = (SString){0,0,0};
 	SString input = new_sstring(string,0);
-	if(copy_sstring(&output,&input) == -1)
+	if(copy_sstring(&output,&input) == NULL_ARGUMENT_SS)
 		return true;
 	if(strcmp(output.string,string))
 		return true;
@@ -121,9 +121,9 @@ bool test_copy_sstring_helper(const char* string)
 int test_copy_sstring()
 {
 	SString temp;
-	if(copy_sstring(NULL,NULL) != -1)
+	if(copy_sstring(NULL,NULL) != NULL_ARGUMENT_SS)
 		return -1;
-	if(copy_sstring(&temp, NULL) != -1)
+	if(copy_sstring(&temp, NULL) != NULL_ARGUMENT_SS)
 		return -2;
 	if(test_copy_sstring_helper(""))
 		return -3;
@@ -132,11 +132,11 @@ int test_copy_sstring()
 	temp = new_sstring(NULL,100);
 	const char* inputStr = "some short string";
 	SString input = new_sstring(inputStr,0);
-	if(copy_sstring(&temp,&input) == -1 || strcmp(temp.string,inputStr) || temp.size != 100 || temp.length != strlen(inputStr))
+	if(copy_sstring(&temp,&input) == NULL_ARGUMENT_SS || strcmp(temp.string,inputStr) || temp.size != 100 || temp.length != strlen(inputStr))
 		return -5;
-	
+
 	free_sstring(&temp);
-	free_sstring(&input);		
+	free_sstring(&input);
 	return 0;
 }
 
