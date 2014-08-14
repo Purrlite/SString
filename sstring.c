@@ -33,6 +33,7 @@ print_error_sstring(enum errors_SString error_num,
 	char * error;
 
 	switch(error_num) {
+	case SUCCESS_SS:
 	case NO_ERROR_SS:
 		error = "No error";
 		break;
@@ -218,7 +219,7 @@ free_sstring(SString * str)
 	str->length = 0;
 	str->size = 0;
 
-	return NO_ERROR_SS;
+	return SUCCESS_SS;
 }
 
 
@@ -238,7 +239,7 @@ free_sstrings(struct SStrings ** strs)
 
 	*strs = NULL;
 
-	return NO_ERROR_SS;
+	return SUCCESS_SS;
 }
 
 
@@ -351,7 +352,7 @@ to_upper_sstring(const SString * str,
 }
 
 
-int
+enum errors_SString
 trim_sstring(SString * str)
 {
 	SString temp;
@@ -368,7 +369,7 @@ trim_sstring(SString * str)
 		}
 
 	if(location == 0)
-		return 1;
+		return SUCCESS_SS;
 
 	if(location != str->length)
 		remove_sstring(str, location, 0);
@@ -382,11 +383,11 @@ trim_sstring(SString * str)
 
 	free(temp.string);
 
-	return 1;
+	return SUCCESS_SS;
 }
 
 
-int
+enum errors_SString
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
@@ -394,7 +395,7 @@ copy_sstring(SString * restrict destination,
 }
 
 
-int
+enum errors_SString
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
@@ -420,11 +421,11 @@ copy_n_sstring(SString * restrict destination,
 
 	destination->length = length;
 
-	return 1;
+	return SUCCESS_SS;
 }
 
 
-int
+enum errors_SString
 copy_str_to_sstring(SString * restrict destination,
                     const char * restrict source,
                     size_t num)
@@ -440,7 +441,7 @@ copy_str_to_sstring(SString * restrict destination,
 }
 
 
-int
+enum errors_SString
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
@@ -448,7 +449,7 @@ append_sstring(SString * restrict destination,
 }
 
 
-int
+enum errors_SString
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t start,
@@ -476,11 +477,11 @@ append_n_sstring(SString * restrict destination,
 
 	destination->string[destination->length] = '\0';
 
-	return 1;
+	return SUCCESS_SS;
 }
 
 
-int
+enum errors_SString
 append_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t num)
@@ -496,7 +497,7 @@ append_str_to_sstring(SString * restrict destination,
 }
 
 
-int
+enum errors_SString
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t insert_start)
@@ -505,7 +506,7 @@ insert_sstring(SString * restrict destination,
 }
 
 
-int
+enum errors_SString
 insert_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t insert_start,
@@ -538,11 +539,11 @@ insert_n_sstring(SString * restrict destination,
 
 	free(temp.string);
 
-	return 1;
+	return SUCCESS_SS;
 }
 
 
-int
+enum errors_SString
 insert_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t insert_start,
@@ -560,7 +561,7 @@ insert_str_to_sstring(SString * restrict destination,
 }
 
 
-int
+enum errors_SString
 remove_sstring(SString * str,
                size_t start,
                size_t num)
@@ -589,7 +590,7 @@ remove_sstring(SString * str,
 		free(temp.string);
 	}
 
-	return 1;
+	return SUCCESS_SS;
 }
 
 

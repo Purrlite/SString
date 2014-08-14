@@ -19,7 +19,8 @@ struct SStrings {
 
 
 enum errors_SString {
-	NO_ERROR_SS = 0,
+	SUCCESS_SS = 1,  // Used as return value by functions that don't have other return value indicating success
+	NO_ERROR_SS = 0,  // Used when passed as an argument
 	NULL_ARGUMENT_SS = -1,
 	BAD_ARGUMENT_SS = -2,
 	NO_MEMORY_SS = -3,
@@ -114,7 +115,7 @@ to_upper_sstring(const SString * str,
 /* Removes leading and trailing spaces and tabs from SString.
  *     Returns 1 on success, or exits with -1 if str or its string is NULL.
  */
-int
+enum errors_SString
 trim_sstring(SString * str) ;
 
 
@@ -124,7 +125,7 @@ trim_sstring(SString * str) ;
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
-int
+enum errors_SString
 copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
@@ -137,7 +138,7 @@ copy_sstring(SString * restrict destination,
  * or source's string is NULL or if start is bigger than source->length,
  * or with -2 if allocating memory fails.
  */
-int
+enum errors_SString
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
@@ -150,7 +151,7 @@ copy_n_sstring(SString * restrict destination,
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or with -2 if allocating memory fails.
  */
-int
+enum errors_SString
 copy_str_to_sstring(SString * restrict destination,
                     const char * restrict source,
                     size_t num);
@@ -162,7 +163,7 @@ copy_str_to_sstring(SString * restrict destination,
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL
  * or source's string is NULL or with -2 if allocating memory fails.
  */
-int
+enum errors_SString
 append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
@@ -175,7 +176,7 @@ append_sstring(SString * restrict destination,
  * or source's string is NULL or if start is bigger or equal to source->length,
  * or with -2 if allocating memory fails.
  */
-int
+enum errors_SString
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t start,
@@ -188,7 +189,7 @@ append_n_sstring(SString * restrict destination,
  *     Returns 1 on success or exits with -1 if any of the arguments is NULL or
  * source's string is NULL, or with -2 if memory allocation fails.
  */
-int
+enum errors_SString
 append_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t num) ;
@@ -201,7 +202,7 @@ append_str_to_sstring(SString * restrict destination,
  * or source's string is NULL or if insert_start is bigger than destination's
  * length, or with -2 if allocating memory fails.
  */
-int
+enum errors_SString
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t insert_start) ;
@@ -217,7 +218,7 @@ insert_sstring(SString * restrict destination,
  * lengthor if insert_start is bigger than destination's length, or with -2 if
  * allocating memory fails.
  */
-int
+enum errors_SString
 insert_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t insert_start,
@@ -233,7 +234,7 @@ insert_n_sstring(SString * restrict destination,
  * source's string is NULL or if insert_start is bigger than destination's
  * lenght, or with -2 if memory allocation fails.
  */
-int
+enum errors_SString
 insert_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t insert_start,
@@ -245,7 +246,7 @@ insert_str_to_sstring(SString * restrict destination,
  *     Returns 1 on success or exits with -1 if str or its string is NULL, or
  * with -2 if memory allocation fails.
  */
-int
+enum errors_SString
 remove_sstring(SString * str,
                size_t start,
                size_t num) ;
