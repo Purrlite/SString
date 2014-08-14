@@ -356,13 +356,13 @@ enum errors_SString
 trim_sstring(SString * str)
 {
 	SString temp;
-	size_t i;
+	long i;
 	size_t location = 0; // location of a char that isn't space or tab
 
 	if(str == NULL  ||  str->string == NULL)
 		return NULL_ARGUMENT_SS;
 
-	for(i = str->length; i > 0; i--)
+	for(i = str->length; i >= 0; i--)
 		if(isblank(str->string[i]) == false) {
 			location = i;
 			break;
