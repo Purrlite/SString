@@ -602,7 +602,7 @@ compare_sstrings(const SString * restrict str1,
 	int return_value;
 
 	if(str1 == NULL  ||  str2 == NULL  ||  NULL == str1->string
-	        ||  NULL == str2->string) {
+		    ||  NULL == str2->string) {
 		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL_ARGUMENT_SS;
 	}
@@ -629,7 +629,7 @@ compare_n_sstrings(const SString * restrict str1,
 	char temp2;
 
 	if(str1 == NULL  ||  str2 == NULL  ||  NULL == str1->string
-	        ||  NULL == str2->string) {
+		    ||  NULL == str2->string) {
 		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL_ARGUMENT_SS;
 	}
@@ -677,7 +677,7 @@ find_chars_in_sstring(const SString * str,
 	char * found_char;
 
 	if(str == NULL  ||  chars == NULL  ||  NULL == str->string
-	        ||  NULL == chars->string) {
+		    ||  NULL == chars->string) {
 		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL_ARGUMENT_SS;
 	}
@@ -712,7 +712,7 @@ find_str_in_sstring(const SString * str,
 	char * return_val;
 
 	if(str == NULL  ||  sub_str == NULL  ||  NULL == str->string
-	        ||  NULL == sub_str->string) {
+		    ||  NULL == sub_str->string) {
 		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL_ARGUMENT_SS;
 	}
@@ -785,7 +785,7 @@ split_sstring(const SString * str,
 	size_t i;
 
 	if(str == NULL  ||  separator == NULL  ||  NULL == str->string
-	        ||  NULL == separator->string) {
+		    ||  NULL == separator->string) {
 		errors_sstring = NULL_ARGUMENT_SS;
 		return NULL;
 	}
