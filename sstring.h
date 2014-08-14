@@ -35,8 +35,10 @@ enum {
 	NO_DIFFERENCE = 0,
 	FIRST_STRs_CHAR_BIGGER = 2,  // 1st string's char is bigger
 	SECOND_STRs_CHAR_BIGGER = 1, // 2nd string's char is bigger
-};
 
+	// For trimming SStrings:
+	NOTHING_TO_TRIM_SS = 0,
+};
 
 /* Prints error message about last error into stderr along with message unless
  * it's NULL, then it ignores it.

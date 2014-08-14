@@ -369,7 +369,7 @@ trim_sstring(SString * str)
 		}
 
 	if(location == 0)
-		return SUCCESS_SS;
+		return NOTHING_TO_TRIM_SS;
 
 	if(location != str->length)
 		remove_sstring(str, location, 0);
