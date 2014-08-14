@@ -780,6 +780,11 @@ split_sstring(const SString * str,
 		return NULL;
 	}
 
+	if(str->length == 0  ||  separator->length == 0) {
+		*error = BAD_ARGUMENT_SS;
+		return NULL;
+	}
+
 	locations = malloc(sizeof(int) * allocated_num);
 	if(locations == NULL) {
 		*error = NO_MEMORY_SS;
@@ -869,7 +874,7 @@ split_sstrings(const struct SStrings * strs,
 		return NULL;
 	}
 
-	if(strs->length == 0) {
+	if(strs->length == 0  ||  separator->length == 0) {
 		*error  = BAD_ARGUMENT_SS;
 		return NULL;
 	}
