@@ -151,6 +151,7 @@ to_upper_sstring(const SString * str,
  *
  * Error values: NO_ERROR_SS       if no error occurs
  *               NULL_ARGUMENT_SS  if str or str->string is NULL
+ *               NO_MEMORY_SS      if allocating memory fails
  */
 
 

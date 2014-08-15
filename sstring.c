@@ -279,15 +279,19 @@ connect_sstrings(const struct SStrings * strs,
 
 static SString
 to_X_sstring(const SString * str,
-             bool to_lower)
+             bool to_lower,
+             enum errors_SS * error)
 {
 	long location = 0;
 	long previous_location = 0;
-	SString new_str = new_sstring(NULL, str->length + 1, NULL);
+	SString new_str = new_sstring(NULL, str->length + 1, error);
 	SString Xcase = (to_lower == true)
-	                ? new_sstring("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0, NULL)
-	                : new_sstring("abcdefghijklmnopqrstuvwxyz", 0, NULL);
+	                ? new_sstring("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0, error)
+	                : new_sstring("abcdefghijklmnopqrstuvwxyz", 0, error);
 	int (* to_X_case)(int) = (to_lower == true) ? tolower : toupper;
+
+	if(*error != NO_ERROR_SS)
+		return (SString){0};
 
 	for(;;) {
 		location = find_chars_in_sstring(str, &Xcase, location, 0);
@@ -328,7 +332,7 @@ to_lower_sstring(const SString * str,
 
 	*error = NO_ERROR_SS;
 
-	return to_X_sstring(str, true);
+	return to_X_sstring(str, true, error);
 }
 
 
@@ -348,7 +352,7 @@ to_upper_sstring(const SString * str,
 
 	*error = NO_ERROR_SS;
 
-	return to_X_sstring(str, false);
+	return to_X_sstring(str, false, error);
 }
 
 
