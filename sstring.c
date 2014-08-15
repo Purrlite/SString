@@ -27,7 +27,7 @@ ensure_necessary_size(SString * str,
 
 
 void
-print_error_sstring(enum errors_SString error_num,
+print_error_sstring(enum errors_SS error_num,
                     const char * message)
 {
 	char * error;
@@ -64,13 +64,13 @@ print_error_sstring(enum errors_SString error_num,
 
 typedef SString (new_SString_func)(const char * ,
                                    size_t ,
-                                   enum errors_SString *);
+                                   enum errors_SS *);
 
 
 static SString
 NULL_string_0_size(const char * string,
                    size_t size,
-                   enum errors_SString * error)
+                   enum errors_SS * error)
 {
 	return (SString){ 0, 0, NULL };
 }
@@ -78,7 +78,7 @@ NULL_string_0_size(const char * string,
 static SString
 NULL_string_non0_size(const char * string,
                       size_t size,
-                      enum errors_SString * error)
+                      enum errors_SS * error)
 {
 	SString str = (SString){ 0, size, NULL };
 
@@ -96,7 +96,7 @@ NULL_string_non0_size(const char * string,
 static SString
 nonNULL_string_0_size(const char * string,
                       size_t size,
-                      enum errors_SString * error)
+                      enum errors_SS * error)
 {
 	size_t length = strlen(string);
 	SString str = (SString){ length, length + 1, NULL };
@@ -115,7 +115,7 @@ nonNULL_string_0_size(const char * string,
 static SString
 nonNULL_string_non0_size(const char * string,
                          size_t size,
-                         enum errors_SString * error)
+                         enum errors_SS * error)
 {
 	size_t length = strlen(string);
 	SString str = (SString){
@@ -160,9 +160,9 @@ get_new_SString_func(const char * string,
 SString
 new_sstring(const char * string,
             size_t size,
-            enum errors_SString * error)
+            enum errors_SS * error)
 {
-	enum errors_SString useless_var;
+	enum errors_SS useless_var;
 
 	if(error == NULL)
 		error = &useless_var;
@@ -178,10 +178,10 @@ SString
 sub_sstring(const SString * str,
             size_t start,
             size_t num,
-            enum errors_SString * error)
+            enum errors_SS * error)
 {
 	size_t length;
-	enum errors_SString useless_var;
+	enum errors_SS useless_var;
 
 	if(error == NULL) {
 		error = &useless_var;
@@ -206,7 +206,7 @@ sub_sstring(const SString * str,
 }
 
 
-inline enum errors_SString
+inline enum errors_SS
 free_sstring(SString * str)
 {
 	if(str == NULL)
@@ -223,7 +223,7 @@ free_sstring(SString * str)
 }
 
 
-inline enum errors_SString
+inline enum errors_SS
 free_sstrings(struct SStrings ** strs)
 {
 	size_t i;
@@ -246,11 +246,11 @@ free_sstrings(struct SStrings ** strs)
 inline SString
 connect_sstrings(const struct SStrings * strs,
                  const SString * connector,
-                 enum errors_SString * error)
+                 enum errors_SS * error)
 {
 	size_t i;
 	SString str = (SString){0};
-	enum errors_SString useless_var;
+	enum errors_SS useless_var;
 
 	if(error == NULL)
 		error = &useless_var;
@@ -314,9 +314,9 @@ to_X_sstring(const SString * str,
 
 SString
 to_lower_sstring(const SString * str,
-                 enum errors_SString * error)
+                 enum errors_SS * error)
 {
-	enum errors_SString pointless_var;
+	enum errors_SS pointless_var;
 
 	if(error == NULL)
 		error = &pointless_var;
@@ -334,9 +334,9 @@ to_lower_sstring(const SString * str,
 
 SString
 to_upper_sstring(const SString * str,
-                 enum errors_SString * error)
+                 enum errors_SS * error)
 {
-	enum errors_SString pointless_var;
+	enum errors_SS pointless_var;
 
 	if(error == NULL)
 		error = &pointless_var;
@@ -352,7 +352,7 @@ to_upper_sstring(const SString * str,
 }
 
 
-enum errors_SString
+enum errors_SS
 trim_sstring(SString * str)
 {
 	SString temp;
@@ -387,7 +387,7 @@ trim_sstring(SString * str)
 }
 
 
-enum errors_SString
+enum errors_SS
 copy_sstring(SString * restrict destination,
              const SString * restrict source)
 {
@@ -395,7 +395,7 @@ copy_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
@@ -425,7 +425,7 @@ copy_n_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 copy_str_to_sstring(SString * restrict destination,
                     const char * restrict source,
                     size_t num)
@@ -441,7 +441,7 @@ copy_str_to_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 append_sstring(SString * restrict destination,
                const SString * restrict source)
 {
@@ -449,7 +449,7 @@ append_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t start,
@@ -481,7 +481,7 @@ append_n_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 append_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t num)
@@ -497,7 +497,7 @@ append_str_to_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t insert_start)
@@ -506,7 +506,7 @@ insert_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 insert_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t insert_start,
@@ -543,7 +543,7 @@ insert_n_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 insert_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t insert_start,
@@ -561,7 +561,7 @@ insert_str_to_sstring(SString * restrict destination,
 }
 
 
-enum errors_SString
+enum errors_SS
 remove_sstring(SString * str,
                size_t start,
                size_t num)
@@ -761,7 +761,7 @@ copy_split_strings(struct SStrings * strs,
 struct SStrings *
 split_sstring(const SString * str,
               const SString * separator,
-              enum errors_SString * error)
+              enum errors_SS * error)
 {
 	struct SStrings * split;
 	int * locations;  // locations of separators relative to start of str
@@ -769,7 +769,7 @@ split_sstring(const SString * str,
 	unsigned int num_of_locations = 0;
 	int split_index = 0;
 	size_t i;
-	enum errors_SString useless_var;
+	enum errors_SS useless_var;
 
 	if(error == NULL)
 		error = &useless_var;
@@ -860,11 +860,11 @@ bad_allocation:
 struct SStrings *
 split_sstrings(const struct SStrings * strs,
                const SString * separator,
-               enum errors_SString * error)
+               enum errors_SS * error)
 {
 	SString temp;
 	struct SStrings * ret_value;
-	enum errors_SString useless_var;
+	enum errors_SS useless_var;
 
 	if(error == NULL)
 		error = &useless_var;

@@ -18,7 +18,7 @@ struct SStrings {
 };
 
 
-enum errors_SString {
+enum errors_SS {
 	SUCCESS_SS = 1,  // Used as return value by functions that don't have other return value indicating success
 	NO_ERROR_SS = 0,  // Used when passed as an argument
 	NULL_ARGUMENT_SS = -1,
@@ -47,7 +47,7 @@ enum {
 
 
 void
-print_error_sstring(enum errors_SString error,
+print_error_sstring(enum errors_SS error,
                     const char * message) ;
 /**
  * Prints error message to stderr.
@@ -57,7 +57,7 @@ print_error_sstring(enum errors_SString error,
 SString
 new_sstring(const char * restrict string,
             size_t size,
-            enum errors_SString * error) ;
+            enum errors_SS * error) ;
 /**
  * Creates a new SString.
  *
@@ -78,7 +78,7 @@ SString
 sub_sstring(const SString * str,
             size_t start,
             size_t num,
-            enum errors_SString * error) ;
+            enum errors_SS * error) ;
 /**
  * Returns a new SString created chosen part of the original one.
  *
@@ -94,7 +94,7 @@ sub_sstring(const SString * str,
  */
 
 
-enum errors_SString
+enum errors_SS
 free_sstring(SString * str) ;
 /**
  * Frees SString.
@@ -108,7 +108,7 @@ free_sstring(SString * str) ;
  */
 
 
-enum errors_SString
+enum errors_SS
 free_sstrings(struct SStrings ** strs) ;
 /**
  * Frees struct SString and sets it's pointer to NULL.
@@ -121,7 +121,7 @@ free_sstrings(struct SStrings ** strs) ;
 SString
 connect_sstrings(const struct SStrings * strs,
                  const SString * connector,
-                 enum errors_SString * error) ;
+                 enum errors_SS * error) ;
 /**
  * Connects SStrings together into a single SString.
  *
@@ -139,11 +139,11 @@ connect_sstrings(const struct SStrings * strs,
 
 SString
 to_lower_sstring(const SString * str,
-                 enum errors_SString * error) ;
+                 enum errors_SS * error) ;
 
 SString
 to_upper_sstring(const SString * str,
-                 enum errors_SString * error) ;
+                 enum errors_SS * error) ;
 /**
  * Returns a new SString with all chars in it changed to upper/lower versions.
  *
@@ -155,7 +155,7 @@ to_upper_sstring(const SString * str,
  */
 
 
-enum errors_SString
+enum errors_SS
 trim_sstring(SString * str) ;
 /**
  * Removes leading and trailing spaces and tabs.
@@ -169,17 +169,17 @@ trim_sstring(SString * str) ;
  */
 
 
-enum errors_SString
+enum errors_SS
 copy_sstring(SString * restrict destination,
              const SString * restrict source) ;
 
-enum errors_SString
+enum errors_SS
 copy_n_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t start,
                size_t num) ;
 
-enum errors_SString
+enum errors_SS
 copy_str_to_sstring(SString * restrict destination,
                     const char * restrict source,
                     size_t num);
@@ -198,17 +198,17 @@ copy_str_to_sstring(SString * restrict destination,
  */
 
 
-enum errors_SString
+enum errors_SS
 append_sstring(SString * restrict destination,
                const SString * restrict source) ;
 
-enum errors_SString
+enum errors_SS
 append_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t start,
                  size_t num) ;
 
-enum errors_SString
+enum errors_SS
 append_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t num) ;
@@ -228,19 +228,19 @@ append_str_to_sstring(SString * restrict destination,
  */
 
 
-enum errors_SString
+enum errors_SS
 insert_sstring(SString * restrict destination,
                const SString * restrict source,
                size_t insert_start) ;
 
-enum errors_SString
+enum errors_SS
 insert_n_sstring(SString * restrict destination,
                  const SString * restrict source,
                  size_t insert_start,
                  size_t source_start,
                  size_t num) ;
 
-enum errors_SString
+enum errors_SS
 insert_str_to_sstring(SString * restrict destination,
                       const char * restrict source,
                       size_t insert_start,
@@ -262,7 +262,7 @@ insert_str_to_sstring(SString * restrict destination,
  */
 
 
-enum errors_SString
+enum errors_SS
 remove_sstring(SString * str,
                size_t start,
                size_t num) ;
@@ -335,12 +335,12 @@ find_str_in_sstring(const SString * str,
 struct SStrings *
 split_sstring(const SString * str,
               const SString * separator,
-              enum errors_SString * error) ;
+              enum errors_SS * error) ;
 
 struct SStrings *
 split_sstrings(const struct SStrings * strs,
                const SString * separator,
-               enum errors_SString * error) ;
+               enum errors_SS * error) ;
 /**
  * Splits string according to the separator.
  *
