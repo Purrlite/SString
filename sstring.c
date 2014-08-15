@@ -384,7 +384,7 @@ trim_sstring(SString * str)
 	}
 
 	temp = new_sstring(" \t", 0, NULL);
-	if(temp == NULL)
+	if(temp.string == NULL)
 		return NO_MEMORY_SS;
 
 	location = find_chars_in_sstring(str, &temp, 0, true);
@@ -541,7 +541,7 @@ insert_n_sstring(SString * restrict destination,
 		return NO_MEMORY_SS;
 
 	temp = new_sstring(&(destination->string[insert_start]), 0, NULL);
-	if(temp == NULL)
+	if(temp.string == NULL)
 		return NO_MEMORY_SS;
 
 	strncpy(&(destination->string[insert_start]), &(source->string[source_start]),
