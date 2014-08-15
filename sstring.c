@@ -362,6 +362,7 @@ trim_sstring(SString * str)
 	SString temp;
 	long i;
 	size_t location = 0; // location of a char that isn't space or tab
+	enum errors_SS error = SUCCESS_SS;
 
 	if(str == NULL  ||  str->string == NULL)
 		return NULL_ARGUMENT_SS;
@@ -375,8 +376,12 @@ trim_sstring(SString * str)
 	if(location == 0)
 		return NOTHING_TO_TRIM_SS;
 
-	if(location != str->length)
-		remove_sstring(str, location, 0);
+	if(location != str->length) {
+		error = remove_sstring(str, location, 0);
+
+		if(error != SUCCESS_SS)
+			return error;
+	}
 
 	temp = new_sstring(" \t", 0, NULL);
 	if(temp == NULL)
@@ -385,11 +390,11 @@ trim_sstring(SString * str)
 	location = find_chars_in_sstring(str, &temp, 0, true);
 
 	if(location != 0)
-		remove_sstring(str, 0, location);
+		error = remove_sstring(str, 0, location);
 
 	free(temp.string);
 
-	return SUCCESS_SS;
+	return error;
 }
 
 
