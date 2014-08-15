@@ -163,6 +163,8 @@ trim_sstring(SString * str) ;
  * Returns: SUCCESS_SS          on success
  *          NULL_ARGUMENT_SS    if str or str->string is NULL
  *          NOTHING_TO_TRIM_SS  if it doesn't find non-space, non-tab char in str
+ *          NO_MEMORY_SS        if allocating memory fails for a temporary
+ *                                 variable inside the function
  *
  * NOTE: If the whole string is made of spaces or tabs, then it won't trim
  *   anything.
