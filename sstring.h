@@ -26,8 +26,7 @@ enum errors_SS {
 	NO_MEMORY_SS = -3,
 };
 
-// Special return values
-enum {
+enum special_return_vals_SS {
 	// For searching SStrings:
 	NOT_FOUND_SS = -10,
 
