@@ -269,14 +269,16 @@ remove_sstring(SString * str,
                size_t start,
                size_t num) ;
 /**
- * Removes/Deletes string from str.
+ * Removes string from str.
  *
  * Returns: SUCCESS_SS        on success
  *          NULL_ARGUMENT_SS  if str or str->string is NULL
  *          BAD_ARGUMENT_SS   if start >= start->length
  *          NO_MEMORY_SS      if allocating memory fails
  *
- * NOTE: If num is 0 or start + num > source->length then everything gets removed
+ * NOTE: If num is 0 or start + num > source->length then everything gets removed.
+ *       The string may still partially be there as this function doesn't zero
+ *   the rest of the string.
  */
 
 
