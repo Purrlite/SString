@@ -3,9 +3,16 @@
 
 #include <stdbool.h>
 
-//tests allocation
-//tests to upper
-//tests to lower
-bool test_all_sstring_functions(void);
+/*
+ * Tests: allocation
+ *        to upper
+ *        to lower
+ *        copying
+ *
+ * Returns: true   if all tests went well
+ *          false  if at least one test failed
+ */
+bool
+test_all_sstring_functions(void);
 
 #endif
