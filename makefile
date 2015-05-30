@@ -1,5 +1,5 @@
 COMPILER = gcc
-STANDARD = c11
+STANDARD = c99
 FLAGS = -Wall
 
 sstring.o :
