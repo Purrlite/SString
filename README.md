@@ -1,4 +1,4 @@
-SString (Struct String)
+SString (Struct String) [![Build Status](https://travis-ci.org/Purlox/SString.svg?branch=master)](https://travis-ci.org/Purlox/SString)
 =======================
 
 SString is a string library that introduces a new structure SString with many functions to work with them.
