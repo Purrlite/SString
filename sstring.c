@@ -424,7 +424,7 @@ copy_n_sstring(SString * restrict destination,
 	         ? source->length - start : num;
 
 	ensure_necessary_size(destination, length + 1, false);
-	if(destination.string == NULL)
+	if(destination->string == NULL)
 		return NO_MEMORY_SS;
 
 	strncpy(destination->string, &(source->string[start]), length);
@@ -478,7 +478,7 @@ append_n_sstring(SString * restrict destination,
 	         ? source->length - start : num;
 
 	ensure_necessary_size(destination, length + destination->length + 1, true);
-	if(destination.string == NULL)
+	if(destination->string == NULL)
 		return NO_MEMORY_SS;
 
 	strncpy(&(destination->string[destination->length]), &(source->string[start]),
@@ -537,7 +537,7 @@ insert_n_sstring(SString * restrict destination,
 	         ? source->length - source_start : num;
 
 	ensure_necessary_size(destination, destination->length + length + 1, true);
-	if(destination.string == NULL)
+	if(destination->string == NULL)
 		return NO_MEMORY_SS;
 
 	temp = new_sstring(&(destination->string[insert_start]), 0, NULL);
