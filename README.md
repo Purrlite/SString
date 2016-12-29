@@ -1,4 +1,4 @@
-SString [![Build Status](https://travis-ci.org/Purlox/SString.svg?branch=master)](https://travis-ci.org/Purlox/SString) [![Coverity Scan Build Status](https://scan.coverity.com/projects/5455/badge.svg)](https://scan.coverity.com/projects/5455)
+SString [![Build Status](https://travis-ci.org/Purrlite/SString.svg?branch=master)](https://travis-ci.org/Purrlite/SString) [![Coverity Scan Build Status](https://scan.coverity.com/projects/5455/badge.svg)](https://scan.coverity.com/projects/5455)
 =======================
 
 SString is a string library that introduces a new structure SString with many functions to work with them.
